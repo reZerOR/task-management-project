@@ -1,5 +1,6 @@
 import bannerImg from "../../../assets/Home/business-4051773_1280.jpg";
 import { GoVideo } from "react-icons/go";
+import Container from "../../../sharedComponents/Container";
 
 
 const Banner = () => {
@@ -10,7 +11,8 @@ const Banner = () => {
 
   return (
     <div className=" bg-[#F4F6F6]">
-      <div className="container mx-auto flex flex-col xl:flex-row justify-between items-center h-auto xl:h-[80vh] ">
+      <Container>
+      <div className=" flex flex-col xl:flex-row justify-between items-center h-auto xl:h-[80vh] ">
         {/* Left side */}
         <div className="flex-1 mr-12 ">
           {/* reviews */}
@@ -220,6 +222,7 @@ const Banner = () => {
           <img src={bannerImg} alt="banner Image object-cover " className="h-[80vh] " />
         </div>
       </div>
+      </Container>
     </div>
   );
 };
