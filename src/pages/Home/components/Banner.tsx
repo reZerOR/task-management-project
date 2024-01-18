@@ -219,7 +219,7 @@ const Banner = () => {
 
         {/* Right side  */}
         <div className="flex-1">
-          <img src={bannerImg} alt="banner Image object-cover " className="h-[80vh] " />
+          <img src={bannerImg} alt="banner Image  " className="h-[80vh]  object-cover " />
         </div>
       </div>
       </Container>
