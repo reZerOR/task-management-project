@@ -1,12 +1,20 @@
 import bannerImg from "../../../assets/Home/business-4051773_1280.jpg";
+import { GoVideo } from "react-icons/go";
+
+
 const Banner = () => {
+  const gradientBorder = {
+    borderImage: "linear-gradient(to right, #5a67d8, #9f7aea, #ed64a6) 1",
+    borderImageSlice: "1",
+  };
+
   return (
     <div className=" bg-[#F4F6F6]">
       <div className="container mx-auto flex justify-between items-center  h-[80vh]">
         {/* Left side */}
         <div className="flex-1 mr-12 ">
           {/* reviews */}
-          <div className="flex justify-between  mb-32 ">
+          <div className="flex justify-between  mb-20 ">
             <figure className="max-w-screen-md">
               <div className="flex items-center mb-4 text-yellow-300">
                 <svg
@@ -174,17 +182,44 @@ const Banner = () => {
           </div>
 
           <h1 className=" text-5xl font-extrabold text-gray-800  leading-snug">
-            Unlock the power of unified teamwork with <span className="text-">TaskFlow's </span> Team Management
-            Hub. 
+            Unlock the power of unified teamwork with{" "}
+            <span className=" text-primeColor">TaskFlow's </span> Team
+            Management Hub.
           </h1>
 
-          <p><strong className="bborder-b-2">Earlier</strong></p>
+          <div className="mt-12">
+            <p>
+              <strong style={gradientBorder} className="border-b-2">
+                {" "}
+                Earlier:
+              </strong>{" "}
+              "Embrace the power of productivity. Yesterday is gone, but with
+              TaskFlow, every 'Earlier' paves the way for tomorrow's success."
+            </p>
+            <p className="mt-5">
+              <strong style={gradientBorder} className="border-b-2">
+                {" "}
+                With TaskFlow's:
+              </strong>{" "}
+              "Empower your team with TaskFlow: where 'Earlier' is a stepping
+              stone and every task is a stride towards seamless collaboration
+              and project success."
+            </p>
+          </div>
 
+          <div className="mt-12 flex gap-48 ">
+            <button className="text-xl  px-4 h-16 before:block before:absolute hover:before:bg-primeColor before:w-0 before:h-0 hover:before:h-20 hover:before:w-full before:-bottom-2 before:right-0 before:duration-500 before:rounded-xl before:-z-10 relative inline-block transform hover:text-white text-secondColor bg-transparent border-2 overflow-hidden border-sky-700 duration-500">
+              Start your free trial
+            </button>
+             <button className="flex justify-center items-center gap-2 text-2xl font-bold">
+             <GoVideo/> How TaskFlow Works 
+            </button>
+          </div>
         </div>
 
         {/* Right side  */}
         <div className="flex-1">
-          <img src={bannerImg} alt="banner Image" className="h-[80vh] " />
+          <img src={bannerImg} alt="banner Image object-cover " className="h-[80vh] " />
         </div>
       </div>
     </div>
