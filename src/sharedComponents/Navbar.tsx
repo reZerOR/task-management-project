@@ -2,6 +2,7 @@ import { useState } from "react";
 import Container from "./Container";
 import { motion } from "framer-motion";
 import { Sling as Hamburger } from "hamburger-react";
+import { Link, NavLink } from "react-router-dom";
 
 const Navbar = () => {
   const [visable, setVisable] = useState(false);
@@ -29,19 +30,23 @@ const Navbar = () => {
         {/* visable in large devices */}
         <div className="lg:flex gap-6 items-center hidden">
           <ul className="flex text-lg font-medium text-primeColor gap-6">
-            <li>Home</li>
+            <NavLink to={"/"}><li>Home</li></NavLink>
             <li>About Us</li>
             <li>Blog</li>
             <li>Contact</li>
           </ul>
 
           <div className="text-lg font-medium space-x-6 py-10">
+            <Link to={"/login"}>
             <button className="px-10 py-4 border-2 border-primeColor rounded-lg text-primeColor">
               Log in
             </button>
+            </Link>
+            <Link to={"/register"}>
             <button className="px-10 py-4 bg-primeColor text-white rounded-lg border-2 border-primeColor">
               Sign Up
             </button>
+            </Link>
           </div>
         </div>
         {/* visable in mobile and tablets */}
