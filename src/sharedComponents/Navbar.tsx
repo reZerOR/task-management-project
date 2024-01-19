@@ -24,13 +24,15 @@ const Navbar = () => {
         {/* logo text */}
         <div>
           <h2 style={{}} className="text-4xl font-bold py-10 text-text">
-            Taskman
+            Taskflow
           </h2>
         </div>
         {/* visable in large devices */}
         <div className="lg:flex gap-6 items-center hidden">
           <ul className="flex text-lg font-medium text-primeColor gap-6">
-            <NavLink to={"/"}><li>Home</li></NavLink>
+            <NavLink to={"/"}>
+              <li>Home</li>
+            </NavLink>
             <li>About Us</li>
             <li>Blog</li>
             <li>Contact</li>
@@ -38,14 +40,14 @@ const Navbar = () => {
 
           <div className="text-lg font-medium space-x-6 py-10">
             <Link to={"/login"}>
-            <button className="px-10 py-4 border-2 border-primeColor rounded-lg text-primeColor">
-              Log in
-            </button>
+              <button className="px-10 py-4 border-2 border-primeColor rounded-lg text-primeColor">
+                Log in
+              </button>
             </Link>
             <Link to={"/register"}>
-            <button className="px-10 py-4 bg-primeColor text-white rounded-lg border-2 border-primeColor">
-              Sign Up
-            </button>
+              <button className="px-10 py-4 bg-primeColor text-white rounded-lg border-2 border-primeColor">
+                Sign Up
+              </button>
             </Link>
           </div>
         </div>
