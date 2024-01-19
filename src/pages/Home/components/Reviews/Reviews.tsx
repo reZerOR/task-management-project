@@ -87,7 +87,7 @@ const Reviews = () => {
                         </SwiperSlide>
 
                     </Swiper>
-                </div>np
+                </div>
             </div>
         </div>
     );

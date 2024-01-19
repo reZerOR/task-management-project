@@ -1,8 +1,10 @@
 import { FaBeer } from 'react-icons/fa';
+import Container from '../../../../sharedComponents/Container';
 const AllFeatures = () => {
     return (
-        <div>
-            <div className='max-w-screen-xl mx-auto bg-sky-100 px-4 py-4 '>
+        <div className='mt-10'>
+            <Container>
+            <div className=' bg-[#EEFDFF] px-10  py-10  rounded-3xl '>
                 <h2 className='text-center text-red-500 font-bold mt-3'>
                     One Tool
                 </h2>
@@ -95,9 +97,10 @@ const AllFeatures = () => {
                 </div>
 
                 <div className='text-center'>
-                    <button className=' px-4 rounded-full mt-5 py-3 bg-blue-600 text-white'>See All Features</button>
+                    <button className=' py-4 my-10 rounded-full  px-10 font-extrabold bg-blue-600 text-white'>See All Features</button>
                 </div>
             </div>
+            </Container>
         </div>
     );
 };
