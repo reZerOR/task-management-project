@@ -1,4 +1,6 @@
 import React, { useState } from "react";
+import Container from "../../../sharedComponents/Container";
+import SectionTitle from "../../../sharedComponents/SectionTitle";
 
 interface TabData {
   [key: string]: {
@@ -60,47 +62,53 @@ const ProjectManagement: React.FC = () => {
   const { text, imgSrc } = tabData[activeTab];
 
   return (
-    <div className="bg-gray-100 p-8 font-sans  flex items-center justify-center">
-      <div className="bg-green-50 p-6 shadow-lg rounded-xl max-w-6xl w-full mx-auto">
-        <h2 className="text-center text-rose-500 font-bold uppercase tracking-wider text-sm mb-2">
-          Project Management
-        </h2>
-        <h1 className="text-center text-gray-800 font-bold text-3xl mb-5">
-          All your projects and teamwork in one place
-        </h1>
-        <header className="border-b pb-4 mb-6">
-          <nav className="flex justify-center overflow-x-auto mb-4">
-            {Object.keys(tabData).map((tabName) => (
-              <a
-                key={tabName}
-                href="#"
-                onClick={(e) => handleTabClick(e, tabName as keyof TabData)}
-                className={`text-sm md:text-base text-gray-600 hover:text-purple-600 font-semibold px-2 md:px-4 py-2 transition-colors duration-300 ${
-                  activeTab === tabName ? "text-purple-600" : ""
-                }`}
-              >
-                {tabName}
-              </a>
-            ))}
-          </nav>
-        </header>
-        <div className="flex flex-col md:flex-row items-center">
-          <div className="flex-1">
-            <h3 className="text-xl font-semibold mb-4">{activeTab}</h3>
-            <p className="text-gray-600 mb-4">{text}</p>
-            <button className="bg-purple-500 text-white rounded-lg px-6 py-2 hover:bg-purple-600 transition-colors duration-300 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:ring-opacity-50">
-              Get started for free
-            </button>
-          </div>
-          <div className="flex-1 mt-6 md:mt-0 md:ml-4">
-            <img
-              className="rounded-lg shadow-lg"
-              src={imgSrc}
-              alt={String(activeTab)}
-            />
+    <div className="bg-secondColor bg-opacity-30 py-20 lg:py-28 ">
+      <Container>
+        <div className="rounded-xl w-full mx-auto">
+          <SectionTitle
+            subTitle="Project Management"
+            mainTitle="All your projects and teamwork in one place"
+          ></SectionTitle>
+          {/* tabs */}
+          <header className="pb-4 mb-6">
+            <nav className="flex justify-between lg:justify-center overflow-x-auto mb-4">
+              {Object.keys(tabData).map((tabName) => (
+                <a
+                  key={tabName}
+                  href="#"
+                  onClick={(e) => handleTabClick(e, tabName as keyof TabData)}
+                  className={`text-sm md:text-base text-black text-opacity-55 whitespace-nowrap  hover:text-primeColor font-semibold mr-4 lg:mx-4 py-2 transition-colors duration-300 ${
+                    activeTab === tabName
+                      ? "text-primeColor text-opacity-100 border-b-2 border-primeColor"
+                      : ""
+                  }`}
+                >
+                  {tabName}
+                </a>
+              ))}
+            </nav>
+          </header>
+          {/* content */}
+          <div className="flex flex-col lg:flex-row gap-10 lg:gap-6 items-center">
+            <div className="flex-1">
+              <h3 className="text-4xl border-l-4 pl-2 border-primeColor font-stylish mb-4">
+                {activeTab}
+              </h3>
+              <p className="text-black font-normal  text-justify">{text}</p>
+              {/* <button className="bg-purple-500 text-white rounded-lg px-6 py-2 hover:bg-purple-600 transition-colors duration-300 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:ring-opacity-50">
+                Get started for free
+              </button> */}
+            </div>
+            <div className="flex-1">
+              <img
+                className="rounded-lg shadow-lg"
+                src={imgSrc}
+                alt={String(activeTab)}
+              />
+            </div>
           </div>
         </div>
-      </div>
+      </Container>
     </div>
   );
 };

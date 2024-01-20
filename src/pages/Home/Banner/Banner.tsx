@@ -1,5 +1,5 @@
-import bannerImg from "../../assets/Home/business-4051773_1280.jpg";
-import Container from "../../sharedComponents/Container";
+import Container from "../../../sharedComponents/Container";
+import bannerImg from "../../../assets/Home/business-4051773_1280.jpg";
 import Stars from "./Stars";
 
 const Banner = () => {
@@ -45,7 +45,7 @@ const Banner = () => {
             </div>
 
             <div className="mt-6">
-              <button className="text-lg font-medium rounded-lg px-8 h-16 before:block before:absolute hover:before:bg-AccentColor before:w-0 before:h-0 hover:before:h-20 hover:before:w-full before:-bottom-2 before:right-0 before:duration-500 before:rounded-xl before:-z-10 relative inline-block transform hover:text-white text-AccentColor bg-transparent border-2 overflow-hidden border-AccentColor duration-500">
+              <button className="text-lg font-medium rounded-lg px-8 h-16 before:block before:absolute hover:before:bg-AccentColor before:w-0 before:h-0 hover:before:h-20 hover:before:w-full before:-bottom-2 before:right-0 before:duration-300 before:rounded-lg before:-z-10 relative inline-block transform hover:text-white text-AccentColor bg-transparent border-2 overflow-hidden border-AccentColor duration-300">
                 Get Started
               </button>
             </div>
