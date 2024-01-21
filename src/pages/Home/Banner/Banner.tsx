@@ -1,19 +1,19 @@
 import Container from "../../../sharedComponents/Container";
-import bannerImg from "../../../assets/Home/business-4051773_1280.jpg";
+import bannerImg from "../../../assets/Home/information-flow-flatline.png";
 import Stars from "./Stars";
+import { motion } from "framer-motion";
 
 const Banner = () => {
   const gradientBorder = {
     borderImage: "linear-gradient(to right, #5a67d8, #9f7aea, #ed64a6) 1",
     borderImageSlice: "1",
   };
-
   return (
     <div className="bg-secondColor bg-opacity-60">
       <Container>
         <div className=" flex flex-col lg:flex-row py-10 min-h-[calc(100vh-126px)] justify-between gap-10 items-center">
           {/* Left side */}
-          <div className="">
+          <div className="flex-1">
             {/* reviews */}
             <div className="flex justify-between flex-wrap gap-3 my-6">
               <Stars messege="'This tools is awesome and I love it.'"></Stars>
@@ -52,9 +52,15 @@ const Banner = () => {
           </div>
 
           {/* Right side  */}
-          <div className="max-w-[780px]">
-            <img src={bannerImg} alt="banner Image  " className="rounded-xl" />
-          </div>
+          <motion.div
+            initial={{ scale: 0 }}
+            animate={{ scale: 1 }}
+            exit={{ scale: 0 }}
+            transition={{ duration: 0.6 }}
+            className="max-w-[780px]"
+          >
+            <img src={bannerImg} alt="banner Image" className="rounded-xl" />
+          </motion.div>
         </div>
       </Container>
     </div>
