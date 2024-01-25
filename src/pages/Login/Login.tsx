@@ -1,71 +1,146 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import Container from "../../sharedComponents/Container";
-import { useState } from "react";
-import { Link } from "react-router-dom";
+import { useContext, useState } from "react";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai";
-import { FaFacebook, FaGithub, FaGoogle } from "react-icons/fa";
+import { FaGithub, FaGoogle } from "react-icons/fa";
 import TitleHelmet from "../../sharedComponents/TitleHelmet";
+import { AuthContext } from "../../Providers/AuthProvider";
+import { UserCredential } from "firebase/auth";
+import { ToastContainer, toast } from "react-toastify";
 
 const Login = () => {
-  // const { signIn,googleSignIn } = useAuth()
+  const userContext = useContext(AuthContext);
+  console.log("userContext", userContext);
   const [showPassword, setShowPassword] = useState(false);
-  //  const navigate = useNavigate();
-  //  const location = useLocation();
+  const navigate = useNavigate();
+  const location = useLocation();
   const handleLogin = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const formElements = (e.target as HTMLFormElement).elements;
 
     // Use namedItem method to access form controls by name
     // Use namedItem method to access form controls by name
-    const emailInput = formElements.namedItem(
-      "email"
-    ) as HTMLInputElement | null;
+    const emailInput = formElements.namedItem("email") as HTMLInputElement;
     const passwordInput = formElements.namedItem(
       "password"
-    ) as HTMLInputElement | null;
+    ) as HTMLInputElement;
 
     // Check if the elements are not null before accessing their values
-    if (emailInput && passwordInput) {
-      const email = emailInput.value;
-      const password = passwordInput.value;
-      console.log(email, password);
-    }
+
+    const email = emailInput.value;
+    const password = passwordInput.value;
+    console.log(email, password);
 
     // sign in user
-    //   signIn(email, password)
-    //     .then((result) => {
-    //       console.log(result.user);
-    //       toast("Successfully logged in");
-    //       setTimeout(() => {
-    //         navigate(location?.state ? location.state : "/");
-    //       }, 2000);
-    //     })
-    //     .catch((error) => {
-    //       console.error(error);
-    //       toast.error("email or password don't match.please try again");
-    //     });
+    userContext
+      .signIn(email, password)
+      .then((result: UserCredential) => {
+        console.log(result.user);
+        toast("Successfully logged in");
+        // console.log("Successfully logged in")
+        setTimeout(() => {
+          navigate(location?.state ? location.state : "/");
+        }, 2000);
+      })
+      .catch((error: UserCredential) => {
+        console.error(error);
+        toast.error("email or password don't match.please try again");
+        // console.log("email or password don't match.please try again")
+      });
   };
   //   // google sign in
   const handleGoogleSignIn = () => {
-    //   googleSignIn()
-    //     .then((result) => {
-    //       console.log(result);
-    //       toast("Successfully logged in");
-    //       setTimeout(() => {
-    //         navigate(location?.state ? location.state : "/");
-    //       }, 2000);
-    //     })
-    //     .catch((error) => {
-    //       console.error(error);
-    //       toast.error("email or password don't match.please try again");
-    //     });
+    userContext
+      .googleSignIn()
+      .then((result: UserCredential) => {
+        console.log(result);
+        const userInfo = {
+          displayName: result.user?.displayName,
+          photoURL: result.user?.photoURL,
+          email: result.user?.email,
+        };
+
+        // Assuming you want to send user information to the server
+        return fetch("http://localhost:5000/user", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(userInfo),
+        });
+      })
+      .then((response: Response) => {
+        if (response.ok) {
+          console.log("User information posted to MongoDB");
+        } else {
+          throw new Error("Failed to post user information to MongoDB");
+        }
+
+        toast("Successfully logged in");
+        // console.log("Successfully logged in")
+        setTimeout(() => {
+          navigate(location?.state ? location.state : "/");
+        }, 2000);
+      })
+      .catch((error: UserCredential) => {
+        console.error(error);
+        toast.error("email or password don't match.please try again");
+        // console.log("email or password don't match.please try again")
+      });
+  };
+  const handleGithubSignIn = () => {
+    userContext
+      .githubSignIn()
+      .then((result: UserCredential) => {
+        console.log(result);
+        const userInfo = {
+          displayName: result.user?.displayName,
+          photoURL: result.user?.photoURL,
+          email: result.user?.email,
+        };
+
+        // Assuming you want to send user information to the server
+        return fetch("http://localhost:5000/user", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(userInfo),
+        });
+      })
+      .then((response: Response) => {
+        if (response.ok) {
+          console.log("User information posted to MongoDB");
+        } else {
+          throw new Error("Failed to post user information to MongoDB");
+        }
+        toast("Successfully logged in");
+        // console.log("Successfully logged in")
+        setTimeout(() => {
+          navigate(location?.state ? location.state : "/");
+        }, 2000);
+      })
+      .catch((error: UserCredential) => {
+        console.error(error);
+        toast.error("email or password don't match.please try again");
+        // console.log("email or password don't match.please try again")
+      });
   };
   return (
     <Container>
       <div>
         <TitleHelmet title="Login"></TitleHelmet>
-        <div className="text-center mb-10">
-          <h1 className="text-5xl font-bold text-primeColor">Login now!</h1>
+        <div className="mt-6">
+          <Link to="/">
+            <button className="text-2xl font-bold rounded-lg px-8 h-16 before:block before:absolute hover:before:bg-primeColor before:w-0 before:h-0 hover:before:h-20 hover:before:w-full before:-bottom-2 before:right-0 before:duration-300 before:rounded-lg before:-z-10 relative inline-block transform hover:text-white text-primeColor bg-transparent border-2 overflow-hidden border-none duration-300">
+              Taskflow
+            </button>
+          </Link>
+        </div>
+        <div className="text-center mt-8 mb-14">
+          <h1 className="text-4xl font-bold text-primeColor">Login now!</h1>
         </div>
         <div className="flex flex-col-reverse lg:flex-row gap-5 justify-center items-center">
           <div className="flex-1">
@@ -79,7 +154,7 @@ const Login = () => {
               <div className="card flex-shrink-0 w-full bg-slate-200 rounded-lg max-w-sm shadow-2xl p-10">
                 <div className="card-body ">
                   <form onSubmit={handleLogin}>
-                    <div className="form-control">
+                    <div className="form-control mb-2">
                       <label className="label">
                         <span className="label-text mr-2">
                           Email<sup className="text-primeColor">*</sup>
@@ -93,7 +168,7 @@ const Login = () => {
                         required
                       />
                     </div>
-                    <div className="form-control relative mr-2">
+                    <div className="form-control mb-2 relative mr-2">
                       <label className="label">
                         <span className="label-text mr-2">
                           Password<sup className="text-primeColor">*</sup>
@@ -122,13 +197,13 @@ const Login = () => {
               </label> */}
                     </div>
                     <div className="form-control mt-6">
-                      <button className="btn w-full bg-primeColor border-prtext-primeColor text-white p-2 rounded-lg">
+                      <button className=" w-full font-bold rounded-lg px-2 h-10 before:block before:absolute hover:before:bg-primeColor before:w-0 before:h-0 hover:before:h-20 hover:before:w-full before:-bottom-2 before:right-0 before:duration-300 before:rounded-lg before:-z-10 relative inline-block transform hover:text-white text-primeColor bg-transparent border-2 overflow-hidden border-primeColor duration-300">
                         Login
                       </button>
                     </div>
                   </form>
                 </div>
-                <div className="flex justify-center items-center my-4">
+                <div className="flex  justify-center items-center my-4">
                   <button
                     onClick={handleGoogleSignIn}
                     className=" text-primeColor  font-semibold flex justify-center items-center gap-2"
@@ -139,22 +214,11 @@ const Login = () => {
                     </span>
                   </button>
                   <button
-                    onClick={handleGoogleSignIn}
-                    className=" text-primeColor  font-semibold flex justify-center items-center gap-2"
-                  >
-                    <FaFacebook className="text-xl"></FaFacebook>
-                    <span className="text-3xl">
-                      {/* <FcGoogle></FcGoogle> */}
-                    </span>
-                  </button>
-                  <button
-                    onClick={handleGoogleSignIn}
+                    onClick={handleGithubSignIn}
                     className=" text-primeColor  font-semibold flex justify-center items-center gap-2"
                   >
                     <FaGithub className="text-xl"></FaGithub>
-                    <span className="text-xl">
-                      {/* <FcGoogle></FcGoogle> */}
-                    </span>
+                    <span className="text-xl"></span>
                   </button>
                 </div>
 
@@ -171,6 +235,7 @@ const Login = () => {
             </div>
           </div>
         </div>
+        <ToastContainer />
       </div>
     </Container>
   );

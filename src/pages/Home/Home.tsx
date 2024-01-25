@@ -7,6 +7,7 @@ import Reviews from "./components/Reviews/Reviews";
 const Home = () => {
   return (
     <div>
+    
       <Banner></Banner>
       <ProjectManagement></ProjectManagement>
       <Collaboration></Collaboration>
