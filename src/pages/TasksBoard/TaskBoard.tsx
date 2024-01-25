@@ -17,7 +17,12 @@ const TasksBoard = () => {
       };
     
     return (
-        <div className="w-72 mx-auto flex items-center justify-center">
+        <>
+
+            <div className="grid grid-cols-12 w-full  mx-auto gap-10 mt-5">
+                
+        {/* Create Project Modal */}
+        <div className="w-72 mx-auto flex items-center justify-center  col-span-12 md:col-span-3">
                 <button onClick={() => setOpenModal(true)} className="bg-primeColor text-white p-2 rounded-lg">Create a Project</button>
                 <div onClick={() => setOpenModal(false)} className={`fixed flex justify-center items-center z-[100] ${ openModal ? 'visible opacity-1' : 'invisible opacity-0'} inset-0 w-full h-full backdrop-blur-sm bg-black/20 duration-100`}>
                     <div onClick={(e_) => e_.stopPropagation()} className={`absolute w-full lg:w-[500px] bg-white drop-shadow-2xl rounded-lg ${openModal ? 'opacity-1 duration-300 translate-y-0' : '-translate-y-20 opacity-0 duration-150'}`}>
@@ -71,7 +76,28 @@ const TasksBoard = () => {
                         </form>
                     </div>
                 </div>
+        </div>
+
+
+
+
+{/* todo, doing and done Boards */}
+<div className='col-span-12 md:col-span-9 flex gap-10  '>
+
+    <div className='w-1/5 h-full bg-yellow-500 ' >
+        <h2>Todo</h2>
+    </div>
+    <div className='w-1/5 h-full bg-yellow-500 '>
+        <h2>Doing</h2>
+    </div>
+    <div className='w-1/5 h-full bg-yellow-500 '>
+        <h2>Done</h2>
+    </div>
+
+</div>
             </div>
+        
+        </>
     )}
 
     export default TasksBoard 
