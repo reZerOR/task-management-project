@@ -41,7 +41,7 @@ const Register = () => {
   
       // sign in user
   
-      const result = await userContext.createUser(displayName,photoURL, email, password)
+       await userContext.createUser(displayName,photoURL, email, password)
         .then(async (result:UserCredential) => {
           console.log(result);
           const response=await fetch("http://localhost:5000/user",{
