@@ -14,6 +14,10 @@ const router = createBrowserRouter([
         element: <Home></Home>,
       },
       {
+        path: "/tasksboard",
+        element: <TasksBoard />
+      },
+      {
         path: "/login",
         element: <Login></Login>
       },
@@ -21,10 +25,6 @@ const router = createBrowserRouter([
         path: "/register",
         element: <Register></Register>
       },
-      {
-        path: "/tasksboard",
-        element: <TasksBoard />
-      }
     ],
   },
 ]);

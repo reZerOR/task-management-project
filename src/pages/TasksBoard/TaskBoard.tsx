@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import lottiAnimation1 from '../../assets/TasksBoard/Add User.json'
 import Lottie from 'lottie-react';
+import { LuListTodo } from "react-icons/lu";
 
 const TasksBoard = () => {
     const [openModal, setOpenModal] = useState(false);
@@ -84,15 +85,22 @@ const TasksBoard = () => {
 {/* todo, doing and done Boards */}
 <div className='col-span-12 md:col-span-9 flex gap-10  '>
 
-    <div className='w-1/5 h-full bg-yellow-500 ' >
-        <h2>Todo</h2>
+    <div className='w-1/5 min-h-screen rounded-lg border border-t-4 border-t-secondColor   shadow-[0_20px_50px_rgba(8,_112,_184,_0.7)]' >
+        <div className='flex gap-5 justify-start ml-5 items-center'>
+            <LuListTodo className='text-2xl' />
+            <h2 className='p-5'>Todo</h2>
+        </div>
+        <hr />
     </div>
-    <div className='w-1/5 h-full bg-yellow-500 '>
-        <h2>Doing</h2>
+    <div className='w-1/5 min-h-screen rounded-lg border border-t-4 border-t-primeColor   shadow-[0_20px_50px_rgba(8,_112,_184,_0.7)]' >
+        <h2 className='p-5'>In progress</h2>
+        <hr />
     </div>
-    <div className='w-1/5 h-full bg-yellow-500 '>
-        <h2>Done</h2>
+    <div className='w-1/5 min-h-screen rounded-lg border border-t-4 border-t-green-500  shadow-[0_20px_50px_rgba(8,_112,_184,_0.7)]' >
+        <h2 className='p-5'>Done</h2>
+        <hr />
     </div>
+    
 
 </div>
             </div>
@@ -100,7 +108,7 @@ const TasksBoard = () => {
         </>
     )}
 
-    export default TasksBoard 
+export default TasksBoard 
 
 
 
