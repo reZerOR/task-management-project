@@ -9,6 +9,9 @@ export default {
         secondColor: "#8696FE",
         AccentColor: "#590DF2",
       },
+      fontFamily: {
+        stylish: "'DM Serif Display', serif;",
+      },
     },
   },
   plugins: [],

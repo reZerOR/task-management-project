@@ -1,6 +1,7 @@
-
+import Collaboration from "./Collaboration/Collaboration";
+import ProjectManagement from "./ProjectManagement/ProjectManagement";
 import AllFeatures from "./components/AllFeatures/AllFeatures";
-import Banner from "./components/Banner";
+import Banner from "./Banner/Banner";
 import Reviews from "./components/Reviews/Reviews";
 
 const Home = () => {
@@ -8,6 +9,8 @@ const Home = () => {
     <div>
     
       <Banner></Banner>
+      <ProjectManagement></ProjectManagement>
+      <Collaboration></Collaboration>
       <AllFeatures></AllFeatures>
       <Reviews></Reviews>
     </div>
