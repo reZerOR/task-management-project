@@ -3,16 +3,17 @@ import ProjectManagement from "./ProjectManagement/ProjectManagement";
 import AllFeatures from "./components/AllFeatures/AllFeatures";
 import Banner from "./Banner/Banner";
 import Reviews from "./components/Reviews/Reviews";
+import CallToAction from "./components/CallToAction/CallToAction";
 
 const Home = () => {
   return (
     <div>
-    
       <Banner></Banner>
       <ProjectManagement></ProjectManagement>
       <Collaboration></Collaboration>
       <AllFeatures></AllFeatures>
       <Reviews></Reviews>
+      <CallToAction></CallToAction>
     </div>
   );
 };
