@@ -11,7 +11,7 @@
   },
   "dependencies": {
     "@types/react-icons": "^3.0.0",
-    "firebase": "^10.7.1",
+    "firebase": "^10.7.2",
     "framer-motion": "^10.18.0",
     "hamburger-react": "^2.5.0",
     "localforage": "^1.10.0",
@@ -34,6 +34,7 @@
     "@typescript-eslint/parser": "^6.14.0",
     "@vitejs/plugin-react": "^4.2.1",
     "autoprefixer": "^10.4.16",
+    "daisyui": "^4.6.0",
     "eslint": "^8.55.0",
     "eslint-plugin-react-hooks": "^4.6.0",
     "eslint-plugin-react-refresh": "^0.4.5",
