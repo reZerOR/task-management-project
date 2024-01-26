@@ -1,3 +1,64 @@
+
+/* eslint-disable @typescript-eslint/no-unused-vars */
+import { useContext, useState } from 'react';
+import lottiAnimation1 from '../../assets/TasksBoard/Add User.json'
+import Lottie from 'lottie-react';
+import { ToastContainer, toast } from 'react-toastify';
+import { AuthContext } from '../../Providers/AuthProvider';
+import List from './List';
+
+const TasksBoard = () => {
+    const [openModal, setOpenModal] = useState(false);
+    const userContext=useContext(AuthContext)
+    const email=userContext.user?.email
+    console.log(email)
+
+    const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+        e.preventDefault();
+    
+        const formData = new FormData(e.currentTarget);
+        const name = formData.get('name');
+        const description = formData.get('description');
+        const Visibility = formData.get('Visibility');
+        
+        console.log(name, description, Visibility);
+        const taskData = {
+            title: name,
+            description:description,
+            visibility:Visibility,
+            email:userContext.user?.email,
+            status:"todo"
+          };
+          fetch("http://localhost:5000/addtask", {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify(taskData),
+          })
+            .then((response) => response.json())
+            .then((data) => {
+              console.log("Task added successfully:", data);
+            })
+            .catch((error) => {
+              console.error("Error adding task:", error);
+            });
+            
+            e.currentTarget.reset();
+
+            toast.success("Congratulations,Task Added");
+            setTimeout(() => {
+                window.location.reload();
+                
+              }, 2000);
+      };
+    
+    return (
+        <>
+
+            <div className="grid grid-cols-12 w-full  mx-auto gap-10 mt-5">
+                
+
 import { useState } from "react";
 import lottiAnimation1 from "../../assets/TasksBoard/Add User.json";
 import Lottie from "lottie-react";
@@ -60,6 +121,7 @@ const TasksBoard = () => {
   return (
     <>
       <div className="grid grid-cols-12 w-full  mx-auto gap-10 mt-5">
+
         {/* Create Project Modal */}
         <div className="w-72 mx-auto flex items-center justify-center  col-span-12 md:col-span-3">
           <button
@@ -89,6 +151,9 @@ const TasksBoard = () => {
                     aria-aria-labelledby="use lottie animation"
                   />
                 </div>
+
+
+    <List/>
 
                 <h1 className="backdrop-blur-sm text-4xl pb-8">
                   Create Project
@@ -201,6 +266,7 @@ const TasksBoard = () => {
                   </div>
                 </div>
 
+
                 {/* button type will be submit for handling form submission*/}
                 <button
                   onClick={() => setOpenModal(false)}
@@ -211,8 +277,20 @@ const TasksBoard = () => {
                 </button>
               </form>
             </div>
+
+        <ToastContainer/>
+        </>
+    )}
+
+    export default TasksBoard 
+
+
+
+
+
           </div>
         </div>
+
 
         {/* todo, doing and done Boards */}
         <div className="col-span-12 md:col-span-9 flex gap-10  ">

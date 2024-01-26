@@ -4,6 +4,8 @@ import Home from "../pages/Home/Home";
 import Login from "../pages/Login/Login";
 import Register from "../pages/Register/Register";
 import TasksBoard from "../pages/TasksBoard/TaskBoard";
+import PrivateRoute from "./PrivateRoute";
+import UpdateTask from "../pages/UpdateTask/UpdateTask";
 const router = createBrowserRouter([
   {
     path: "/",
@@ -15,8 +17,15 @@ const router = createBrowserRouter([
       },
       {
         path: "/tasksboard",
-        element: <TasksBoard></TasksBoard>,
+
+        element: <PrivateRoute><TasksBoard /></PrivateRoute>
       },
+      {
+        path:"updatetask/:id",
+        element:<PrivateRoute><UpdateTask></UpdateTask></PrivateRoute>,
+        loader:({params})=>fetch(`http://localhost:5000/updatetask/${params.id}`)
+      }
+
     ],
   },
   {
