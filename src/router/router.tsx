@@ -17,6 +17,7 @@ const router = createBrowserRouter([
       },
       {
         path: "/tasksboard",
+
         element: <PrivateRoute><TasksBoard /></PrivateRoute>
       },
       {
@@ -24,17 +25,17 @@ const router = createBrowserRouter([
         element:<PrivateRoute><UpdateTask></UpdateTask></PrivateRoute>,
         loader:({params})=>fetch(`http://localhost:5000/updatetask/${params.id}`)
       }
+
     ],
   },
-    {
-      path: "/login",
-      element: <Login></Login>
-    },
-    {
-      path: "/register",
-      element: <Register></Register>
-    },
-  
+  {
+    path: "/login",
+    element: <Login></Login>,
+  },
+  {
+    path: "/register",
+    element: <Register></Register>,
+  },
 ]);
 
 export default router;
