@@ -2,6 +2,9 @@ import { useState } from 'react';
 import lottiAnimation1 from '../../assets/TasksBoard/Add User.json'
 import Lottie from 'lottie-react';
 import { LuListTodo } from "react-icons/lu";
+import { GrInProgress } from "react-icons/gr";
+import { AiOutlineFileDone } from "react-icons/ai";
+
 
 const TasksBoard = () => {
     const [openModal, setOpenModal] = useState(false);
@@ -20,11 +23,11 @@ const TasksBoard = () => {
     return (
         <>
 
-            <div className="grid grid-cols-12 w-full  mx-auto gap-10 mt-5">
+  <div className="grid grid-cols-12 w-full  mx-auto gap-10 mt-5">
                 
         {/* Create Project Modal */}
         <div className="w-72 mx-auto flex items-center justify-center  col-span-12 md:col-span-3">
-                <button onClick={() => setOpenModal(true)} className="bg-primeColor text-white p-2 rounded-lg">Create a Project</button>
+                <button onClick={() => setOpenModal(true)} className="bg-primeColor text-white p-2 rounded-lg">Create a Tasks </button>
                 <div onClick={() => setOpenModal(false)} className={`fixed flex justify-center items-center z-[100] ${ openModal ? 'visible opacity-1' : 'invisible opacity-0'} inset-0 w-full h-full backdrop-blur-sm bg-black/20 duration-100`}>
                     <div onClick={(e_) => e_.stopPropagation()} className={`absolute w-full lg:w-[500px] bg-white drop-shadow-2xl rounded-lg ${openModal ? 'opacity-1 duration-300 translate-y-0' : '-translate-y-20 opacity-0 duration-150'}`}>
                         <form  onSubmit={(e)=>handleSubmit(e)} className="p-12">
@@ -93,11 +96,20 @@ const TasksBoard = () => {
         <hr />
     </div>
     <div className='w-1/5 min-h-screen rounded-lg border border-t-4 border-t-primeColor   shadow-[0_20px_50px_rgba(8,_112,_184,_0.7)]' >
-        <h2 className='p-5'>In progress</h2>
+    <div className='flex gap-5 justify-start ml-5 items-center'>
+            <GrInProgress className='text-2xl' />
+            <h2 className='p-5'>In progress</h2>
+        </div>
+       
         <hr />
     </div>
     <div className='w-1/5 min-h-screen rounded-lg border border-t-4 border-t-green-500  shadow-[0_20px_50px_rgba(8,_112,_184,_0.7)]' >
-        <h2 className='p-5'>Done</h2>
+
+    <div className='flex gap-5 justify-start ml-5 items-center'>
+            <AiOutlineFileDone className='text-2xl' />
+            <h2 className='p-5'>Done</h2>
+        </div>
+        
         <hr />
     </div>
     
