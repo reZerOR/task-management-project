@@ -4,9 +4,22 @@ import Lottie from 'lottie-react';
 import { LuListTodo } from "react-icons/lu";
 import { GrInProgress } from "react-icons/gr";
 import { AiOutlineFileDone } from "react-icons/ai";
+import axios from 'axios';
+import { toast } from 'react-toastify';
+import { useQuery } from '@tanstack/react-query';
+import SingleTask from './SingleTask';
 
 
 const TasksBoard = () => {
+
+    type TaskType = {
+        id: number;
+        name: string;
+        description: string;
+        visibility: string;
+    }
+
+
     const [openModal, setOpenModal] = useState(false);
 
     const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
@@ -15,10 +28,38 @@ const TasksBoard = () => {
         const formData = new FormData(e.currentTarget);
         const name = formData.get('name');
         const description = formData.get('description');
-        const Visibility = formData.get('Visibility');
+        const visibility = formData.get('Visibility');
     
-        console.log(name, description, Visibility);
-      };
+        const createTaskData = {
+          name,
+          description,
+          visibility
+        }
+
+        axios.post('http://localhost:5000/create-task', createTaskData )
+        .then(() => {
+            toast.success('Task created successfully!');
+        })
+        .catch((error) => {
+          console.error(error);
+        })
+
+
+      }
+
+      const { data: tasks = [] } = useQuery({ 
+        queryKey: ["tasks"],
+        queryFn: async () => {
+            try {
+              const res = await axios.get(`http://localhost:5000/all-task`);
+              return res.data;
+            } catch (error) {
+              console.log(error);
+            }
+          },
+      }); 
+    
+    console.log(tasks);
     
     return (
         <>
@@ -76,7 +117,7 @@ const TasksBoard = () => {
 
 
                             {/* button type will be submit for handling form submission*/}
-                            <button type="submit" className="py-2 px-5 mb-4 mt-6 shadow-lg rounded-lg before:block before:-left-1 before:-top-1 before:bg-black before:rounded-lg before:absolute before:h-0 before:w-0 before:hover:w-[100%] before:hover:h-[100%]  before:duration-500 before:-z-40 after:block after:-right-1 after:-bottom-1 after:bg-black after:rounded-lg after:absolute after:h-0 after:w-0 after:hover:w-[100%] after:hover:h-[100%] after:duration-500 after:-z-40 bg-white relative inline-block">Submit</button>
+                            <button onClick={() => setOpenModal(false)} type="submit" className="py-2 px-5 mb-4 mt-6 shadow-lg rounded-lg before:block before:-left-1 before:-top-1 before:bg-black before:rounded-lg before:absolute before:h-0 before:w-0 before:hover:w-[100%] before:hover:h-[100%]  before:duration-500 before:-z-40 after:block after:-right-1 after:-bottom-1 after:bg-black after:rounded-lg after:absolute after:h-0 after:w-0 after:hover:w-[100%] after:hover:h-[100%] after:duration-500 after:-z-40 bg-white relative inline-block">Create</button>
                         </form>
                     </div>
                 </div>
@@ -94,6 +135,15 @@ const TasksBoard = () => {
             <h2 className='p-5'>Todo</h2>
         </div>
         <hr />
+
+        {/* Tasks */}
+     <div className='flex flex-col gap-5'>
+     {
+     tasks.map((task: TaskType ) => (
+         <SingleTask key={task.id} task={task} />
+     ))
+     }
+     </div>
     </div>
     <div className='w-1/5 min-h-screen rounded-lg border border-t-4 border-t-primeColor   shadow-[0_20px_50px_rgba(8,_112,_184,_0.7)]' >
     <div className='flex gap-5 justify-start ml-5 items-center'>
