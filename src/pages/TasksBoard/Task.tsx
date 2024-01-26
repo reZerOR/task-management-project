@@ -24,9 +24,12 @@ const Task = ({ task, setTasks }: parameter) => {
   }));
   const handleRemove = async (id: string) => {
     console.log(id);
-    const res = await fetch(`http://localhost:5000/deletetask/${id}`, {
-      method: "DELETE",
-    });
+    const res = await fetch(
+      `https://task-project-server-smoky.vercel.app/deletetask/${id}`,
+      {
+        method: "DELETE",
+      }
+    );
     if (res.ok) {
       // Remove the deleted task from the state
       setTasks((prevTasks: any) => prevTasks.filter((t: any) => t._id !== id));
