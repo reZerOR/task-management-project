@@ -11,4 +11,4 @@ const SingleTask = ({task}) => {
     );
 };
 
-export default SingleTask;J
+export default SingleTask
