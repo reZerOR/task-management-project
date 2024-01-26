@@ -1,8 +1,25 @@
 import { useState } from 'react';
 import lottiAnimation1 from '../../assets/TasksBoard/Add User.json'
 import Lottie from 'lottie-react';
+import { LuListTodo } from "react-icons/lu";
+import { GrInProgress } from "react-icons/gr";
+import { AiOutlineFileDone } from "react-icons/ai";
+import axios from 'axios';
+import { toast } from 'react-toastify';
+import { useQuery } from '@tanstack/react-query';
+import SingleTask from './SingleTask';
+
 
 const TasksBoard = () => {
+
+    type TaskType = {
+        id: number;
+        name: string;
+        description: string;
+        visibility: string;
+    }
+
+
     const [openModal, setOpenModal] = useState(false);
 
     const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
@@ -11,19 +28,47 @@ const TasksBoard = () => {
         const formData = new FormData(e.currentTarget);
         const name = formData.get('name');
         const description = formData.get('description');
-        const Visibility = formData.get('Visibility');
+        const visibility = formData.get('Visibility');
     
-        console.log(name, description, Visibility);
-      };
+        const createTaskData = {
+          name,
+          description,
+          visibility
+        }
+
+        axios.post('http://localhost:5000/create-task', createTaskData )
+        .then(() => {
+            toast.success('Task created successfully!');
+        })
+        .catch((error) => {
+          console.error(error);
+        })
+
+
+      }
+
+      const { data: tasks = [] } = useQuery({ 
+        queryKey: ["tasks"],
+        queryFn: async () => {
+            try {
+              const res = await axios.get(`http://localhost:5000/all-task`);
+              return res.data;
+            } catch (error) {
+              console.log(error);
+            }
+          },
+      }); 
+    
+    console.log(tasks);
     
     return (
         <>
 
-            <div className="grid grid-cols-12 w-full  mx-auto gap-10 mt-5">
+  <div className="grid grid-cols-12 w-full  mx-auto gap-10 mt-5">
                 
         {/* Create Project Modal */}
         <div className="w-72 mx-auto flex items-center justify-center  col-span-12 md:col-span-3">
-                <button onClick={() => setOpenModal(true)} className="bg-primeColor text-white p-2 rounded-lg">Create a Project</button>
+                <button onClick={() => setOpenModal(true)} className="bg-primeColor text-white p-2 rounded-lg">Create a Tasks </button>
                 <div onClick={() => setOpenModal(false)} className={`fixed flex justify-center items-center z-[100] ${ openModal ? 'visible opacity-1' : 'invisible opacity-0'} inset-0 w-full h-full backdrop-blur-sm bg-black/20 duration-100`}>
                     <div onClick={(e_) => e_.stopPropagation()} className={`absolute w-full lg:w-[500px] bg-white drop-shadow-2xl rounded-lg ${openModal ? 'opacity-1 duration-300 translate-y-0' : '-translate-y-20 opacity-0 duration-150'}`}>
                         <form  onSubmit={(e)=>handleSubmit(e)} className="p-12">
@@ -72,7 +117,7 @@ const TasksBoard = () => {
 
 
                             {/* button type will be submit for handling form submission*/}
-                            <button type="submit" className="py-2 px-5 mb-4 mt-6 shadow-lg rounded-lg before:block before:-left-1 before:-top-1 before:bg-black before:rounded-lg before:absolute before:h-0 before:w-0 before:hover:w-[100%] before:hover:h-[100%]  before:duration-500 before:-z-40 after:block after:-right-1 after:-bottom-1 after:bg-black after:rounded-lg after:absolute after:h-0 after:w-0 after:hover:w-[100%] after:hover:h-[100%] after:duration-500 after:-z-40 bg-white relative inline-block">Submit</button>
+                            <button onClick={() => setOpenModal(false)} type="submit" className="py-2 px-5 mb-4 mt-6 shadow-lg rounded-lg before:block before:-left-1 before:-top-1 before:bg-black before:rounded-lg before:absolute before:h-0 before:w-0 before:hover:w-[100%] before:hover:h-[100%]  before:duration-500 before:-z-40 after:block after:-right-1 after:-bottom-1 after:bg-black after:rounded-lg after:absolute after:h-0 after:w-0 after:hover:w-[100%] after:hover:h-[100%] after:duration-500 after:-z-40 bg-white relative inline-block">Create</button>
                         </form>
                     </div>
                 </div>
@@ -84,15 +129,40 @@ const TasksBoard = () => {
 {/* todo, doing and done Boards */}
 <div className='col-span-12 md:col-span-9 flex gap-10  '>
 
-    <div className='w-1/5 h-full bg-yellow-500 ' >
-        <h2>Todo</h2>
+    <div className='w-1/5 min-h-screen rounded-lg border border-t-4 border-t-secondColor   shadow-[0_20px_50px_rgba(8,_112,_184,_0.7)]' >
+        <div className='flex gap-5 justify-start ml-5 items-center'>
+            <LuListTodo className='text-2xl' />
+            <h2 className='p-5'>Todo</h2>
+        </div>
+        <hr />
+
+        {/* Tasks */}
+     <div className='flex flex-col gap-5'>
+     {
+     tasks.map((task: TaskType ) => (
+         <SingleTask key={task.id} task={task} />
+     ))
+     }
+     </div>
     </div>
-    <div className='w-1/5 h-full bg-yellow-500 '>
-        <h2>Doing</h2>
+    <div className='w-1/5 min-h-screen rounded-lg border border-t-4 border-t-primeColor   shadow-[0_20px_50px_rgba(8,_112,_184,_0.7)]' >
+    <div className='flex gap-5 justify-start ml-5 items-center'>
+            <GrInProgress className='text-2xl' />
+            <h2 className='p-5'>In progress</h2>
+        </div>
+       
+        <hr />
     </div>
-    <div className='w-1/5 h-full bg-yellow-500 '>
-        <h2>Done</h2>
+    <div className='w-1/5 min-h-screen rounded-lg border border-t-4 border-t-green-500  shadow-[0_20px_50px_rgba(8,_112,_184,_0.7)]' >
+
+    <div className='flex gap-5 justify-start ml-5 items-center'>
+            <AiOutlineFileDone className='text-2xl' />
+            <h2 className='p-5'>Done</h2>
+        </div>
+        
+        <hr />
     </div>
+    
 
 </div>
             </div>
@@ -100,7 +170,7 @@ const TasksBoard = () => {
         </>
     )}
 
-    export default TasksBoard 
+export default TasksBoard 
 
 
 
