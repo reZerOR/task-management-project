@@ -17,13 +17,12 @@ const router = createBrowserRouter([
       },
       {
         path: "/tasksboard",
-
         element: <PrivateRoute><TasksBoard /></PrivateRoute>
       },
       {
         path:"updatetask/:id",
         element:<PrivateRoute><UpdateTask></UpdateTask></PrivateRoute>,
-        loader:({params})=>fetch(`http://localhost:5000/updatetask/${params.id}`)
+        loader:({params}:{params:{id:string}})=>fetch(`http://localhost:5000/updatetask/${params.id}`)
       }
 
     ],
