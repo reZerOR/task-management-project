@@ -15,19 +15,18 @@ const router = createBrowserRouter([
       },
       {
         path: "/tasksboard",
-        element: <TasksBoard />
-      }
+        element: <TasksBoard></TasksBoard>,
+      },
     ],
   },
-    {
-      path: "/login",
-      element: <Login></Login>
-    },
-    {
-      path: "/register",
-      element: <Register></Register>
-    },
-  
+  {
+    path: "/login",
+    element: <Login></Login>,
+  },
+  {
+    path: "/register",
+    element: <Register></Register>,
+  },
 ]);
 
 export default router;
