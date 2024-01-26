@@ -11,7 +11,7 @@ import Container from "../../../../sharedComponents/Container";
 
 const Reviews = () => {
   return (
-    <div className=" py-20 lg:py-28 bg-secondColor bg-opacity-90">
+    <div className=" py-20 lg:py-28 bg-secondColor bg-opacity-5">
       <Container>
         <div>
           <SectionTitle

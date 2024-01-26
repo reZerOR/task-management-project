@@ -7,7 +7,7 @@ type parameter = {
 const PrivateRoute = ({ children }: parameter) => {
   const userContext = useContext(AuthContext);
   const location = useLocation();
-  console.log(userContext.loading, userContext.user);
+  console.log(userContext.loading);
 
   if (userContext.loading) {
     return (
@@ -18,7 +18,10 @@ const PrivateRoute = ({ children }: parameter) => {
       ></progress>
     );
   }
-  if (userContext.user) {
+  if (
+    userContext.user?.displayName !== "Unknown" &&
+    userContext.user?.displayName !== null
+  ) {
     return children;
   }
   return <Navigate state={location.pathname} to={"/login"}></Navigate>;
