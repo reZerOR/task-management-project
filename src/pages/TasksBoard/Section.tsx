@@ -4,6 +4,7 @@ import { useDrop } from "react-dnd";
 import { toast } from "react-toastify";
 import Header from "./Header";
 import Task from "./Task";
+// import { useEffect } from "react";
 
 type parameter = {
   status: string;
@@ -48,7 +49,7 @@ const Section = ({
 
   const addItemToSection = (id: string) => {
     fetch(
-      `https://task-project-server-smoky.vercel.app/updateTaskStatus/${id}`,
+      `http://localhost:5000/updateTaskStatus/${id}`,
       {
         method: "PATCH",
         headers: {
@@ -64,7 +65,6 @@ const Section = ({
         return response.json();
       })
       .then(() => {
-        // Update the task status in the state
         setTasks((prev: any) => {
           const modifiedTask = prev.map((task: any) => {
             if (task._id === id) {
@@ -74,13 +74,27 @@ const Section = ({
           });
           return modifiedTask;
         });
-        toast.success("Task status changed");
+
+        const currentStatus = taskToMap.find((task: any) => task._id === id)?.status;
+
+        console.log("Current Status:", currentStatus);
+        console.log("New Status:", status);
+
+        if (currentStatus !== status) {
+          toast.success("Task status changed");
+        }
       })
       .catch((error) => {
         console.error("Error updating task status:", error);
-        toast.error("Failed to update task status");
+
+        // Show error toast only if the status has changed
+        const currentStatus = taskToMap.find((task: any) => task._id === id)?.status;
+        if (currentStatus !== status) {
+          toast.error("Failed to update task status");
+        }
       });
   };
+
   return (
     <div ref={drop} className={`w-64 ${isOver ? "bg-slate-200" : ""}`}>
       <Header text={text} bg={bg} count={taskToMap.length}></Header>

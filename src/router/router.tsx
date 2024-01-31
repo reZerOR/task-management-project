@@ -32,7 +32,7 @@ const router = createBrowserRouter([
         ),
         loader: ({ params }) =>
           fetch(
-            `https://task-project-server-smoky.vercel.app/updatetask/${params.id}`
+            `http://localhost:5000/updatetask/${params.id}`
           ),
       },
     ],
