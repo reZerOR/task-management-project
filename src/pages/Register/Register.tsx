@@ -48,7 +48,7 @@ const Register = () => {
       .then(async (result: UserCredential) => {
         console.log(result);
         const response = await fetch(
-          "https://task-project-server-smoky.vercel.app/user",
+          "http://localhost:5000/user",
           {
             method: "POST",
             headers: {
@@ -85,7 +85,7 @@ const Register = () => {
         };
 
         // Assuming you want to send user information to the server
-        return fetch("https://task-project-server-smoky.vercel.app/user", {
+        return fetch("http://localhost:5000/user", {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
@@ -124,7 +124,7 @@ const Register = () => {
         };
 
         // Assuming you want to send user information to the server
-        return fetch("https://task-project-server-smoky.vercel.app/user", {
+        return fetch("http://localhost:5000/user", {
           method: "POST",
           headers: {
             "Content-Type": "application/json",

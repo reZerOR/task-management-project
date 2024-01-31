@@ -5,7 +5,7 @@ import { BiSolidEdit } from "react-icons/bi";
 import { CiCircleRemove } from "react-icons/ci";
 import { Link } from "react-router-dom";
 import { toast } from "react-toastify";
-
+import Swal from 'sweetalert2'
 type parameter = {
   task: any;
   tasks: any;
@@ -22,22 +22,37 @@ const Task = ({ task, setTasks }: parameter) => {
       isDragging: !!monitor.isDragging(),
     }),
   }));
-  const handleRemove = async (id: string) => {
+  const handleRemove =  (id: string) => {
     console.log(id);
-    const res = await fetch(
-      `https://task-project-server-smoky.vercel.app/deletetask/${id}`,
-      {
-        method: "DELETE",
+    Swal.fire({
+      title: "Are you sure?",
+      text: "You won't be able to revert this!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, delete it!"
+    }).then(async(result) => {
+      if (result.isConfirmed) {
+        const res = await fetch(
+          `http://localhost:5000/deletetask/${id}`,
+          {
+            method: "DELETE",
+          }
+        );
+        if (res.ok) {
+          setTasks((prevTasks: any) => prevTasks.filter((t: any) => t._id !== id));
+        } else {
+          console.error("Failed to delete task");
+        }
+        Swal.fire({
+          title: "Deleted!",
+          text: "Your task has been deleted.",
+          icon: "success"
+        });
       }
-    );
-    if (res.ok) {
-      // Remove the deleted task from the state
-      setTasks((prevTasks: any) => prevTasks.filter((t: any) => t._id !== id));
-    } else {
-      console.error("Failed to delete task");
-    }
-
-    toast.success("Task Deleted Successfully");
+    });
+   
   };
 
   return (

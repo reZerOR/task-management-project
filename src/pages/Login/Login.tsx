@@ -63,7 +63,7 @@ const Login = () => {
         };
 
         // Assuming you want to send user information to the server
-        return fetch("https://task-project-server-smoky.vercel.app/user", {
+        return fetch("http://localhost:5000/user", {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
@@ -102,7 +102,7 @@ const Login = () => {
         };
 
         // Assuming you want to send user information to the server
-        return fetch("https://task-project-server-smoky.vercel.app/user", {
+        return fetch("http://localhost:5000/user", {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
