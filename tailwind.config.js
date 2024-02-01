@@ -5,7 +5,7 @@ export default {
     extend: {
       colors: {
         text: "#2F4F4F",
-        primeColor: "#6A5ACD",
+        primeColor: "#590DF2",
         secondColor: "#B0E0E6",
         AccentColor: "#590DF2",
       },
