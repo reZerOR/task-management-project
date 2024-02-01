@@ -39,12 +39,7 @@ const FAQ = () => {
                          <p>Yes, Taskflow is responsive and can be accessed on various devices, including smartphones and tablets, making it convenient for on-the-go task management.</p>
                     </div>
                 </details>
-                <details>
-                    <summary className="py-2 outline-none cursor-pointer focus:underline"> Is Taskflow suitable for teams?</summary>
-                    <div className="px-4 pb-4 space-y-2">
-                         <p>Yes, Taskflow is ideal for teams. It offers collaboration features, allowing team members to share tasks, update statuses, and work together seamlessly.</p>
-                    </div>
-                </details>
+                
             </div>
         </div>
     </section>
