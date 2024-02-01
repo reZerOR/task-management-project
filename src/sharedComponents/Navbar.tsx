@@ -1,11 +1,16 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import Container from "./Container";
 import { motion } from "framer-motion";
 import { Sling as Hamburger } from "hamburger-react";
 import { Link, NavLink } from "react-router-dom";
+import { AuthContext } from "../Providers/AuthProvider";
 
 const Navbar = () => {
+  const userContext = useContext(AuthContext);
   const [visable, setVisable] = useState(false);
+  const handleLogout = () => {
+    userContext.logOut();
+  };
   const itemVarients = {
     open: {
       opacity: 1,
@@ -23,10 +28,9 @@ const Navbar = () => {
       <Container>
         <nav className="flex items-center justify-between">
           {/* logo text */}
-          <div>
-            <h2 style={{}} className="text-4xl font-bold py-10 text-text">
-              Taskflow
-            </h2>
+          <div className="flex items-center">
+           <img className="w-16" src="/favicon.png" alt="logo" />
+           <h2 className="text-3xl font-bold"><span className="text-primeColor font-extrabold">Task</span>Flow</h2>
           </div>
           {/* visable in large devices */}
           <div className="lg:flex gap-6 items-center hidden">
@@ -35,26 +39,33 @@ const Navbar = () => {
                 <li>Home</li>
               </NavLink>
               <NavLink to={"/tasksboard"}>
-
                 <li>TaskBoard</li>
               </NavLink>
-              <li>About Us</li>
-
-              <li>Blog</li>
-              <li>Contact</li>
             </ul>
 
             <div className="text-lg font-medium space-x-6 py-10">
-              <Link to={"/login"}>
-                <button className="px-10 py-4 border-2 border-primeColor rounded-lg text-primeColor">
-                  Log in
+              {userContext.user?.displayName !== "Unknown" &&
+              userContext.user?.displayName !== null ? (
+                <button
+                  onClick={handleLogout}
+                  className="px-10 py-4 bg-primeColor text-white rounded-lg border-2 border-primeColor"
+                >
+                  Log Out
                 </button>
-              </Link>
-              <Link to={"/register"}>
-                <button className="px-10 py-4 bg-primeColor text-white rounded-lg border-2 border-primeColor">
-                  Sign Up
-                </button>
-              </Link>
+              ) : (
+                <>
+                  <Link to={"/login"}>
+                    <button className="px-10 py-4 border-2 border-primeColor rounded-lg text-primeColor">
+                      Log in
+                    </button>
+                  </Link>
+                  <Link to={"/register"}>
+                    <button className="px-10 py-4 bg-primeColor text-white rounded-lg border-2 border-primeColor">
+                      Sign Up
+                    </button>
+                  </Link>
+                </>
+              )}
             </div>
           </div>
           {/* visable in mobile and tablets */}
@@ -88,21 +99,35 @@ const Navbar = () => {
               className="mt-10 absolute bg-primeColor text-white w-60 md:w-96 right-0 p-4 space-y-4 rounded-lg"
             >
               <motion.li variants={itemVarients}>Home</motion.li>
-              <motion.li variants={itemVarients}>About Us</motion.li>
-              <motion.li variants={itemVarients}>Blog</motion.li>
-              <motion.li variants={itemVarients}>Contact</motion.li>
-              <motion.button
-                variants={itemVarients}
-                className="px-10 py-4 border-2 mr-4 border-secondColor rounded-lg text-secondColor"
-              >
-                Log in
-              </motion.button>
-              <motion.button
-                variants={itemVarients}
-                className="px-10 py-4 bg-AccentColor text-white rounded-lg border-2 border-AccentColor"
-              >
-                Sign Up
-              </motion.button>
+              <motion.li variants={itemVarients}>
+                <Link to={"/tasksboard"}>TaskBoard</Link>
+              </motion.li>
+
+              {userContext.user?.displayName !== "Unknown" &&
+              userContext.user?.displayName !== null ? (
+                <motion.button
+                  onClick={handleLogout}
+                  variants={itemVarients}
+                  className="px-10 py-4 bg-AccentColor text-white rounded-lg border-2 border-AccentColor"
+                >
+                  Log Out
+                </motion.button>
+              ) : (
+                <>
+                  <motion.button
+                    variants={itemVarients}
+                    className="px-10 py-4 border-2 mr-4 border-secondColor rounded-lg text-secondColor"
+                  >
+                    Log in
+                  </motion.button>
+                  <motion.button
+                    variants={itemVarients}
+                    className="px-10 py-4 bg-AccentColor text-white rounded-lg border-2 border-AccentColor"
+                  >
+                    Sign Up
+                  </motion.button>
+                </>
+              )}
             </motion.ul>
           </motion.div>
         </nav>

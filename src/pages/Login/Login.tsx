@@ -134,7 +134,7 @@ const Login = () => {
         <TitleHelmet title="Login"></TitleHelmet>
         <div className="mt-6">
           <Link to="/">
-            <button className="text-2xl font-bold rounded-lg px-8 h-16 before:block before:absolute hover:before:bg-primeColor before:w-0 before:h-0 hover:before:h-20 hover:before:w-full before:-bottom-2 before:right-0 before:duration-300 before:rounded-lg before:-z-10 relative inline-block transform hover:text-white text-primeColor bg-transparent border-2 overflow-hidden border-none duration-300">
+            <button className="text-4xl font-stylish rounded-lg px-8 h-16 before:block before:absolute hover:before:bg-primeColor before:w-0 before:h-0 hover:before:h-20 hover:before:w-full before:-bottom-2 before:right-0 before:duration-300 before:rounded-lg before:-z-10 relative inline-block transform hover:text-white text-primeColor bg-transparent border-2 overflow-hidden border-none duration-300">
               Taskflow
             </button>
           </Link>
@@ -142,17 +142,18 @@ const Login = () => {
         <div className="text-center mt-8 mb-14">
           <h1 className="text-4xl font-bold text-primeColor">Login now!</h1>
         </div>
-        <div className="flex flex-col-reverse lg:flex-row gap-5 justify-center items-center">
-          <div className="flex-1">
+        <div className="flex flex-col-reverse lg:flex-row gap-5 justify-evenly items-center">
+          <div className="">
             <img
               src="https://i.ibb.co/7CKcLrn/undraw-Login-re-4vu2.png"
               alt=""
+              className="max-w-[700px]"
             />
           </div>
-          <div className="flex-1">
-            <div className="hero-content flex-col  ">
-              <div className="card flex-shrink-0 w-full bg-slate-200 rounded-lg max-w-sm shadow-2xl p-10">
-                <div className="card-body ">
+          <div className="">
+            <div className="">
+              <div className=" w-full bg-slate-200 rounded-lg shadow-2xl p-10">
+                <div className="">
                   <form onSubmit={handleLogin}>
                     <div className="form-control mb-2">
                       <label className="label">

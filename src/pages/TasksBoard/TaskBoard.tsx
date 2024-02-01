@@ -50,10 +50,11 @@ const TasksBoard = () => {
       window.location.reload();
     }, 2000);
   };
+ 
 
   return (
     <>
-      <div className="grid grid-cols-12 w-full  mx-auto gap-10 mt-5">
+      <div className="grid grid-cols-12 w-full mx-auto min-h-[calc(100vh-384px)] gap-10 mt-5">
         {/* Create Project Modal */}
         <div className="w-72 mx-auto flex items-center justify-center  col-span-12 md:col-span-3">
           <button
@@ -208,7 +209,7 @@ const TasksBoard = () => {
         </div>
 
         {/* todo, doing and done Boards */}
-        <div className="col-span-12 md:col-span-9 flex gap-10  ">
+        <div className="col-span-12 md:col-span-9 mx-auto md:mx-0 flex gap-6">
           <List />
         </div>
       </div>
