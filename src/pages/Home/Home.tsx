@@ -4,6 +4,7 @@ import AllFeatures from "./components/AllFeatures/AllFeatures";
 import Banner from "./Banner/Banner";
 import Reviews from "./components/Reviews/Reviews";
 import CallToAction from "./components/CallToAction/CallToAction";
+import FAQ from "./FAQ/FAQ";
 
 const Home = () => {
   return (
@@ -14,6 +15,7 @@ const Home = () => {
       <AllFeatures></AllFeatures>
       <Reviews></Reviews>
       <CallToAction></CallToAction>
+      <FAQ></FAQ>
     </div>
   );
 };
