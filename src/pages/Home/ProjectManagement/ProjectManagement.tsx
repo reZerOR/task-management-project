@@ -69,7 +69,7 @@ const ProjectManagement: React.FC = () => {
   const { text, imgSrc } = tabData[activeTab];
 
   return (
-    <div className="bg-secondColor bg-opacity-30 py-20 lg:py-28 ">
+    <div className="bg-white py-20 lg:py-28 ">
       <Container>
         <div className="rounded-xl w-full mx-auto">
           <SectionTitle

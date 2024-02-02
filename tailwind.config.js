@@ -5,9 +5,9 @@ export default {
     extend: {
       colors: {
         text: "#2F4F4F",
-        primeColor: "#590DF2",
-        secondColor: "#B0E0E6",
-        AccentColor: "#590DF2",
+        primeColor: "#4942E4",
+        secondColor: "#8696FE",
+        AccentColor: "#11009E",
       },
       fontFamily: {
         stylish: "'DM Serif Display', serif;",

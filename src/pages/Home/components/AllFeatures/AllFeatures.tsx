@@ -3,7 +3,7 @@ import SectionTitle from "../../../../sharedComponents/SectionTitle";
 import FeaturesDetails from "./FeaturesDetails";
 const AllFeatures = () => {
   return (
-    <div className="bg-secondColor bg-opacity-35 py-20 lg:py-28 ">
+    <div className="bg-white py-20 lg:py-28 ">
       <Container>
         <div className="">
           <SectionTitle
