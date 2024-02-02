@@ -6,6 +6,7 @@ import Register from "../pages/Register/Register";
 import TasksBoard from "../pages/TasksBoard/TaskBoard";
 import PrivateRoute from "./PrivateRoute";
 import UpdateTask from "../pages/UpdateTask/UpdateTask";
+import MyProfile from "../pages/MyProfile/MyProfile";
 const router = createBrowserRouter([
   {
     path: "/",
@@ -35,6 +36,10 @@ const router = createBrowserRouter([
             `https://task-project-server-smoky.vercel.app/updatetask/${params.id}`
           ),
       },
+      {
+        path: "/myProfile",
+        element: <MyProfile></MyProfile>,
+      },
     ],
   },
   {
@@ -45,6 +50,7 @@ const router = createBrowserRouter([
     path: "/register",
     element: <Register></Register>,
   },
+ 
 ]);
 
 export default router;

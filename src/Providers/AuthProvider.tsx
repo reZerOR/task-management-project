@@ -54,6 +54,7 @@ export const AuthContext = createContext({} as UserContextType);
 
 const AuthProvider = ({ children }: UserContextProviderType) => {
   const [user, setUser] = useState<AuthUser | null>(null);
+  
   const [loading, setLoading] = useState(true);
 
   const logOut = () => {
@@ -105,6 +106,8 @@ const AuthProvider = ({ children }: UserContextProviderType) => {
     logOut();
     return;
   };
+
+console.log(auth.currentUser);
 
   const signIn = (email: string, password: string) => {
     setLoading(true);
