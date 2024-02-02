@@ -7,6 +7,7 @@ import { AuthContext } from "../Providers/AuthProvider";
 
 const Navbar = () => {
   const userContext = useContext(AuthContext);
+  console.log(userContext.user)
   const [visable, setVisable] = useState(false);
   const handleLogout = () => {
     userContext.logOut();
@@ -41,12 +42,17 @@ const Navbar = () => {
               </NavLink>
               <NavLink to={"/tasksboard"}>
                 <li>TaskBoard</li>
+                
+              </NavLink>
+              <NavLink to={"/myProfile"}>
+                <li>My Profile</li>
+                
               </NavLink>
             </ul>
 
             <div className="text-lg font-medium space-x-6 py-10">
               {userContext.user?.displayName !== "Unknown" &&
-              userContext.user?.displayName !== null ? (
+                userContext.user?.displayName !== null ? (
                 <button
                   onClick={handleLogout}
                   className="px-10 py-4 bg-primeColor text-white rounded-lg border-2 border-primeColor"
@@ -105,14 +111,21 @@ const Navbar = () => {
               </motion.li>
 
               {userContext.user?.displayName !== "Unknown" &&
-              userContext.user?.displayName !== null ? (
-                <motion.button
-                  onClick={handleLogout}
-                  variants={itemVarients}
-                  className="px-10 py-4 bg-AccentColor text-white rounded-lg border-2 border-AccentColor"
-                >
-                  Log Out
-                </motion.button>
+                userContext.user?.displayName !== null ? (
+
+           
+                  
+
+                  <motion.button
+                    onClick={handleLogout}
+                    variants={itemVarients}
+                    className="px-10 py-4 bg-AccentColor text-white rounded-lg border-2 border-AccentColor"
+                  >
+                    Log Out
+                  </motion.button>
+               
+
+
               ) : (
                 <>
                   <motion.button
@@ -127,6 +140,9 @@ const Navbar = () => {
                   >
                     Sign Up
                   </motion.button>
+
+
+
                 </>
               )}
             </motion.ul>
