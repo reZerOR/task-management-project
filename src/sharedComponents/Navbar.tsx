@@ -28,10 +28,9 @@ const Navbar = () => {
       <Container>
         <nav className="flex items-center justify-between">
           {/* logo text */}
-          <div>
-            <h2 style={{}} className="text-4xl font-stylish py-10 text-text">
-              Taskflow
-            </h2>
+          <div className="flex items-center">
+           <img className="w-16" src="/favicon.png" alt="logo" />
+           <h2 className="text-3xl font-bold"><span className="text-primeColor font-extrabold">Task</span>Flow</h2>
           </div>
           {/* visable in large devices */}
           <div className="lg:flex gap-6 items-center hidden">
