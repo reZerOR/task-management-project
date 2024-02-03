@@ -6,7 +6,7 @@ export default {
       colors: {
         text: "#2F4F4F",
         primeColor: "#590DF2",
-        secondColor: "#B0E0E6",
+        secondColor: "#F2F2F2",
         AccentColor: "#590DF2",
       },
       fontFamily: {
