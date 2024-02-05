@@ -14,8 +14,8 @@ const Home = () => {
       <Collaboration></Collaboration>
       <AllFeatures></AllFeatures>
       <Reviews></Reviews>
-      <CallToAction></CallToAction>
       <FAQ></FAQ>
+      <CallToAction></CallToAction>
     </div>
   );
 };

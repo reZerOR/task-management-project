@@ -6,6 +6,7 @@ import Register from "../pages/Register/Register";
 import TasksBoard from "../pages/TasksBoard/TaskBoard";
 import PrivateRoute from "./PrivateRoute";
 import UpdateTask from "../pages/UpdateTask/UpdateTask";
+import MyProfile from "../pages/MyProfile/MyProfile";
 const router = createBrowserRouter([
   {
     path: "/",
@@ -32,8 +33,16 @@ const router = createBrowserRouter([
         ),
         loader: ({ params }) =>
           fetch(
-            `http://localhost:5000/updatetask/${params.id}`
+            `https://task-project-server-smoky.vercel.app/updatetask/${params.id}`
           ),
+      },
+      {
+        path: "/myProfile",
+        element: (
+          <PrivateRoute>
+            <MyProfile></MyProfile>
+          </PrivateRoute>
+        ),
       },
     ],
   },
