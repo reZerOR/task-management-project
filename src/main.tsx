@@ -13,6 +13,7 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { ToastContainer } from "react-toastify";
 import { TouchBackend } from "react-dnd-touch-backend";
 import ScrollZone from "react-dnd-scrollzone";
+import {NextUIProvider} from "@nextui-org/react";
 // import { ReactNativeBackend } from "react-dnd-react-native-backend";
 
 const queryClient = new QueryClient();
@@ -25,6 +26,7 @@ ReactDOM.createRoot(document.getElementById("root")!).render(
   <DndProvider backend={Backend} options={{ enableMouseEvents: true }}>
     {/* <React.StrictMode> */}
     <HelmetProvider>
+      <NextUIProvider>
       <AuthProvider>
         <QueryClientProvider client={queryClient}>
           <RouterProvider router={router} />
@@ -33,6 +35,7 @@ ReactDOM.createRoot(document.getElementById("root")!).render(
           </ScrollZone>
         </QueryClientProvider>
       </AuthProvider>
+      </NextUIProvider>
     </HelmetProvider>
     {/* </React.StrictMode> */}
   </DndProvider>

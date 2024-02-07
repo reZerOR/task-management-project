@@ -6,13 +6,29 @@ import { CiCircleRemove } from "react-icons/ci";
 import { Link } from "react-router-dom";
 // import { toast } from "react-toastify";
 import Swal from "sweetalert2";
+
+// Modal 
+import {Modal, ModalContent, ModalHeader, ModalBody, ModalFooter, Button, useDisclosure, Avatar, Input} from "@nextui-org/react";
+import { useContext } from "react";
+import { AuthContext } from "../../Providers/AuthProvider";
+import CommentBox from "./TaskEditModal/CommentBox";
+import DueDate from "./TaskEditModal/DueDate";
+
+
+
 type parameter = {
   task: any;
   tasks: any;
   setTasks: any;
+  onPress: () => void;
 };
 
 const Task = ({ task, setTasks }: parameter) => {
+  // for modal 
+  const {isOpen, onOpen, onOpenChange } = useDisclosure();
+  const { user } = useContext(AuthContext);
+ 
+  
   // console.log("task",task)
   // console.log("tasksss",tasks)
   const [{ isDragging }, drag] = useDrag(() => ({
@@ -57,11 +73,14 @@ const Task = ({ task, setTasks }: parameter) => {
   };
 
   return (
-    <div
+<>
+<div
+     onClick={onOpen}
       ref={drag}
       className={`relative border p-3
      rounded-lg my-2 space-y-4 bg-slate-100
     cursor-grab shadow-md ${isDragging ? "opacity-25" : "opacity-100"}`}
+
     >
       <p className="text-xl font-stylish">{task.title}</p>
       <p>{task.description}</p>
@@ -83,8 +102,49 @@ const Task = ({ task, setTasks }: parameter) => {
             <BiSolidEdit></BiSolidEdit>
           </button>
         </Link>
+     
       </div>
+
     </div>
+
+
+{/*Task Edit Modal  ====================================================================== */}
+
+<>
+    
+      <Modal isOpen={isOpen} onOpenChange={onOpenChange}  size="5xl"> {/* Use onClose instead of onOpenChange */}
+  <ModalContent>
+    {(onClose) => (
+      <>
+        <ModalHeader className="flex flex-col gap-1">{task.title}</ModalHeader>
+        <ModalBody>
+          <div className="px-10 py-10">
+            <p className="mb-10">{task.description}</p>
+            <hr />
+            <DueDate />
+
+            {/* comment feature start ===================== */}
+            <div className="flex items-center gap-5 bg-gray-200 px-5 pt-2 pb-10 rounded-md">
+              <Avatar src={user.photoURL} />
+              {/* <Input type="text"  placeholder="Enter your comment" /> */}
+              <CommentBox />
+            </div>
+            {/* comment feature end ===================== */}
+
+          </div>
+        </ModalBody>
+      </>
+    )}
+  </ModalContent>
+</Modal>
+
+    </>
+
+
+</>
+
+
+
   );
 };
 

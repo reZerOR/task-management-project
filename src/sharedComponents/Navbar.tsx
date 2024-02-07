@@ -28,7 +28,7 @@ const Navbar = () => {
     },
   };
   return (
-    <div className="bg-secondColor bg-opacity-60">
+    <div className="bg-secondColor  bg-opacity-60 ">
       <Container>
         <nav className="flex items-center justify-between">
           {/* logo text */}
