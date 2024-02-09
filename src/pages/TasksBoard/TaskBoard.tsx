@@ -29,7 +29,7 @@ const TasksBoard = () => {
       email: userContext.user?.email,
       status: "todo",
     };
-    fetch("http://localhost:5000/addtask", {
+    fetch("https://task-project-server-smoky.vercel.app/addtask", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -51,12 +51,13 @@ const TasksBoard = () => {
       window.location.reload();
     }, 2000);
   };
- 
 
   return (
     <>
+
      <Container>
      <div className="grid grid-cols-4 w-full mx-auto min-h-[calc(100vh-384px)] gap-10 mt-5">
+
         {/* Create Project Modal */}
         <div className="w-72 mx-auto flex items-center justify-center  col-span-3 md:col-span-12">
           <button
@@ -73,7 +74,7 @@ const TasksBoard = () => {
           >
             <div
               onClick={(e_) => e_.stopPropagation()}
-              className={`absolute w-full lg:w-[500px] bg-white drop-shadow-2xl rounded-lg ${
+              className={`absolute w-[80%] lg:w-[500px] bg-white drop-shadow-2xl rounded-lg ${
                 openModal
                   ? "opacity-1 duration-300 translate-y-0"
                   : "-translate-y-20 opacity-0 duration-150"

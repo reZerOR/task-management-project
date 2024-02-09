@@ -12,7 +12,7 @@ const List = () => {
   // const user=userContext.user
   useEffect(() => {
     fetch(
-      `http://localhost:5000/userAddedtask?email=${userContext.user.email}`
+      `https://task-project-server-smoky.vercel.app/userAddedtask?email=${userContext.user.email}`
     )
       .then((res) => res.json())
       .then((data) => {

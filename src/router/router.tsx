@@ -74,12 +74,16 @@ const router = createBrowserRouter([
         ),
         loader: ({ params }: { params: { id: string } }) =>
           fetch(
-            `http://localhost:5000/updatetask/${params.id}`
+            `https://task-project-server-smoky.vercel.app/updatetask/${params.id}`
           ),
       },
       {
         path: "/myProfile",
-        element: <MyProfile></MyProfile>,
+        element: (
+          <PrivateRoute>
+            <MyProfile></MyProfile>
+          </PrivateRoute>
+        ),
       },
     ],
   },
@@ -91,7 +95,6 @@ const router = createBrowserRouter([
     path: "/register",
     element: <Register></Register>,
   },
- 
 ]);
 
 export default router;

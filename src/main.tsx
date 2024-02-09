@@ -11,26 +11,38 @@ import { DndProvider } from "react-dnd";
 import { HTML5Backend } from "react-dnd-html5-backend";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { ToastContainer } from "react-toastify";
-import { TouchBackend } from 'react-dnd-touch-backend';
-import ScrollZone  from "react-dnd-scrollzone";
+import { TouchBackend } from "react-dnd-touch-backend";
+import ScrollZone from "react-dnd-scrollzone";
+import {NextUIProvider} from "@nextui-org/react";
 // import { ReactNativeBackend } from "react-dnd-react-native-backend";
 
 const queryClient = new QueryClient();
-const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+const isMobile =
+  /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(
+    navigator.userAgent
+  );
 const Backend = isMobile ? TouchBackend : HTML5Backend;
 ReactDOM.createRoot(document.getElementById("root")!).render(
   <DndProvider backend={Backend} options={{ enableMouseEvents: true }}>
-  {/* <React.StrictMode> */}
+
+    {/* <React.StrictMode> */}
+
     <HelmetProvider>
+      <NextUIProvider>
       <AuthProvider>
         <QueryClientProvider client={queryClient}>
           <RouterProvider router={router} />
           <ScrollZone>
-            <ToastContainer/>
-            </ScrollZone>
+            <ToastContainer />
+          </ScrollZone>
         </QueryClientProvider>
       </AuthProvider>
+      </NextUIProvider>
     </HelmetProvider>
-  {/* </React.StrictMode> */}
-</DndProvider>
+
+
+
+    {/* </React.StrictMode> */}
+  </DndProvider>
+
 );

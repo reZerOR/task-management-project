@@ -49,7 +49,7 @@ const Section = ({
 
   const addItemToSection = (id: string) => {
     fetch(
-      `http://localhost:5000/updateTaskStatus/${id}`,
+      `https://task-project-server-smoky.vercel.app/updateTaskStatus/${id}`,
       {
         method: "PATCH",
         headers: {
@@ -75,7 +75,9 @@ const Section = ({
           return modifiedTask;
         });
 
-        const currentStatus = taskToMap.find((task: any) => task._id === id)?.status;
+        const currentStatus = taskToMap.find(
+          (task: any) => task._id === id
+        )?.status;
 
         console.log("Current Status:", currentStatus);
         console.log("New Status:", status);
@@ -88,7 +90,9 @@ const Section = ({
         console.error("Error updating task status:", error);
 
         // Show error toast only if the status has changed
-        const currentStatus = taskToMap.find((task: any) => task._id === id)?.status;
+        const currentStatus = taskToMap.find(
+          (task: any) => task._id === id
+        )?.status;
         if (currentStatus !== status) {
           toast.error("Failed to update task status");
         }
