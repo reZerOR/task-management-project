@@ -2,15 +2,20 @@ import { useContext, useState } from "react";
 import Container from "./Container";
 import { motion } from "framer-motion";
 import { Sling as Hamburger } from "hamburger-react";
-import { Link, NavLink } from "react-router-dom";
+import { Link, NavLink, useNavigate } from "react-router-dom";
 import { AuthContext } from "../Providers/AuthProvider";
 import useUser from "../Hooks/IsUser/useUser";
+import { Avatar, Dropdown, DropdownItem, DropdownMenu, DropdownTrigger, User } from "@nextui-org/react";
+import useUserInfo from "../Hooks/UserInfo/useUserInfo";
 
 const Navbar = () => {
   const userContext = useContext(AuthContext);
   const user = useUser();
-
+  const [userInfo, refetch]= useUserInfo();
+  
   const [visable, setVisable] = useState(false);
+
+  const navigate= useNavigate();
 
   const handleLogout = () => {
     userContext.logOut();
@@ -27,6 +32,10 @@ const Navbar = () => {
       transition: { duration: 0.5 },
     },
   };
+
+  const handleToMyProfile=()=>{
+    navigate('/myProfile');
+  }
   return (
     <div className="bg-secondColor  bg-opacity-60 ">
       <Container>
@@ -54,9 +63,9 @@ const Navbar = () => {
                   <NavLink to={"/tasksboard"}>
                     <li>TaskBoard</li>
                   </NavLink>
-                  <NavLink to={"/myProfile"}>
+                  {/* <NavLink to={"/myProfile"}>
                     <li>My Profile</li>
-                  </NavLink>
+                  </NavLink> */}
                 </>
               )}
 
@@ -64,12 +73,42 @@ const Navbar = () => {
 
             <div className="text-lg font-medium space-x-6 py-5">
               {user ? (
-                <button
-                  onClick={handleLogout}
-                  className="px-10 py-4 bg-primeColor text-white rounded-lg border-2 border-primeColor"
-                >
-                  Log Out
-                </button>
+                <>
+                  {/* <button
+                    onClick={handleLogout}
+                    className="px-10 py-4 bg-primeColor text-white rounded-lg border-2 border-primeColor"
+                  >
+                    Log Out
+                  </button> */}
+                  <div className="flex items-center gap-4">
+                    <Dropdown placement="bottom-end">
+                      <DropdownTrigger>
+                        <Avatar
+                          isBordered
+                          as="button"
+                          className="transition-transform h-[50px] w-[50px]"
+                          src={userInfo?.photoURL}
+                        />
+                      </DropdownTrigger>
+                      <DropdownMenu aria-label="Profile Actions" variant="flat">
+                        <DropdownItem key="profile" className="h-14 gap-2">
+                          <p className="font-semibold">Signed in as</p>
+                          <p className="font-semibold">{userContext?.user?.email}</p>
+                        </DropdownItem>
+                        
+                        
+                        <DropdownItem onClick={handleToMyProfile}  key="myProfile">
+                          My Profile
+                        </DropdownItem>
+                        <DropdownItem onClick={handleLogout} key="logout" color="danger">
+                          Log Out
+                        </DropdownItem>
+                      </DropdownMenu>
+                    </Dropdown>
+
+                    
+                  </div>
+                </>
               ) : (
                 <>
                   <Link to={"/login"}>

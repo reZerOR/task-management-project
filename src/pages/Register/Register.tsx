@@ -9,69 +9,90 @@ import TitleHelmet from "../../sharedComponents/TitleHelmet";
 import { FaGithub, FaGoogle } from "react-icons/fa";
 import { AuthContext } from "../../Providers/AuthProvider";
 import { UserCredential } from "firebase/auth";
+import useAxiosPublic from "../../Hooks/AxiosPublic/useAxiosPublic";
+const image_hosting_key = import.meta.env.VITE_IMAGE_API;
+const image_hosting_api = `https://api.imgbb.com/1/upload?key=${image_hosting_key}`
 
 const Register = () => {
   const [showPassword, setShowPassword] = useState(false);
   const userContext = useContext(AuthContext);
   const navigate = useNavigate();
+  const axiosPublic = useAxiosPublic();
 
   const handleRegister = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    const formElements = (e.target as HTMLFormElement).elements;
-    const displayNameInput = formElements.namedItem("name") as HTMLInputElement;
-    const photoURLInput = formElements.namedItem("img") as HTMLInputElement;
-    const emailInput = formElements.namedItem("email") as HTMLInputElement;
-    const passwordInput = formElements.namedItem(
-      "password"
-    ) as HTMLInputElement;
+    const form = e.target as HTMLFormElement;
+    const imageFile = {
+      image: form.img.files[0],
 
-    const displayName = displayNameInput.value;
-    const photoURL = photoURLInput.value;
-    const email = emailInput.value;
-    const password = passwordInput.value;
-    console.log(displayName, photoURL, email, password);
-
-    // password validation
-    if (password.length < 6) {
-      return toast("Password should be at least 6 characters long.");
-    } else if (!/(?=.*[A-Z])/.test(password)) {
-      return toast("Include at least one uppercase letter.");
-    } else if (!/(?=.*[!@#$%^&*()_+{}|:<>?])/.test(password)) {
-      return toast("Include at least one special characters.");
     }
 
-    // sign in user
+    const res = await axiosPublic.post(image_hosting_api, imageFile, {
+      headers: {
+        "content-type": "multipart/form-data"
+      }
+    });
 
-    await userContext
-      .createUser(displayName, photoURL, email, password)
-      .then(async (result: UserCredential) => {
-        console.log(result);
-        const response = await fetch(
-          "https://task-project-server-smoky.vercel.app/user",
-          {
-            method: "POST",
-            headers: {
-              "Content-Type": "application/json",
-            },
-            body: JSON.stringify({ displayName, photoURL, email }),
+    if (res.data.success) {
+
+      const formElements = (e.target as HTMLFormElement).elements;
+      const displayNameInput = formElements.namedItem("name") as HTMLInputElement;
+      const photoURLInput = res.data.data.display_url;
+      const emailInput = formElements.namedItem("email") as HTMLInputElement;
+      const passwordInput = formElements.namedItem(
+        "password"
+      ) as HTMLInputElement;
+
+      const displayName = displayNameInput.value;
+      const photoURL = photoURLInput;
+      const email = emailInput.value;
+      const password = passwordInput.value;
+      console.log(displayName, photoURL, email, password);
+
+      // password validation
+      if (password.length < 6) {
+        return toast("Password should be at least 6 characters long.");
+      } else if (!/(?=.*[A-Z])/.test(password)) {
+        return toast("Include at least one uppercase letter.");
+      } else if (!/(?=.*[!@#$%^&*()_+{}|:<>?])/.test(password)) {
+        return toast("Include at least one special characters.");
+      }
+
+      // sign in user
+
+      await userContext
+        .createUser(displayName, photoURL, email, password)
+        .then(async (result: UserCredential) => {
+          console.log(result);
+          const response = await fetch(
+            "https://task-project-server-smoky.vercel.app/user",
+            {
+              method: "POST",
+              headers: {
+                "Content-Type": "application/json",
+              },
+              body: JSON.stringify({ displayName, photoURL, email }),
+            }
+          );
+          if (response.ok) {
+            console.log("User information posted to MongoDB");
+          } else {
+            throw new Error("Failed to post user information to MongoDB");
           }
+        })
+        .catch((error: UserCredential) =>
+          console.log("error from sign up", error)
         );
-        if (response.ok) {
-          console.log("User information posted to MongoDB");
-        } else {
-          throw new Error("Failed to post user information to MongoDB");
-        }
-      })
-      .catch((error: UserCredential) =>
-        console.log("error from sign up", error)
-      );
-    toast("Congratulations,registration successful");
-    // console.log("Congratulations,registration successful");
-    setTimeout(() => {
-      userContext.logOut();
-      navigate("/login");
-    }, 1000);
+      toast("Congratulations,registration successful");
+      // console.log("Congratulations,registration successful");
+      setTimeout(() => {
+        userContext.logOut();
+        navigate("/login");
+      }, 1000);
+
+    }
+
   };
   const handleGoogleSignIn = () => {
     userContext
@@ -199,10 +220,11 @@ const Register = () => {
                       <span className="label-text mr-2">Image</span>
                     </label>
                     <input
-                      type="photoURL"
+                      type="file"
                       name="img"
                       placeholder="Image"
                       className="border-primeColor input input-bordered p-2"
+                      required
                     />
                   </div>
                   <div className="form-control mb-2">
