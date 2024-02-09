@@ -58,7 +58,7 @@ const Task = ({ task, setTasks }: parameter) => {
   return (
     <div
       ref={drag}
-      className={`relative border p-3
+      className={`relative border p-3 max-w-full
      rounded-lg my-2 space-y-4 bg-slate-100
     cursor-grab shadow-md ${isDragging ? "opacity-25" : "opacity-100"}`}
     >

@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import Container from "../../../sharedComponents/Container";
 import bannerImg from "../../../assets/Home/information-flow-flatline.png";
 import Stars from "./Stars";
@@ -23,7 +24,7 @@ const Banner = () => {
               <Stars messege="'This tools is awesome'"></Stars>
             </div>
 
-            <h1 className=" text-6xl xl:text-8xl font-stylish text-gray-800  leading-snug">
+            <h1 className=" text-5xl lg:text-8xl font-stylish text-gray-800  leading-snug">
               Unlock the power of teamwork with{" "}
               <span className=" text-primeColor font-stylish">TaskFlow</span>
             </h1>

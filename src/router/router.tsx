@@ -7,6 +7,11 @@ import TasksBoard from "../pages/TasksBoard/TaskBoard";
 import PrivateRoute from "./PrivateRoute";
 import UpdateTask from "../pages/UpdateTask/UpdateTask";
 import MyProfile from "../pages/MyProfile/MyProfile";
+import Board from "../pages/Board/Board";
+import MailAcceptINvitation from "../pages/Board/MailAcceptInvitation/MailAcceptINvitation";
+import CreateBoard from "../pages/Board/CreateBoard/CreateBoard";
+import SingleTask from "../pages/TasksBoard/SingleTask";
+import Singleboard from "../pages/Board/Singleboard/Singleboard";
 const router = createBrowserRouter([
   {
     path: "/",
@@ -25,13 +30,49 @@ const router = createBrowserRouter([
         ),
       },
       {
+        path: "/board",
+        element: (
+          <PrivateRoute>
+            <Board></Board>
+          </PrivateRoute>
+        ),
+      },
+      {
+        path: "/createboard",
+        element: (
+          <PrivateRoute>
+            <CreateBoard></CreateBoard>
+          </PrivateRoute>
+        ),
+      },
+      {
+        path: "singleboard/:id",
+        element: (
+          <PrivateRoute>
+            <Singleboard></Singleboard>
+          </PrivateRoute>
+        ),
+        loader: ({ params }: { params: { id: string } }) =>
+          fetch(
+            `http://localhost:5000/singleboard/${params.id}`
+          ),
+      },
+      {
+        path: "/accept-invitation",
+        element: (
+          <PrivateRoute>
+            <MailAcceptINvitation></MailAcceptINvitation>
+          </PrivateRoute>
+        ),
+      },
+      {
         path: "updatetask/:id",
         element: (
           <PrivateRoute>
             <UpdateTask></UpdateTask>
           </PrivateRoute>
         ),
-        loader: ({ params }) =>
+        loader: ({ params }: { params: { id: string } }) =>
           fetch(
             `http://localhost:5000/updatetask/${params.id}`
           ),

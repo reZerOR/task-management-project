@@ -47,6 +47,14 @@ const Navbar = () => {
                 <li>My Profile</li>
                 
               </NavLink>
+              <NavLink to={"/board"}>
+                <li>Board</li>
+                
+              </NavLink>
+              <NavLink to={"/createboard"}>
+                <li>New Board</li>
+                
+              </NavLink>
             </ul>
 
             <div className="text-lg font-medium space-x-6 py-10">

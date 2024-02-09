@@ -36,7 +36,7 @@ const List = () => {
   }, [tasks]);
   const status = ["todo", "progress", "complete"];
   return (
-    <div className="flex flex-col lg:flex-row gap-16">
+    <div className="flex flex-col justify-center  lg:flex-row gap-16">
       {status.map((status, index) => (
         <Section
           key={index}
