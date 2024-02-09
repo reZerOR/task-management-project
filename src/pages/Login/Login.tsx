@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import Container from "../../sharedComponents/Container";
+// import Container from "../../sharedComponents/Container";
 import { useContext, useState } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai";
@@ -129,116 +129,126 @@ const Login = () => {
       });
   };
   return (
-    <Container>
-      <div>
-        <TitleHelmet title="Login"></TitleHelmet>
-        <div className="mt-6">
+    <div>
+      <TitleHelmet title="Login"></TitleHelmet>
+      {/* <div className="mt-6">
           <Link to="/">
             <button className="text-4xl font-stylish rounded-lg px-8 h-16 before:block before:absolute hover:before:bg-primeColor before:w-0 before:h-0 hover:before:h-20 hover:before:w-full before:-bottom-2 before:right-0 before:duration-300 before:rounded-lg before:-z-10 relative inline-block transform hover:text-white text-primeColor bg-transparent border-2 overflow-hidden border-none duration-300">
               Taskflow
             </button>
           </Link>
-        </div>
-        <div className="text-center mt-8 mb-14">
+        </div> */}
+      {/* <div className="text-center mt-8 mb-14">
           <h1 className="text-4xl font-bold text-primeColor">Login now!</h1>
+        </div> */}
+      <div className="flex flex-col-reverse lg:flex-row justify-evenly h-screen items-center">
+        {/* left side  */}
+        <div className="w-1/2 relative h-full flex items-center justify-center bg-primeColor bg-opacity-25">
+          <img
+            className="w-2/5 opacity-15 absolute"
+            src="/favicon.png"
+            alt="logo"
+          />
+          <h2 className="text-9xl tracking-wider font-bold font-stylish">
+            <span className="text-primeColor font-stylish ">Task</span>Flow
+          </h2>
         </div>
-        <div className="flex flex-col-reverse lg:flex-row gap-5 justify-evenly items-center">
-          <div className="">
-            <img
-              src="https://i.ibb.co/7CKcLrn/undraw-Login-re-4vu2.png"
-              alt=""
-              className="max-w-[700px]"
-            />
-          </div>
-          <div className="">
+
+        {/* right side */}
+        <div className="w-1/2">
+          <div className="mx-auto max-w-96">
             <div className="">
-              <div className=" w-full bg-slate-200 rounded-lg shadow-2xl p-10">
-                <div className="">
-                  <form onSubmit={handleLogin}>
-                    <div className="form-control mb-2">
-                      <label className="label">
-                        <span className="label-text mr-2">
-                          Email<sup className="text-primeColor">*</sup>
-                        </span>
-                      </label>
-                      <input
-                        type="email"
-                        name="email"
-                        placeholder="email"
-                        className="border-primeColor input input-bordered p-2"
-                        required
-                      />
-                    </div>
-                    <div className="form-control mb-2 relative mr-2">
-                      <label className="label">
-                        <span className="label-text mr-2">
-                          Password<sup className="text-primeColor">*</sup>
-                        </span>
-                      </label>
-                      <input
-                        type={showPassword ? "text" : "password"}
-                        name="password"
-                        placeholder="password"
-                        className=" border-primeColor input input-bordered p-2"
-                        required
-                      />
-                      <span className="absolute bottom-2 right-2">
-                        <span onClick={() => setShowPassword(!showPassword)}>
-                          {showPassword ? (
-                            <AiOutlineEye></AiOutlineEye>
-                          ) : (
-                            <AiOutlineEyeInvisible></AiOutlineEyeInvisible>
-                          )}
-                        </span>
-                      </span>
-                      {/* <label className="label">
+              <form onSubmit={handleLogin}>
+                <h1 className="text-4xl font-stylish text-center mb-10">
+                  Login
+                </h1>
+                {/* email */}
+                <div className="form-control mb-2">
+                  <label className="label">
+                    <span className="text-lg font-medium mr-2">
+                      Email<sup className="text-primeColor">*</sup>
+                    </span>
+                  </label>
+                  <input
+                    type="email"
+                    name="email"
+                    placeholder="email"
+                    className="border-primeColor focus:outline-none focus:border-primeColor input input-bordered"
+                    required
+                  />
+                </div>
+
+                {/* password */}
+                <div className="form-control mb-2 relative">
+                  <label className="label">
+                    <span className="text-lg font-medium mr-2">
+                      Password<sup className="text-primeColor">*</sup>
+                    </span>
+                  </label>
+                  <input
+                    type={showPassword ? "text" : "password"}
+                    name="password"
+                    placeholder="password"
+                    className=" border-primeColor w-full focus:outline-none focus:border-primeColor input input-bordered"
+                    required
+                  />
+                  <span className="absolute bottom-4 right-3">
+                    <span onClick={() => setShowPassword(!showPassword)}>
+                      {showPassword ? (
+                        <AiOutlineEye className="text-xl"></AiOutlineEye>
+                      ) : (
+                        <AiOutlineEyeInvisible className="text-xl"></AiOutlineEyeInvisible>
+                      )}
+                    </span>
+                  </span>
+                  {/* <label className="label">
                 <a href="#" className="label-text-alt link link-hover">
                   Forgot password?
                 </a>
               </label> */}
-                    </div>
-                    <div className="form-control mt-6">
-                      <button className=" w-full font-bold rounded-lg px-2 h-10 before:block before:absolute hover:before:bg-primeColor before:w-0 before:h-0 hover:before:h-20 hover:before:w-full before:-bottom-2 before:right-0 before:duration-300 before:rounded-lg before:-z-10 relative inline-block transform hover:text-white text-primeColor bg-transparent border-2 overflow-hidden border-primeColor duration-300">
-                        Login
-                      </button>
-                    </div>
-                  </form>
-                </div>
-                <div className="flex  justify-center items-center my-4">
-                  <button
-                    onClick={handleGoogleSignIn}
-                    className=" text-primeColor  font-semibold flex justify-center items-center gap-2"
-                  >
-                    <FaGoogle className="text-lg"></FaGoogle>
-                    <span className="text-2xl">
-                      {/* <FcGoogle></FcGoogle> */}
-                    </span>
-                  </button>
-                  <button
-                    onClick={handleGithubSignIn}
-                    className=" text-primeColor  font-semibold flex justify-center items-center gap-2"
-                  >
-                    <FaGithub className="text-xl"></FaGithub>
-                    <span className="text-xl"></span>
-                  </button>
                 </div>
 
-                <p className="p-3 text-center">
-                  New here? Please
-                  <Link to="/register">
-                    <button className="btn btn-link text-primeColor ml-1 font-semibold underline">
-                      {" "}
-                      Register
-                    </button>
-                  </Link>
-                </p>
-              </div>
+                {/* login button */}
+
+                <div className="form-control mt-6">
+                  <button className=" w-full font-bold rounded-lg px-2 h-10 before:block before:absolute hover:before:bg-primeColor before:w-0 before:h-0 hover:before:h-20 hover:before:w-full before:-bottom-2 before:right-0 before:duration-300 before:rounded-lg before:-z-10 relative inline-block transform hover:text-white text-primeColor bg-transparent border-2 overflow-hidden border-primeColor duration-300">
+                    Login
+                  </button>
+                </div>
+              </form>
             </div>
+            <div className="divider before:bg-primeColor after:bg-primeColor">
+              OR
+            </div>
+            {/* extra provider */}
+            <div className="flex justify-center flex-col gap-2 items-center my-4">
+              <button
+                onClick={handleGoogleSignIn}
+                className=" text-primeColor bg-primeColor bg-opacity-20 w-full py-2 rounded-lg font-semibold flex justify-center items-center gap-2"
+              >
+                <FaGoogle className="text-lg"></FaGoogle> Sign with Google
+              </button>
+              <button
+                onClick={handleGithubSignIn}
+                className=" text-primeColor bg-primeColor bg-opacity-20 w-full py-2 rounded-lg font-semibold flex justify-center items-center gap-2"
+              >
+                <FaGithub className="text-xl"></FaGithub>Sign with Github
+              </button>
+            </div>
+
+            <p className=" text-center">
+              New here? Please{" "}
+              <Link to="/register">
+                <button className=" text-primeColor font-semibold underline">
+                  Register
+                </button>
+              </Link>
+            </p>
           </div>
         </div>
-        <ToastContainer />
       </div>
-    </Container>
+      <ToastContainer />
+    </div>
   );
 };
 
