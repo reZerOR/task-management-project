@@ -3,7 +3,7 @@
 // import React from "react";
 import ReactDOM from "react-dom/client";
 import "./index.css";
-import { RouterProvider } from "react-router-dom";
+import { RouterProvider } from "react-router";
 import router from "./router/router";
 import { HelmetProvider } from "react-helmet-async";
 import AuthProvider from "./Providers/AuthProvider";
@@ -24,7 +24,9 @@ const isMobile =
 const Backend = isMobile ? TouchBackend : HTML5Backend;
 ReactDOM.createRoot(document.getElementById("root")!).render(
   <DndProvider backend={Backend} options={{ enableMouseEvents: true }}>
+
     {/* <React.StrictMode> */}
+
     <HelmetProvider>
       <NextUIProvider>
       <AuthProvider>
@@ -37,6 +39,10 @@ ReactDOM.createRoot(document.getElementById("root")!).render(
       </AuthProvider>
       </NextUIProvider>
     </HelmetProvider>
+
+
+
     {/* </React.StrictMode> */}
   </DndProvider>
+
 );

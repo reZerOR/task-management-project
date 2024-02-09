@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import Container from "../../../sharedComponents/Container";
 // import bannerImg from "../../../assets/Home/information-flow-flatline.png";
 import { motion } from "framer-motion";
@@ -18,7 +19,11 @@ const Banner = () => {
         <div className=" flex flex-col lg:flex-row py-10 min-h-[calc(100vh-91px)] justify-between gap-16 items-center">
           {/* Left side */}
           <div className="flex-1">
+
+            {/* reviews */
+
             <h1 className=" text-6xl xl:text-8xl font-stylish text-gray-800  leading-snug">
+
               Unlock the power of teamwork with{" "}
               <span className=" text-primeColor font-stylish">TaskFlow</span>
             </h1>

@@ -5,6 +5,7 @@ import Lottie from "lottie-react";
 import { ToastContainer, toast } from "react-toastify";
 import { AuthContext } from "../../Providers/AuthProvider";
 import List from "./List";
+import Container from "../../sharedComponents/Container";
 
 const TasksBoard = () => {
   const [openModal, setOpenModal] = useState(false);
@@ -53,9 +54,12 @@ const TasksBoard = () => {
 
   return (
     <>
-      <div className="grid grid-cols-12 w-full mx-auto min-h-[calc(100vh-348px)] gap-10 mt-5">
+
+     <Container>
+     <div className="grid grid-cols-4 w-full mx-auto min-h-[calc(100vh-384px)] gap-10 mt-5">
+
         {/* Create Project Modal */}
-        <div className="w-72 mx-auto flex items-center justify-center  col-span-12 md:col-span-3">
+        <div className="w-72 mx-auto flex items-center justify-center  col-span-3 md:col-span-12">
           <button
             onClick={() => setOpenModal(true)}
             className="bg-primeColor text-white p-2 rounded-lg"
@@ -76,7 +80,7 @@ const TasksBoard = () => {
                   : "-translate-y-20 opacity-0 duration-150"
               }`}
             >
-              <form onSubmit={(e) => handleSubmit(e)} className="p-12">
+              <form onSubmit={(e) => handleSubmit(e)} className="lg:p-12 p-2">
                 <div className="flex justify-center items-center  w-60 h-60">
                   <Lottie
                     animationData={lottiAnimation1}
@@ -208,11 +212,13 @@ const TasksBoard = () => {
         </div>
 
         {/* todo, doing and done Boards */}
-        <div className="col-span-12 md:col-span-9 mx-auto md:mx-0 flex gap-6">
+        <div className="flex items-center justify-center col-span-12 md:col-span-9 mx-auto md:mx-0  gap-6">
           <List />
         </div>
+        <ToastContainer />
       </div>
-      <ToastContainer />
+      
+     </Container>
     </>
   );
 };
