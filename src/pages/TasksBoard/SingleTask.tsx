@@ -9,7 +9,7 @@ const SingleTask = ({
   const { name, description, visibility } = task;
 
   return (
-    <div className="bg-slate-100 p-5  border rounded-xl m-2 w-full ">
+    <div className="bg-slate-100 p-5  border rounded-xl m-2 w-auto ">
       <h3 className=" font-bold">{name}</h3>
       <hr />
       <p className="text-slate-500">{description}</p>
