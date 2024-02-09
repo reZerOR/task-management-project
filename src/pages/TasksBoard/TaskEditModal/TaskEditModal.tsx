@@ -15,7 +15,10 @@ const TaskEditModal = ({ isOpen, onClose, task }: parameter) => {
   return  (
     <Modal isOpen={isOpen} onClose={onClose}>
       <ModalContent>
-        <ModalHeader className="flex flex-col gap-1">{task.title}</ModalHeader>
+      
+        <ModalHeader className="flex flex-col gap-1  "> 
+        <input type="text" placeholder="Type here" className="input input-ghost w-full max-w-xs" defaultValue={task.title} />
+        </ModalHeader>
         <ModalBody>
           <p>{task.description}</p>
           <DueDate />
