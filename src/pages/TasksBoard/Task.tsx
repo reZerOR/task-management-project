@@ -16,6 +16,7 @@ import DueDate from "./TaskEditModal/DueDate";
 
 
 
+
 type parameter = {
   task: any;
   tasks: any;
@@ -27,6 +28,7 @@ const Task = ({ task, setTasks }: parameter) => {
   // for modal 
   const {isOpen, onOpen, onOpenChange } = useDisclosure();
   const { user } = useContext(AuthContext);
+  
  
   
   // console.log("task",task)
@@ -116,10 +118,14 @@ const Task = ({ task, setTasks }: parameter) => {
   <ModalContent>
     {(onClose) => (
       <>
-        <ModalHeader className="flex flex-col gap-1">{task.title}</ModalHeader>
+        <ModalHeader className="flex flex-col gap-1  "> 
+        <input type="text" placeholder="Type here" className="input input-ghost w-full  text-3xl font-extrabold" defaultValue={task.title} />
+        </ModalHeader>
         <ModalBody>
           <div className="px-10 py-10">
-            <p className="mb-10">{task.description}</p>
+            
+          <textarea className="textarea w-full h-20 textarea-ghost text-2xl mb-10" defaultValue={task.description}></textarea>
+
             <hr />
             <DueDate />
 
