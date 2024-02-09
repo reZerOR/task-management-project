@@ -50,6 +50,14 @@ const Navbar = () => {
           {/* visable in large devices */}
           <div className="lg:flex gap-6 items-center hidden">
             <ul className="flex text-lg font-medium text-primeColor gap-6">
+
+      
+
+              <NavLink to={"/createboard"}>
+                <li>New Board</li>
+                
+              </NavLink>
+
               {user && (
                 <>
                   <NavLink to={"/tasksboard"}>
@@ -60,6 +68,7 @@ const Navbar = () => {
                   </NavLink> */}
                 </>
               )}
+
             </ul>
 
             <div className="text-lg font-medium space-x-6 py-5">
