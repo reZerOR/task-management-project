@@ -8,9 +8,7 @@ import { Link } from "react-router-dom";
 import Swal from "sweetalert2";
 
 // Modal 
-import {Modal, ModalContent, ModalHeader, ModalBody, ModalFooter, Button, useDisclosure, Avatar, Input} from "@nextui-org/react";
-import { useContext } from "react";
-import { AuthContext } from "../../Providers/AuthProvider";
+import {Modal, ModalContent, ModalHeader, ModalBody, useDisclosure} from "@nextui-org/react";
 import CommentBox from "./TaskEditModal/CommentBox";
 import DueDate from "./TaskEditModal/DueDate";
 
@@ -27,8 +25,46 @@ type parameter = {
 const Task = ({ task, setTasks }: parameter) => {
   // for modal 
   const {isOpen, onOpen, onOpenChange } = useDisclosure();
-  const { user } = useContext(AuthContext);
-  
+
+  // Update Task
+  const handleUpdate = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+
+    const formData = new FormData(e.currentTarget);
+    const name = formData.get("name");
+    const description = formData.get("description");
+    const Visibility = formData.get("Visibility");
+
+    console.log(name, description, Visibility);
+    const taskData = {
+      title: name,
+      description: description,
+      visibility: Visibility,
+    };
+    fetch(`https://task-project-server-smoky.vercel.app/updatetask/${id}`, {
+      method: "PATCH",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(taskData),
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        console.log("Task updated successfully:", data);
+      })
+      .catch((error) => {
+        console.error("Error updating task:", error);
+      });
+
+    e.currentTarget.reset();
+
+    // toast.success("Task updated successfully");
+    // setTimeout(() => {
+    //   navigate("/tasksboard");
+    // }, 2000);
+  };
+
+
  
   
   // console.log("task",task)
@@ -115,7 +151,7 @@ const Task = ({ task, setTasks }: parameter) => {
 <>
     
       <Modal isOpen={isOpen} onOpenChange={onOpenChange}  size="5xl"> {/* Use onClose instead of onOpenChange */}
-  <ModalContent>
+    <ModalContent>
     {(onClose) => (
       <>
         <ModalHeader className="flex flex-col gap-1  "> 
@@ -131,7 +167,6 @@ const Task = ({ task, setTasks }: parameter) => {
 
             {/* comment feature start ===================== */}
             <div className="flex items-center gap-5 bg-gray-200 px-5 pt-2 pb-10 rounded-md">
-              <Avatar src={user.photoURL} />
               {/* <Input type="text"  placeholder="Enter your comment" /> */}
               <CommentBox />
             </div>
