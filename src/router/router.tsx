@@ -10,8 +10,13 @@ import MyProfile from "../pages/MyProfile/MyProfile";
 import Board from "../pages/Board/Board";
 import MailAcceptINvitation from "../pages/Board/MailAcceptInvitation/MailAcceptINvitation";
 import CreateBoard from "../pages/Board/CreateBoard/CreateBoard";
-import SingleTask from "../pages/TasksBoard/SingleTask";
+// import SingleTask from "../pages/TasksBoard/SingleTask";
 import Singleboard from "../pages/Board/Singleboard/Singleboard";
+
+// interface LoaderFunctionArgs<T> {
+//   params: T;
+//   // Other properties if needed
+// }
 const router = createBrowserRouter([
   {
     path: "/",
@@ -52,10 +57,10 @@ const router = createBrowserRouter([
             <Singleboard></Singleboard>
           </PrivateRoute>
         ),
-        loader: ({ params }: { params: { id: string } }) =>
-          fetch(
-            `http://localhost:5000/singleboard/${params.id}`
-          ),
+        // loader: ({ params }: LoaderFunctionArgs<{ id: string }>) =>
+        //   fetch(
+        //     `https://task-project-server-smoky.vercel.app/singleboard/${params.id}`
+        //   ),
       },
       {
         path: "/accept-invitation",
@@ -72,10 +77,10 @@ const router = createBrowserRouter([
             <UpdateTask></UpdateTask>
           </PrivateRoute>
         ),
-        loader: ({ params }: { params: { id: string } }) =>
-          fetch(
-            `https://task-project-server-smoky.vercel.app/updatetask/${params.id}`
-          ),
+        // loader: ({ params }: { params: { id: string } }) =>
+        //   fetch(
+        //     `https://task-project-server-smoky.vercel.app/updatetask/${params.id}`
+        //   ),
       },
       {
         path: "/myProfile",
