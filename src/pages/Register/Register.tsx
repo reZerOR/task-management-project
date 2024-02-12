@@ -11,7 +11,7 @@ import { AuthContext } from "../../Providers/AuthProvider";
 import { UserCredential } from "firebase/auth";
 import useAxiosPublic from "../../Hooks/AxiosPublic/useAxiosPublic";
 const image_hosting_key = import.meta.env.VITE_IMAGE_API;
-const image_hosting_api = `https://api.imgbb.com/1/upload?key=${image_hosting_key}`
+const image_hosting_api = `https://api.imgbb.com/1/upload?key=${image_hosting_key}`;
 
 const Register = () => {
   const [showPassword, setShowPassword] = useState(false);
@@ -25,19 +25,19 @@ const Register = () => {
     const form = e.target as HTMLFormElement;
     const imageFile = {
       image: form.img.files[0],
-
-    }
+    };
 
     const res = await axiosPublic.post(image_hosting_api, imageFile, {
       headers: {
-        "content-type": "multipart/form-data"
-      }
+        "content-type": "multipart/form-data",
+      },
     });
 
     if (res.data.success) {
-
       const formElements = (e.target as HTMLFormElement).elements;
-      const displayNameInput = formElements.namedItem("name") as HTMLInputElement;
+      const displayNameInput = formElements.namedItem(
+        "name"
+      ) as HTMLInputElement;
       const photoURLInput = res.data.data.display_url;
       const emailInput = formElements.namedItem("email") as HTMLInputElement;
       const passwordInput = formElements.namedItem(
@@ -90,9 +90,7 @@ const Register = () => {
         userContext.logOut();
         navigate("/login");
       }, 1000);
-
     }
-
   };
   const handleGoogleSignIn = () => {
     userContext
