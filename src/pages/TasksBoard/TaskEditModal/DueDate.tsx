@@ -1,17 +1,17 @@
-import React, { useState } from 'react';
+import { useState } from "react";
 
 const DueDate = () => {
-  const [dueDate, setDueDate] = useState('');
+  const [dueDate, setDueDate] = useState("");
 
   // Function to handle due date selection
-  const handleDueDateChange = (e) => {
+  const handleDueDateChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setDueDate(e.target.value);
   };
 
   // Function to handle setting due date
   const handleSetDueDate = () => {
     // You can perform further actions with the dueDate state, like saving it to your database
-    console.log('Due date selected:', dueDate);
+    console.log("Due date selected:", dueDate);
   };
 
   return (
@@ -28,7 +28,6 @@ const DueDate = () => {
 };
 
 export default DueDate;
-
 
 // import React, { useState } from "react";
 // import DatePicker from "react-datepicker";

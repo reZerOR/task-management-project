@@ -5,17 +5,23 @@ import { Sling as Hamburger } from "hamburger-react";
 import { Link, NavLink, useNavigate } from "react-router-dom";
 import { AuthContext } from "../Providers/AuthProvider";
 import useUser from "../Hooks/IsUser/useUser";
-import { Avatar, Dropdown, DropdownItem, DropdownMenu, DropdownTrigger, User } from "@nextui-org/react";
+import {
+  Avatar,
+  Dropdown,
+  DropdownItem,
+  DropdownMenu,
+  DropdownTrigger,
+} from "@nextui-org/react";
 import useUserInfo from "../Hooks/UserInfo/useUserInfo";
 
 const Navbar = () => {
   const userContext = useContext(AuthContext);
   const user = useUser();
-  const [userInfo, refetch]= useUserInfo();
-  
+  const [userInfo] = useUserInfo();
+
   const [visable, setVisable] = useState(false);
 
-  const navigate= useNavigate();
+  const navigate = useNavigate();
 
   const handleLogout = () => {
     userContext.logOut();
@@ -33,9 +39,9 @@ const Navbar = () => {
     },
   };
 
-  const handleToMyProfile=()=>{
-    navigate('/myProfile');
-  }
+  const handleToMyProfile = () => {
+    navigate("/myProfile");
+  };
   return (
     <div className="bg-secondColor  bg-opacity-60 ">
       <Container>
@@ -50,12 +56,8 @@ const Navbar = () => {
           {/* visable in large devices */}
           <div className="lg:flex gap-6 items-center hidden">
             <ul className="flex text-lg font-medium text-primeColor gap-6">
-
-      
-
               <NavLink to={"/createboard"}>
                 <li>New Board</li>
-                
               </NavLink>
 
               {user && (
@@ -68,7 +70,6 @@ const Navbar = () => {
                   </NavLink> */}
                 </>
               )}
-
             </ul>
 
             <div className="text-lg font-medium space-x-6 py-5">
@@ -93,20 +94,26 @@ const Navbar = () => {
                       <DropdownMenu aria-label="Profile Actions" variant="flat">
                         <DropdownItem key="profile" className="h-14 gap-2">
                           <p className="font-semibold">Signed in as</p>
-                          <p className="font-semibold">{userContext?.user?.email}</p>
+                          <p className="font-semibold">
+                            {userContext?.user?.email}
+                          </p>
                         </DropdownItem>
-                        
-                        
-                        <DropdownItem onClick={handleToMyProfile}  key="myProfile">
+
+                        <DropdownItem
+                          onClick={handleToMyProfile}
+                          key="myProfile"
+                        >
                           My Profile
                         </DropdownItem>
-                        <DropdownItem onClick={handleLogout} key="logout" color="danger">
+                        <DropdownItem
+                          onClick={handleLogout}
+                          key="logout"
+                          color="danger"
+                        >
                           Log Out
                         </DropdownItem>
                       </DropdownMenu>
                     </Dropdown>
-
-                    
                   </div>
                 </>
               ) : (
