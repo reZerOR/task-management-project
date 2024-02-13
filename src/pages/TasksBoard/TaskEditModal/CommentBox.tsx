@@ -3,7 +3,9 @@ import axios from "axios";
 import { IoSendSharp } from "react-icons/io5";
 import { useState } from "react";
 
-const CommentBox = () => {
+const CommentBox = ({taskId}:{taskId: string}) => {
+  console.log(taskId);
+  
   const [commentInput, setCommentInput] = useState("");
 
   const submitComment = (e: React.FormEvent) => {
@@ -12,8 +14,8 @@ const CommentBox = () => {
     const comment = form.comment.value;
 
     axios
-      .post("https://task-project-server-smoky.vercel.app/comment", {
-        comment: comment,
+      .post("http://localhost:5000/comment", {
+        comment: comment, taskId
       })
       .then((response) => {
         console.log("Comment added successfully:", response.data);
@@ -29,7 +31,7 @@ const CommentBox = () => {
     queryKey: ["comments"],
     queryFn: () =>
       axios
-        .get("https://task-project-server-smoky.vercel.app/comment")
+        .get(`http://localhost:5000/comment/${taskId}`)
         .then((res) => res.data),
   });
 
@@ -49,6 +51,7 @@ const CommentBox = () => {
           onChange={(e) => setCommentInput(e.target.value)} // Update input value state
           placeholder="Type here"
           className="input input-bordered input-info w-full max-w-xs"
+          required
         />
         <button type="submit" className="text-3xl text-primeColor">
           <IoSendSharp />

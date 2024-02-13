@@ -139,7 +139,7 @@ const Task = ({ task, setTasks }: parameter) => {
                     <div className="flex items-center gap-5 bg-gray-200 px-5 pt-2 pb-10 rounded-md">
                       <Avatar src={user.photoURL} />
                       {/* <Input type="text"  placeholder="Enter your comment" /> */}
-                      <CommentBox />
+                      <CommentBox taskId ={task._id} />
                     </div>
                     {/* comment feature end ===================== */}
                   </div>
