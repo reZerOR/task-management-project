@@ -29,7 +29,7 @@ const TasksBoard = () => {
       email: userContext.user?.email,
       status: "todo",
     };
-    fetch("https://task-project-server-smoky.vercel.app/addtask", {
+    fetch("http://localhost:5000/addtask", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

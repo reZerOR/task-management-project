@@ -26,14 +26,14 @@ const Singleboard = () => {
   // const { id } = useParams();
   console.log("board", board);
   // const { details, name, email, type } = board;
-  const { name, type } = board as { name: string; type: string };
+  const { _id, name, type } = board as { _id: string, name: string; type: string };
 
   return (
     <div>
       <div className="flex flex-col justify-center items-center my-10">
         <p className="text-2xl font-bold"> Name: {name}</p>
         <p className="text-xl text-default-500 font-medium"> Type: {type}</p>
-        {type === "Team" && <Board />}
+        {type === "Team" && <Board id={_id}/>}
       </div>
       <TasksBoard></TasksBoard>
     </div>

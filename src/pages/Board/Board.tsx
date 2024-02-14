@@ -10,13 +10,19 @@ import { toast } from "react-toastify";
 import { AuthContext } from "../../Providers/AuthProvider";
 // import { useNavigate, useLocation } from "react-router";
 
-const Board = () => {
+
+interface BoardProps {
+  id: string;
+}
+
+const Board = ({ id }: BoardProps) => {
   // const [UserEmail, setUserEmail] = useState<{ email: string }[]>([]);
   const [openModal, setOpenModal] = useState(false);
   // const [acceptanceStatus, setAcceptanceStatus] = useState("");
 
   const { user } = useContext(AuthContext);
   const loggedInUser = user?.email;
+  console.log(id);
 
   const axiosPrivate = useAxiosPrivate();
 
@@ -46,7 +52,7 @@ const Board = () => {
     console.log(name, selectedMember);
     try {
       // Make an API call to your backend
-      const response = await axiosPrivate.post("/send-invitation", {
+      const response = await axiosPrivate.post(`/send-invitation/${id}`, {
         from: loggedInUser, // Add the from email
         to: selectedMember,
         projectName: name,
