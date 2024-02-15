@@ -49,7 +49,7 @@ const Section = ({
 
   const addItemToSection = (id: string) => {
     fetch(
-      `https://task-project-server-smoky.vercel.app/updateTaskStatus/${id}`,
+      `http://localhost:5000/updateTaskStatus/${id}`,
       {
         method: "PATCH",
         headers: {
