@@ -1,11 +1,13 @@
 import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
 import { IoSendSharp } from "react-icons/io5";
-import { useState } from "react";
+import { useContext, useState } from "react";
+import { Avatar } from "@nextui-org/react";
+import { AuthContext } from "../../../Providers/AuthProvider";
+
 
 const CommentBox = ({taskId}:{taskId: string}) => {
-  console.log(taskId);
-  
+  const { user } = useContext(AuthContext);
   const [commentInput, setCommentInput] = useState("");
 
   const submitComment = (e: React.FormEvent) => {
@@ -38,37 +40,38 @@ const CommentBox = ({taskId}:{taskId: string}) => {
   console.log(comments);
 
   return (
-    <div className="comment-container">
-      <div className="comment-header">
-        <h2 className="font-bold mb-2">Comments</h2>
-        <hr />
-      </div>
-      <form className="flex items-center gap-5" onSubmit={submitComment}>
-        <input
-          type="text"
-          name="comment"
-          value={commentInput} // Controlled input value
-          onChange={(e) => setCommentInput(e.target.value)} // Update input value state
-          placeholder="Type here"
-          className="input input-bordered input-info w-full max-w-xs"
-          required
-        />
-        <button type="submit" className="text-3xl text-primeColor">
-          <IoSendSharp />
-        </button>
-      </form>
-
-      {/* Show Comment  */}
-      <ul className="comment-list">
-        {comments.map(
-          (comment: { _id: string; comment: string }, idx: number) => (
-            <li className="text-sm lg:text-xl mb-2 " key={idx}>
-              {comment.comment}
-            </li>
-          )
-        )}
-      </ul>
+    <div className="comment-container h-5xl w-full overflow-scroll">
+    <div className="comment-header">
+      <h2 className="font-bold text-lg lg:text-xl mb-2 text-gray-800">Comments</h2>
+      <hr className="border-gray-300" />
     </div>
+    <form className="flex items-center gap-5 mt-4" onSubmit={submitComment}>
+    <Avatar src={user.photoURL} />
+      <input
+        type="text"
+        name="comment"
+        value={commentInput}
+        onChange={(e) => setCommentInput(e.target.value)}
+        placeholder="Add a comment..."
+        className="input input-bordered input-info w-full max-w-lg p-3 rounded-lg ml-2"
+        required
+      />
+      <button type="submit" className="text-3xl text-primeColor hover:text-primeColor-dark">
+        <IoSendSharp />
+      </button>
+    </form>
+  
+    <ul className="comment-list mt-4">
+      {comments.map(
+        (comment: { _id: string; comment: string }, idx: number) => (
+          <li className="text-base lg:text-lg mb-2 text-gray-700 flex gap-2 items-center" key={idx}>
+           <Avatar src={user.photoURL} /> {comment.comment}
+          </li>
+        )
+      )}
+    </ul>
+  </div>
+  
   );
 };
 

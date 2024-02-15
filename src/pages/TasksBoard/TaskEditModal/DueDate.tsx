@@ -1,47 +1,89 @@
-import { useState } from "react";
+import React, { useEffect, useState } from "react";
+import axios from "axios";
+import { toast } from "react-toastify";
 
-const DueDate = () => {
+interface Task {
+  _id: string;
+  dueDate: string;
+}
+
+interface TimeLeft {
+  days: number;
+  hours: number;
+  minutes: number;
+  seconds: number;
+}
+
+const DueDate: React.FC<{ task: Task }> = ({ task }) => {
   const [dueDate, setDueDate] = useState("");
+  const [timeLeft, setTimeLeft] = useState<TimeLeft>({
+    days: 0,
+    hours: 0,
+    minutes: 0,
+    seconds: 0,
+  });
+  function calculateTimeLeft() {
+    const difference = +new Date(task.dueDate) - +new Date();
+    let timeLeft = {};
+  
+    if (difference > 0) {
+      timeLeft = {
+        days: Math.floor(difference / (1000 * 60 * 60 * 24)),
+        hours: Math.floor((difference / (1000 * 60 * 60)) % 24),
+        minutes: Math.floor((difference / 1000 / 60) % 60),
+        seconds: Math.floor((difference / 1000) % 60),
+      };
+    }
+  
+    return timeLeft;
+  }
+ 
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      return setTimeLeft(calculateTimeLeft());
+    }, 1000);
+  
+    return () => clearTimeout(timer);
+  });
+  
 
-  // Function to handle due date selection
-  const handleDueDateChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setDueDate(e.target.value);
-  };
-
-  // Function to handle setting due date
-  const handleSetDueDate = () => {
-    // You can perform further actions with the dueDate state, like saving it to your database
-    console.log("Due date selected:", dueDate);
+  const handleDueDateUpdate = async () => {
+    try {
+      await axios.patch(`http://localhost:5000/dueDate/${task._id}`, {
+        dueDate: dueDate,
+      });
+      toast.success("Due date updated successfully");
+    } catch (error) {
+      console.error("Error updating due date:", error);
+      alert("Failed to update due date. Please try again.");
+    }
   };
 
   return (
-    <div className="due-date-container">
-      <input
-        type="date"
-        value={dueDate}
-        onChange={handleDueDateChange}
-        placeholder="Select due date"
-      />
-      <button onClick={handleSetDueDate}> Due Date</button>
+    <div className="flex flex-col mb-4">
+      <label htmlFor="dueDate" className="font-bold mb-1">
+       <p> <span className="text-slate-500 text-xl">Due Date: </span>{timeLeft.days} <span className=" text-gray-500">days</span> {timeLeft.hours} <span className=" text-gray-500">hours</span> {timeLeft.minutes} <span className=" text-gray-500">minutes</span> {timeLeft.seconds} <span className=" text-gray-500">seconds</span> </p>
+      </label>
+      <div className="flex items-center">
+        <input
+          type="datetime-local"
+          id="dueDate"
+          value={dueDate}
+          onChange={(e) => setDueDate(e.target.value)}
+          className="px-4 py-2 border rounded mr-2"
+        />
+        <button
+          className="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600"
+          onClick={handleDueDateUpdate}
+        >
+          Save
+        </button>
+      </div>
     </div>
   );
 };
 
 export default DueDate;
 
-// import React, { useState } from "react";
-// import DatePicker from "react-datepicker";
 
-// import "react-datepicker/dist/react-datepicker.css";
-
-// // CSS Modules, react-datepicker-cssmodules.css
-// // import 'react-datepicker/dist/react-datepicker-cssmodules.css';
-
-// const DueDate = () => {
-//   const [startDate, setStartDate] = useState(new Date());
-//   return (
-//     <DatePicker selected={startDate} onChange={(date) => setStartDate(date)} />
-//   );
-// };
-
-// export default DueDate
+{/*  */}

@@ -26,9 +26,11 @@ const TasksBoard = () => {
       title: name,
       description: description,
       visibility: Visibility,
+      dueDate : '',
       email: userContext.user?.email,
       status: "todo",
     };
+
     fetch("http://localhost:5000/addtask", {
       method: "POST",
       headers: {
