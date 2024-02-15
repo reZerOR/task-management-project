@@ -68,9 +68,9 @@ const router = createBrowserRouter([
         element: (
           // <HandleInvitation></HandleInvitation> for user email onno thakle mailer invitation emaile login korte hobe
           <HandleInvitation>
-            <PrivateRoute>
+            
               <MailAcceptINvitation></MailAcceptINvitation>
-            </PrivateRoute>
+         
           </HandleInvitation>
 
 

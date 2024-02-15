@@ -1,7 +1,7 @@
 
 import React, { useContext } from "react";
 import { AuthContext } from "../../Providers/AuthProvider";
-import { Navigate } from "react-router-dom";
+import { Navigate, useLocation } from "react-router-dom";
 
 
 type parameter = {
@@ -9,7 +9,9 @@ type parameter = {
   };
 
 const HandleInvitation = ({ children }: parameter) => {
-    const {user, logOut, loading} = useContext(AuthContext);
+    const {user, loading, fTime} = useContext(AuthContext);
+    // const navigate=useNavigation();
+    const location = useLocation();
   
     if (loading) {
       return (
@@ -23,9 +25,11 @@ const HandleInvitation = ({ children }: parameter) => {
     if (
       user?.email
     ) {
-      <Navigate to={"/login"}></Navigate>
+      if(fTime==true){
+        return <Navigate state={location.pathname} to="/login" />;
+      }
 
-      return;
+      
     }
 
     return children;
