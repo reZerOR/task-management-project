@@ -40,8 +40,11 @@ const MyProfile = () => {
     const imageFile = {
       image: form.image.files[0],
     };
-
-    if (!imageFile.image) {
+    const file = imageFile.image as File;
+    // const imageInput = form.image as HTMLInputElement;
+    // const imageFile = imageInput.files && imageInput.files[0];
+    console.log(imageFile)
+    if (!imageFile) {
       const userName = (form.elements.namedItem("name") as HTMLInputElement)
         ?.value;
 
@@ -66,6 +69,13 @@ const MyProfile = () => {
         toast.success("Profile updated successfully");
       }
     } else {
+
+      if (file && file.size && file.size > 50 * 1024) {
+        // Image size exceeds 100KB, show error message
+        toast.error("Image size should be less than 50KB");
+        return;
+      }
+      console.log("hello")
       const result = await axiosPublic.post(image_hosting_api, imageFile, {
         headers: {
           "content-type": "multipart/form-data",
@@ -189,6 +199,7 @@ const MyProfile = () => {
 
             <input
               className="py-1 rounded-lg"
+              
               ref={imageInputRef}
               type="file"
               name="image"

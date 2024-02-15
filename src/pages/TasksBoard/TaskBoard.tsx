@@ -30,7 +30,7 @@ const TasksBoard = () => {
       email: userContext.user?.email,
       status: "todo",
     };
-   
+
     fetch("http://localhost:5000/addtask", {
       method: "POST",
       headers: {
