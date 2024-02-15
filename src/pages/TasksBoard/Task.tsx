@@ -14,10 +14,8 @@ import {
   ModalHeader,
   ModalBody,
   useDisclosure,
-  Avatar,
 } from "@nextui-org/react";
-import { useContext } from "react";
-import { AuthContext } from "../../Providers/AuthProvider";
+
 import CommentBox from "./TaskEditModal/CommentBox";
 import DueDate from "./TaskEditModal/DueDate";
 
@@ -31,7 +29,7 @@ type parameter = {
 const Task = ({ task, setTasks }: parameter) => {
   // for modal
   const { isOpen, onOpen, onOpenChange } = useDisclosure();
-  const { user } = useContext(AuthContext);
+ 
 
   // console.log("task",task)
   // console.log("tasksss",tasks)
@@ -137,8 +135,6 @@ const Task = ({ task, setTasks }: parameter) => {
           
                     {/* comment feature start ===================== */}
                     <div className="flex items-center gap-5 bg-gray-200 px-5 pt-2 pb-10 rounded-md">
-                      <Avatar src={user.photoURL} />
-                      {/* <Input type="text"  placeholder="Enter your comment" /> */}
                       <CommentBox taskId ={task._id} />
                     </div>
                     {/* comment feature end ===================== */}
