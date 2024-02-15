@@ -17,7 +17,7 @@ const UpdateTask = () => {
   console.log(email);
   const navigate = useNavigate();
   useEffect(() => {
-    fetch(`https://task-project-server-smoky.vercel.app/updatetask/${id}`)
+    fetch(`http://localhost:5000/updatetask/${id}`)
       .then((res) => res.json())
       .then((data) => {
         setUpdateTask(data);
@@ -37,7 +37,7 @@ const UpdateTask = () => {
       description: description,
       visibility: Visibility,
     };
-    fetch(`https://task-project-server-smoky.vercel.app/updatetask/${id}`, {
+    fetch(`http://localhost:5000/updatetask/${id}`, {
       method: "PATCH",
       headers: {
         "Content-Type": "application/json",

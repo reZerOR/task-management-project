@@ -1,8 +1,8 @@
 import axios from "axios";
 
 const axiosSecure = axios.create({
-  baseURL: "https://task-project-server-smoky.vercel.app",
-  // baseURL: "https://task-project-server-smoky.vercel.app",
+  baseURL: "http://localhost:5000",
+  // baseURL: "http://localhost:5000",
 });
 const useAxiosPrivate = () => {
   return axiosSecure;

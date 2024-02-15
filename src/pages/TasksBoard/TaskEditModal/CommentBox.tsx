@@ -38,7 +38,7 @@ const CommentBox = ({taskId}:{taskId: string}) => {
   console.log(comments);
 
   return (
-    <div className="comment-container">
+    <div className="comment-container  h-5xl w-full overflow-scroll">
       <div className="comment-header">
         <h2 className="font-bold mb-2">Comments</h2>
         <hr />
