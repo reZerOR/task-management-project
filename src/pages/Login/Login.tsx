@@ -131,16 +131,7 @@ const Login = () => {
   return (
     <div>
       <TitleHelmet title="Login"></TitleHelmet>
-      {/* <div className="mt-6">
-          <Link to="/">
-            <button className="text-4xl font-stylish rounded-lg px-8 h-16 before:block before:absolute hover:before:bg-primeColor before:w-0 before:h-0 hover:before:h-20 hover:before:w-full before:-bottom-2 before:right-0 before:duration-300 before:rounded-lg before:-z-10 relative inline-block transform hover:text-white text-primeColor bg-transparent border-2 overflow-hidden border-none duration-300">
-              Taskflow
-            </button>
-          </Link>
-        </div> */}
-      {/* <div className="text-center mt-8 mb-14">
-          <h1 className="text-4xl font-bold text-primeColor">Login now!</h1>
-        </div> */}
+
       <div className="flex flex-col-reverse lg:flex-row justify-evenly h-screen items-center">
         {/* left side  */}
         <div className="w-1/2 relative h-full flex items-center justify-center bg-primeColor bg-opacity-25">
@@ -210,7 +201,7 @@ const Login = () => {
 
                 {/* login button */}
 
-                <div className="form-control mt-6">
+                <div className="form-control mb-2 mt-6">
                   <button className=" w-full font-bold rounded-lg px-2 h-10 before:block before:absolute hover:before:bg-primeColor before:w-0 before:h-0 hover:before:h-20 hover:before:w-full before:-bottom-2 before:right-0 before:duration-300 before:rounded-lg before:-z-10 relative inline-block transform hover:text-white text-primeColor bg-transparent border-2 overflow-hidden border-primeColor duration-300">
                     Login
                   </button>
@@ -226,7 +217,7 @@ const Login = () => {
                 onClick={handleGoogleSignIn}
                 className=" text-primeColor bg-primeColor bg-opacity-20 w-full py-2 rounded-lg font-semibold flex justify-center items-center gap-2"
               >
-                <FaGoogle className="text-lg"></FaGoogle> Sign with Google
+                <FaGoogle className="text-lg"></FaGoogle>Sign with Google
               </button>
               <button
                 onClick={handleGithubSignIn}
