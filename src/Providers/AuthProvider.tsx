@@ -72,10 +72,12 @@ const AuthProvider = ({ children }: UserContextProviderType) => {
 
   const googleSignIn = () => {
     setLoading(true);
+    setFTime(false);
     return signInWithPopup(auth, googleProvider);
   };
   const githubSignIn = () => {
     setLoading(true);
+    setFTime(false);
     return signInWithPopup(auth, githubProvider);
   };
 

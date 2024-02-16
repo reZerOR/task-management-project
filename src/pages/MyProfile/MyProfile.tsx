@@ -1,4 +1,4 @@
-import { useContext, useRef } from "react";
+import { useContext, useRef, useState } from "react";
 
 /* eslint-disable @typescript-eslint/no-unused-vars */
 
@@ -12,14 +12,19 @@ const image_hosting_key = import.meta.env.VITE_IMAGE_API;
 const image_hosting_api = `https://api.imgbb.com/1/upload?key=${image_hosting_key}`;
 import { MdOutlineDeleteForever } from "react-icons/md";
 import Swal from "sweetalert2";
+import { Button, Modal, ModalBody, ModalContent, ModalFooter, ModalHeader, useDisclosure } from "@nextui-org/react";
 
 const MyProfile = () => {
   // const [userInfo, refetch] = useUserInfo();
   const axiosPrivate = useAxiosPrivate();
   const axiosPublic = useAxiosPublic();
   const imageInputRef = useRef<HTMLInputElement>(null);
+  console.log(imageInputRef)
   // console.log(userInfo)
   const { user } = useContext(AuthContext);
+  const { isOpen, onOpen, onOpenChange } = useDisclosure();
+  const [previewImg, setPreviewImg]= useState("");
+  const [isButtonVisible, setIsButtonVisible] = useState("");
 
   const { data: userInfo, refetch } = useQuery({
     queryKey: ["userInfo", user?.email],
@@ -44,7 +49,7 @@ const MyProfile = () => {
     // const imageInput = form.image as HTMLInputElement;
     // const imageFile = imageInput.files && imageInput.files[0];
     console.log(imageFile)
-    if (!imageFile) {
+    if (!imageFile.image) {
       const userName = (form.elements.namedItem("name") as HTMLInputElement)
         ?.value;
 
@@ -67,6 +72,7 @@ const MyProfile = () => {
           imageInputRef.current.value = "";
         }
         toast.success("Profile updated successfully");
+        setIsButtonVisible("");
       }
     } else {
 
@@ -105,8 +111,10 @@ const MyProfile = () => {
           refetch();
           if (imageInputRef.current) {
             imageInputRef.current.value = "";
+            
           }
           toast.success("Profile updated successfully");
+          setIsButtonVisible("");
         }
       }
     }
@@ -134,6 +142,40 @@ const MyProfile = () => {
       }
     });
   };
+
+  const handlePreview= async()=>{
+  
+
+    if (imageInputRef.current) {
+      const imageFile = {
+        image: imageInputRef.current.files && imageInputRef.current.files[0],
+      };
+      const file = imageFile.image as File;
+  
+      console.log(imageFile);
+      if (!file) {
+        return;
+      }
+  
+      const result = await axiosPublic.post(image_hosting_api, imageFile, {
+        headers: {
+          "content-type": "multipart/form-data",
+        },
+      });
+  
+      if (result.data.success) {
+        console.log("paici");
+        const previewUserImg = result.data.data.display_url;
+        console.log(previewUserImg);
+        setPreviewImg(previewUserImg);
+      }
+    }
+  }
+
+  const handleFileInputChange = () => {
+    setIsButtonVisible(imageInputRef?.current?.value as string); // Update button visibility based on file input value
+  };
+
   return (
     <div className="min-h-[calc(100vh-348px)] mb-12 lg:mb-6">
       <div className="w-[400px] md:w-[600px]  mx-auto bg-primeColor bg-opacity-35 mt-14 py-6 rounded-2xl">
@@ -194,17 +236,60 @@ const MyProfile = () => {
             />
           </div>
 
-          <div className="flex flex-col gap-1">
+          <div className="flex flex-col gap-1 w-fit">
             <h2 className="text-lg font-semibold">Upload Image</h2>
 
             <input
               className="py-1 rounded-lg"
-              
+              onChange={handleFileInputChange}
               ref={imageInputRef}
               type="file"
               name="image"
               id=""
             />
+
+            <div>
+              {
+                  isButtonVisible && <Button className="text-white font-semibold bg-violet-800 w-[115px] h-[30px] rounded-md" onPress={onOpen} onClick={handlePreview} >Preview Image</Button>
+              }
+              
+              <Modal
+                backdrop="opaque"
+                isOpen={isOpen}
+                onOpenChange={onOpenChange}
+                radius="lg"
+                classNames={{
+                  body: "py-6",
+                  backdrop: "bg-[#292f46]/50 backdrop-opacity-40",
+                  base: "border-[#292f46] bg-[#19172c] dark:bg-[#19172c] text-[#a8b0d3]",
+                  header: "border-b-[1px] border-[#292f46]",
+                  footer: "border-t-[1px] border-[#292f46]",
+                  closeButton: "hover:bg-white/5 active:bg-white/10",
+                }}
+              >
+                <ModalContent>
+                  {(onClose) => (
+                    <>
+                      <ModalHeader className="flex flex-col gap-1">Image Preview</ModalHeader>
+                      <ModalBody>
+                        <div className="h-[200px] w-[200px] mx-auto rounded-full border-4 ">
+                          <img
+                            className="rounded-full h-full w-full "
+                            src={previewImg}
+                          />
+                        </div>
+                      </ModalBody>
+                      <ModalFooter>
+                        <Button className="text-white bg-black" variant="light" onPress={onClose}>
+                          Close
+                        </Button>
+
+                      </ModalFooter>
+                    </>
+                  )}
+                </ModalContent>
+              </Modal>
+            </div>
           </div>
 
           <br />
