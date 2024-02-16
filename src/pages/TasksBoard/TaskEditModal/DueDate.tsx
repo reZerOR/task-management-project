@@ -22,9 +22,14 @@ const DueDate: React.FC<{ task: Task }> = ({ task }) => {
     minutes: 0,
     seconds: 0,
   });
-  function calculateTimeLeft() {
+  function calculateTimeLeft(task: { dueDate: string }): TimeLeft {
     const difference = +new Date(task.dueDate) - +new Date();
-    let timeLeft = {};
+    let timeLeft: TimeLeft = {
+      days: 0,
+      hours: 0,
+      minutes: 0,
+      seconds: 0,
+    };
   
     if (difference > 0) {
       timeLeft = {
@@ -40,7 +45,7 @@ const DueDate: React.FC<{ task: Task }> = ({ task }) => {
  
   useEffect(() => {
     const timer = setTimeout(() => {
-      return setTimeLeft(calculateTimeLeft());
+      return setTimeLeft(calculateTimeLeft(task));
     }, 1000);
   
     return () => clearTimeout(timer);
@@ -60,9 +65,9 @@ const DueDate: React.FC<{ task: Task }> = ({ task }) => {
   };
 
   return (
-    <div className="flex flex-col mb-4">
+    <div className="flex flex-col mb-4 w-1/2">
       <label htmlFor="dueDate" className="font-bold mb-1">
-       <p> <span className="text-slate-500 text-xl">Due Date: </span>{timeLeft.days} <span className=" text-gray-500">days</span> {timeLeft.hours} <span className=" text-gray-500">hours</span> {timeLeft.minutes} <span className=" text-gray-500">minutes</span> {timeLeft.seconds} <span className=" text-gray-500">seconds</span> </p>
+       <p> <span className="text-slate-500 ">Due Date: </span>{timeLeft.days} <span className=" text-gray-500">days</span> {timeLeft.hours} <span className=" text-gray-500">hours</span> {timeLeft.minutes} <span className=" text-gray-500">minutes</span> {timeLeft.seconds} <span className=" text-gray-500">seconds</span> </p>
       </label>
       <div className="flex items-center">
         <input
@@ -73,7 +78,7 @@ const DueDate: React.FC<{ task: Task }> = ({ task }) => {
           className="px-4 py-2 border rounded mr-2"
         />
         <button
-          className="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600"
+          className="px-4 py-2 bg-primeColor text-white rounded hover:bg-blue-600"
           onClick={handleDueDateUpdate}
         >
           Save
