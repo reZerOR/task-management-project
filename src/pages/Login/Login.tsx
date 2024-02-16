@@ -140,7 +140,7 @@ const Login = () => {
             src="/favicon.png"
             alt="logo"
           />
-          <h2 className="text-9xl tracking-wider font-bold font-stylish">
+          <h2 className="text-9xl tracking-wider font-stylish">
             <span className="text-primeColor font-stylish ">Task</span>Flow
           </h2>
         </div>
