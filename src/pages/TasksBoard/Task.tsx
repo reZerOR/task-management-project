@@ -18,6 +18,7 @@ import {
 
 import CommentBox from "./TaskEditModal/CommentBox";
 import DueDate from "./TaskEditModal/DueDate";
+import FileUploader from "./TaskEditModal/FileUploader";
 
 type parameter = {
   task: any;
@@ -131,7 +132,10 @@ const Task = ({ task, setTasks }: parameter) => {
                     ></textarea>
 
                     <hr />
+                    <div className="flex justify-center mb-10">
                     <DueDate task={task} />
+                    <FileUploader />
+                    </div>
           
                     {/* comment feature start ===================== */}
                     <div className="flex items-center gap-5 bg-gray-200 px-5 pt-2 pb-10 rounded-md">
