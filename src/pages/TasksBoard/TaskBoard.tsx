@@ -6,14 +6,19 @@ import { ToastContainer, toast } from "react-toastify";
 import { AuthContext } from "../../Providers/AuthProvider";
 import List from "./List";
 import Container from "../../sharedComponents/Container";
+import useAxiosPrivate from "../../Hooks/AxiosPrivate/useAxiosPrivate";
+import { useQuery } from "@tanstack/react-query";
 
-const TasksBoard = () => {
+const TasksBoard = ({id}:{id:string}) => {
   const [openModal, setOpenModal] = useState(false);
   const userContext = useContext(AuthContext);
   const email = userContext.user?.email;
-  console.log(email);
 
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  const axiosSecure=useAxiosPrivate()
+
+  console.log(email);
+ console.log("boardid from yaskboard",id)
+  const handleSubmit = async(e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
     const formData = new FormData(e.currentTarget);
@@ -29,7 +34,7 @@ const TasksBoard = () => {
       email: userContext.user?.email,
       status: "todo",
     };
-    fetch("https://task-project-server-smoky.vercel.app/addtask", {
+    fetch("http://localhost:5000/addtask", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -45,11 +50,23 @@ const TasksBoard = () => {
       });
 
     e.currentTarget.reset();
-
     toast.success("Congratulations,Task Added");
     setTimeout(() => {
       window.location.reload();
     }, 2000);
+
+
+  const res = await axiosSecure.patch(
+    `/addTaskToBoard/${id}`,
+    taskData
+  );
+  console.log(res.data);
+  if (res.data.modifiedCount > 0) {
+   
+    toast.success("Task added successfully");
+  }
+  console.log("Alltasks from taskboard",res.data);
+  
   };
 
   return (

@@ -55,7 +55,7 @@ const Task = ({ task, setTasks }: parameter) => {
     }).then(async (result: any) => {
       if (result.isConfirmed) {
         const res = await fetch(
-          `https://task-project-server-smoky.vercel.app/deletetask/${id}`,
+          `http://localhost:5000/deletetask/${id}`,
           {
             method: "DELETE",
           }

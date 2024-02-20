@@ -59,7 +59,7 @@ const router = createBrowserRouter([
         ),
         // loader: ({ params }: LoaderFunctionArgs<{ id: string }>) =>
         //   fetch(
-        //     `https://task-project-server-smoky.vercel.app/singleboard/${params.id}`
+        //     `http://localhost:5000/singleboard/${params.id}`
         //   ),
       },
       {
@@ -79,7 +79,7 @@ const router = createBrowserRouter([
         ),
         // loader: ({ params }: { params: { id: string } }) =>
         //   fetch(
-        //     `https://task-project-server-smoky.vercel.app/updatetask/${params.id}`
+        //     `http://localhost:5000/updatetask/${params.id}`
         //   ),
       },
       {

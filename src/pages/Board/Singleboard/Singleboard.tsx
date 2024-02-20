@@ -35,7 +35,7 @@ const Singleboard = () => {
         <p className="text-xl text-default-500 font-medium"> Type: {type}</p>
         {type === "Team" && <Board />}
       </div>
-      <TasksBoard></TasksBoard>
+      <TasksBoard id={id ?? ""}></TasksBoard>
     </div>
   );
 };
