@@ -6,7 +6,6 @@ import { toast } from "react-toastify";
 import Header from "./Header";
 import Task from "./Task";
 import useAxiosPrivate from "../../Hooks/AxiosPrivate/useAxiosPrivate";
-// import { useEffect } from "react";
 
 type parameter = {
   status: string;
@@ -25,11 +24,11 @@ const Section = ({
   progress,
   complete,
 }: parameter) => {
+  const axiosPrivate = useAxiosPrivate();
   const [{ isOver }, drop] = useDrop(() => ({
     accept: "task",
     drop: (item: any) => {
       addItemToSection(item.id);
-      console.log("from section",item.id)
     },
     collect: (monitor) => ({
       isOver: !!monitor.isOver(),
@@ -50,27 +49,11 @@ const Section = ({
     taskToMap = complete;
   }
 
-  const addItemToSection = async(id: string) => {
-    // const axiosPrivate=useAxiosPrivate()
+  const addItemToSection = async (id: string) => {
+    try {
+      const response = await axiosPrivate.patch(`/updateStatusInBoard/${id}`, { status: status });
 
-    // const res=await axiosPrivate.patch("",{ status: status })
-    fetch(
-      `http://localhost:5000/updateTaskStatus/${id}`,
-      {
-        method: "PATCH",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ status: status }),
-      }
-    )
-      .then((response) => {
-        if (!response.ok) {
-          throw new Error("Failed to update task status");
-        }
-        return response.json();
-      })
-      .then(() => {
+      if (response.status === 200) {
         setTasks((prev: any) => {
           const modifiedTask = prev.map((task: any) => {
             if (task._id === id) {
@@ -81,9 +64,7 @@ const Section = ({
           return modifiedTask;
         });
 
-        const currentStatus = taskToMap.find(
-          (task: any) => task._id === id
-        )?.status;
+        const currentStatus = taskToMap.find((task: any) => task._id === id)?.status;
 
         console.log("Current Status:", currentStatus);
         console.log("New Status:", status);
@@ -91,18 +72,18 @@ const Section = ({
         if (currentStatus !== status) {
           toast.success("Task status changed");
         }
-      })
-      .catch((error) => {
-        console.error("Error updating task status:", error);
+      } else {
+        throw new Error("Failed to update task status");
+      }
+    } catch (error) {
+      console.error("Error updating task status:", error);
 
-        // Show error toast only if the status has changed
-        const currentStatus = taskToMap.find(
-          (task: any) => task._id === id
-        )?.status;
-        if (currentStatus !== status) {
-          toast.error("Failed to update task status");
-        }
-      });
+      // Show error toast only if the status has changed
+      const currentStatus = taskToMap.find((task: any) => task._id === id)?.status;
+      if (currentStatus !== status) {
+        toast.error("Failed to update task status");
+      }
+    }
   };
 
   return (
@@ -110,12 +91,7 @@ const Section = ({
       <Header text={text} bg={bg} count={taskToMap.length}></Header>
       {taskToMap.length > 0 &&
         taskToMap.map((task: any) => (
-          <Task
-            key={task._id}
-            task={task}
-            tasks={tasks}
-            setTasks={setTasks}
-          ></Task>
+          <Task key={task._id} task={task} tasks={tasks} setTasks={setTasks}></Task>
         ))}
     </div>
   );
