@@ -6,7 +6,14 @@ import {  useEffect, useState } from "react";
 import Section from "./Section";
 import { useQuery } from "@tanstack/react-query";
 import useAxiosPrivate from "../../Hooks/AxiosPrivate/useAxiosPrivate";
-const List = ({boardId}:{boardId:string}) => {
+
+
+interface TasksBoardProps {
+  boardId: { id: string };
+}
+
+
+const List : React.FC<TasksBoardProps> = ({ boardId }) => {
   const [tasks, setTasks] = useState<any[]>([]);
   const [todo, setTodo] = useState<any[]>([]);
   const [progress, setprogress] = useState<any[]>([]);
@@ -25,7 +32,7 @@ const List = ({boardId}:{boardId:string}) => {
     },
   });
   refetch()
-  // console.log("hello from list",taskFromBoard)
+  console.log("hello from list",taskFromBoard)
   // console.log(tasks)
 
   useEffect(() => {

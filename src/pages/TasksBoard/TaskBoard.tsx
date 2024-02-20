@@ -8,7 +8,12 @@ import List from "./List";
 import Container from "../../sharedComponents/Container";
 import useAxiosPrivate from "../../Hooks/AxiosPrivate/useAxiosPrivate";
 
-const TasksBoard = ({id}:{id:string}) => {
+
+interface TasksBoardProps {
+  id: { id: string };
+}
+
+const TasksBoard: React.FC<TasksBoardProps> = ({ id }) => {
   const [openModal, setOpenModal] = useState(false);
   const userContext = useContext(AuthContext);
   const email = userContext.user?.email;
