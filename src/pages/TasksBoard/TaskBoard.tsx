@@ -7,7 +7,6 @@ import { AuthContext } from "../../Providers/AuthProvider";
 import List from "./List";
 import Container from "../../sharedComponents/Container";
 import useAxiosPrivate from "../../Hooks/AxiosPrivate/useAxiosPrivate";
-import { useQuery } from "@tanstack/react-query";
 
 const TasksBoard = ({id}:{id:string}) => {
   const [openModal, setOpenModal] = useState(false);
@@ -17,7 +16,7 @@ const TasksBoard = ({id}:{id:string}) => {
   const axiosSecure=useAxiosPrivate()
 
   console.log(email);
- console.log("boardid from yaskboard",id)
+ console.log("boardid from Taskboard",id)
   const handleSubmit = async(e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
@@ -34,39 +33,21 @@ const TasksBoard = ({id}:{id:string}) => {
       email: userContext.user?.email,
       status: "todo",
     };
-    fetch("http://localhost:5000/addtask", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(taskData),
-    })
-      .then((response) => response.json())
-      .then((data) => {
-        console.log("Task added successfully:", data);
-      })
-      .catch((error) => {
-        console.error("Error adding task:", error);
-      });
 
-    e.currentTarget.reset();
-    toast.success("Congratulations,Task Added");
-    setTimeout(() => {
-      window.location.reload();
-    }, 2000);
-
-
-  const res = await axiosSecure.patch(
-    `/addTaskToBoard/${id}`,
-    taskData
-  );
+  const res = await axiosSecure.patch(`/addTaskToBoard/${id}`,taskData );
+  // e.currentTarget.reset()
   console.log(res.data);
   if (res.data.modifiedCount > 0) {
    
-    toast.success("Task added successfully");
+    toast.success("Congratulations,Task Added");
   }
   console.log("Alltasks from taskboard",res.data);
   
+
+  const Task = await axiosSecure.post(`/addtask`,taskData);
+  console.log(Task.data);
+  
+
   };
 
   return (
@@ -228,7 +209,7 @@ const TasksBoard = ({id}:{id:string}) => {
 
           {/* todo, doing and done Boards */}
           <div className="flex items-center justify-center col-span-12 md:col-span-9 mx-auto md:mx-0  gap-6">
-            <List />
+            <List boardId={id}/>
           </div>
           <ToastContainer />
         </div>
