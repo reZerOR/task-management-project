@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import {  useEffect, useState } from "react";
 
@@ -18,23 +19,23 @@ const List = ({boardId}:{boardId:string}) => {
     queryKey: ["taskFromBoard", boardId],
     queryFn: async () => {
       const res = await axiosPrivate.get(`/boards/${boardId}/tasks`);
-      console.log(res.data.tasks);
+      // console.log(res.data.tasks);
       setTasks(res.data.tasks);  
       return res.data.tasks;
     },
   });
   refetch()
-  console.log("hello from list",taskFromBoard)
-  console.log(tasks)
+  // console.log("hello from list",taskFromBoard)
+  // console.log(tasks)
 
   useEffect(() => {
-    console.log('Tasks:', tasks);
+    // console.log('Tasks:', tasks);
 
   // Ensure tasks is an array
-  if (!Array.isArray(tasks)) {
-    console.error('Tasks is not an array:', tasks);
-    return;
-  }
+  // if (!Array.isArray(tasks)) {
+  //   console.error('Tasks is not an array:', tasks);
+  //   return;
+  // }
   
     const fTodo = tasks ? tasks.filter((task: any) => task.status === "todo") : [];
     const fProgress = tasks ? tasks.filter((task: any) => task.status === "progress") : [];

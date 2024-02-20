@@ -20,6 +20,8 @@ import { useContext } from "react";
 import { AuthContext } from "../../Providers/AuthProvider";
 import CommentBox from "./TaskEditModal/CommentBox";
 import DueDate from "./TaskEditModal/DueDate";
+import useAxiosPrivate from "../../Hooks/AxiosPrivate/useAxiosPrivate";
+import { ToastContainer, toast } from "react-toastify";
 
 type parameter = {
   task: any;
@@ -32,7 +34,7 @@ const Task = ({ task, setTasks }: parameter) => {
   // for modal
   const { isOpen, onOpen, onOpenChange } = useDisclosure();
   const { user } = useContext(AuthContext);
-
+  const axiosPrivate=useAxiosPrivate()
   // console.log("task",task)
   // console.log("tasksss",tasks)
   const [{ isDragging }, drag] = useDrag(() => ({
@@ -54,24 +56,23 @@ const Task = ({ task, setTasks }: parameter) => {
       confirmButtonText: "Yes, delete it!",
     }).then(async (result: any) => {
       if (result.isConfirmed) {
-        const res = await fetch(
-          `http://localhost:5000/deletetask/${id}`,
-          {
-            method: "DELETE",
-          }
-        );
-        if (res.ok) {
+        const res = await axiosPrivate.delete(`/deletetaskFromBoard/${id}`)
+        console.log("from task delete",res.status)
+        
+        if (res.status === 200 || res.status === 204) {
           setTasks((prevTasks: any) =>
             prevTasks.filter((t: any) => t._id !== id)
           );
+          toast.success("Task has been deleted")
         } else {
           console.error("Failed to delete task");
         }
-        Swal.fire({
-          title: "Deleted!",
-          text: "Your task has been deleted.",
-          icon: "success",
-        });
+        // Swal.fire({
+        //   title: "Deleted!",
+        //   text: "Your task has been deleted.",
+        //   icon: "success",
+        // });
+       
       }
     });
   };
@@ -149,6 +150,7 @@ const Task = ({ task, setTasks }: parameter) => {
           </ModalContent>
         </Modal>
       </>
+      <ToastContainer/>
     </>
   );
 };

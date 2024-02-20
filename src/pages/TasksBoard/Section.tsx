@@ -1,9 +1,11 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
 import { useDrop } from "react-dnd";
 import { toast } from "react-toastify";
 import Header from "./Header";
 import Task from "./Task";
+import useAxiosPrivate from "../../Hooks/AxiosPrivate/useAxiosPrivate";
 // import { useEffect } from "react";
 
 type parameter = {
@@ -27,6 +29,7 @@ const Section = ({
     accept: "task",
     drop: (item: any) => {
       addItemToSection(item.id);
+      console.log("from section",item.id)
     },
     collect: (monitor) => ({
       isOver: !!monitor.isOver(),
@@ -47,7 +50,10 @@ const Section = ({
     taskToMap = complete;
   }
 
-  const addItemToSection = (id: string) => {
+  const addItemToSection = async(id: string) => {
+    // const axiosPrivate=useAxiosPrivate()
+
+    // const res=await axiosPrivate.patch("",{ status: status })
     fetch(
       `http://localhost:5000/updateTaskStatus/${id}`,
       {
