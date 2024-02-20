@@ -12,6 +12,7 @@ import MailAcceptINvitation from "../pages/Board/MailAcceptInvitation/MailAccept
 import CreateBoard from "../pages/Board/CreateBoard/CreateBoard";
 // import SingleTask from "../pages/TasksBoard/SingleTask";
 import Singleboard from "../pages/Board/Singleboard/Singleboard";
+import HandleInvitation from "../Hooks/HandleInvitation/HandleInvitation";
 
 // interface LoaderFunctionArgs<T> {
 //   params: T;
@@ -38,7 +39,7 @@ const router = createBrowserRouter([
         path: "/board",
         element: (
           <PrivateRoute>
-            <Board></Board>
+            <Board id ="string"></Board>
           </PrivateRoute>
         ),
       },
@@ -63,11 +64,17 @@ const router = createBrowserRouter([
         //   ),
       },
       {
-        path: "/accept-invitation",
+        path: "/accept-invitation/:boardId/:token",
         element: (
-          <PrivateRoute>
-            <MailAcceptINvitation></MailAcceptINvitation>
-          </PrivateRoute>
+          // <HandleInvitation></HandleInvitation> for user email onno thakle mailer invitation emaile login korte hobe
+          <HandleInvitation>
+            
+              <MailAcceptINvitation></MailAcceptINvitation>
+         
+          </HandleInvitation>
+
+
+
         ),
       },
       {

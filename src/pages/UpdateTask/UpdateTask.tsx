@@ -17,7 +17,9 @@ const UpdateTask = () => {
   console.log(email);
   const navigate = useNavigate();
   useEffect(() => {
+
     fetch(`http://localhost:5000/updatetaskInTheBoard/${id}`)
+
       .then((res) => res.json())
       .then((data) => {
         setUpdateTask(data);
@@ -37,7 +39,9 @@ const UpdateTask = () => {
       description: description,
       visibility: Visibility,
     };
+
     fetch(`http://localhost:5000/updatetaskInTheBoard/${id}`, {
+
       method: "PATCH",
       headers: {
         "Content-Type": "application/json",

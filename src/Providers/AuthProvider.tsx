@@ -23,6 +23,8 @@ export type UserContextType = {
   createUser: any;
   logOut: any;
   loading: any;
+  fTime: boolean;
+  
 };
 
 type UserContextProviderType = {
@@ -49,6 +51,8 @@ type AuthContextType = {
   githubSignIn: () => Promise<UserCredential>;
   loading: boolean;
   logOut: () => Promise<void>;
+  fTime: boolean;
+  setFTime: any;
 };
 export const AuthContext = createContext({} as UserContextType);
 
@@ -56,6 +60,7 @@ const AuthProvider = ({ children }: UserContextProviderType) => {
   const [user, setUser] = useState<AuthUser | null>(null);
   
   const [loading, setLoading] = useState(true);
+  const [fTime, setFTime]= useState(true);
 
   const logOut = () => {
     setLoading(true);
@@ -67,10 +72,12 @@ const AuthProvider = ({ children }: UserContextProviderType) => {
 
   const googleSignIn = () => {
     setLoading(true);
+    setFTime(false);
     return signInWithPopup(auth, googleProvider);
   };
   const githubSignIn = () => {
     setLoading(true);
+    setFTime(false);
     return signInWithPopup(auth, githubProvider);
   };
 
@@ -111,6 +118,7 @@ console.log(auth.currentUser);
 
   const signIn = (email: string, password: string) => {
     setLoading(true);
+    setFTime(false);
     return signInWithEmailAndPassword(auth, email, password);
   };
 
@@ -146,6 +154,8 @@ console.log(auth.currentUser);
     githubSignIn,
     loading,
     logOut,
+    fTime,
+    setFTime
   };
 
   return (
