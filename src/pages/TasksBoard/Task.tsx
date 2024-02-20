@@ -101,7 +101,7 @@ const Task = ({ task, setTasks }: parameter) => {
           </button>
         </div>
         <div>
-          <Link to={`/updatetask/${task._id}`}>
+          <Link to={`/updatetaskInTheBoard/${task._id}`}>
             <button className="absolute top-8 right-1 text-slate-400 hover:text-black text-2xl">
               <BiSolidEdit></BiSolidEdit>
             </button>

@@ -71,7 +71,7 @@ const router = createBrowserRouter([
         ),
       },
       {
-        path: "updatetask/:id",
+        path: "updatetaskInTheBoard/:id",
         element: (
           <PrivateRoute>
             <UpdateTask></UpdateTask>
