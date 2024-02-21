@@ -9,6 +9,7 @@ import { useQuery } from "@tanstack/react-query";
 import BoardCard from "./BoardCard/BoardCard";
 import Container from "../../../sharedComponents/Container";
 import useAxiosPublic from "../../../Hooks/AxiosPublic/useAxiosPublic";
+import { Link } from "react-router-dom";
 
 const CreateBoard = () => {
   const [openModal, setOpenModal] = useState(false);
@@ -54,7 +55,12 @@ const CreateBoard = () => {
   return (
     <Container>
       <div>
+        <div>
+          <p>Limit Left: </p>
+          <Link to="/increaseLimit"><button className="bg-green-600 p-2 rounded-md text-white">Increase Limit</button></Link>
+        </div>
         <div className="w-72 my-10 mx-auto flex items-center justify-center  col-span-3 md:col-span-12">
+        
           <button
             onClick={() => setOpenModal(true)}
             className="bg-primeColor text-white p-2 rounded-lg"

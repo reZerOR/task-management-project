@@ -13,6 +13,7 @@ import CreateBoard from "../pages/Board/CreateBoard/CreateBoard";
 // import SingleTask from "../pages/TasksBoard/SingleTask";
 import Singleboard from "../pages/Board/Singleboard/Singleboard";
 import HandleInvitation from "../Hooks/HandleInvitation/HandleInvitation";
+import Packages from "../pages/Packages/Packages";
 
 // interface LoaderFunctionArgs<T> {
 //   params: T;
@@ -94,6 +95,14 @@ const router = createBrowserRouter([
         element: (
           <PrivateRoute>
             <MyProfile></MyProfile>
+          </PrivateRoute>
+        ),
+      },
+      {
+        path: "/increaseLimit",
+        element: (
+          <PrivateRoute>
+            <Packages></Packages>
           </PrivateRoute>
         ),
       },
