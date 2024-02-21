@@ -30,7 +30,6 @@ type parameter = {
 const Task = ({ task, setTasks }: parameter) => {
   // for modal
   const { isOpen, onOpen, onOpenChange } = useDisclosure();
- 
 
   // console.log("task",task)
   // console.log("tasksss",tasks)
@@ -54,7 +53,7 @@ const Task = ({ task, setTasks }: parameter) => {
     }).then(async (result: any) => {
       if (result.isConfirmed) {
         const res = await fetch(
-          `http://localhost:5000/deletetask/${id}`,
+          `https://task-project-server-smoky.vercel.app/deletetask/${id}`,
           {
             method: "DELETE",
           }
@@ -133,13 +132,13 @@ const Task = ({ task, setTasks }: parameter) => {
 
                     <hr />
                     <div className="flex justify-center mb-10">
-                    <DueDate task={task} />
-                    <FileUploader />
+                      <DueDate task={task} />
+                      <FileUploader />
                     </div>
-          
+
                     {/* comment feature start ===================== */}
                     <div className="flex items-center gap-5 bg-gray-200 px-5 pt-2 pb-10 rounded-md">
-                      <CommentBox taskId ={task._id} />
+                      <CommentBox taskId={task._id} />
                     </div>
                     {/* comment feature end ===================== */}
                   </div>

@@ -65,13 +65,16 @@ const Register = () => {
         .createUser(displayName, photoURL, email, password)
         .then(async (result: UserCredential) => {
           console.log(result);
-          const response = await fetch("http://localhost:5000/user", {
-            method: "POST",
-            headers: {
-              "Content-Type": "application/json",
-            },
-            body: JSON.stringify({ displayName, photoURL, email }),
-          });
+          const response = await fetch(
+            "https://task-project-server-smoky.vercel.app/user",
+            {
+              method: "POST",
+              headers: {
+                "Content-Type": "application/json",
+              },
+              body: JSON.stringify({ displayName, photoURL, email }),
+            }
+          );
           if (response.ok) {
             console.log("User information posted to MongoDB");
           } else {
@@ -101,7 +104,7 @@ const Register = () => {
         };
 
         // Assuming you want to send user information to the server
-        return fetch("http://localhost:5000/user", {
+        return fetch("https://task-project-server-smoky.vercel.app/user", {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
@@ -140,7 +143,7 @@ const Register = () => {
         };
 
         // Assuming you want to send user information to the server
-        return fetch("http://localhost:5000/user", {
+        return fetch("https://task-project-server-smoky.vercel.app/user", {
           method: "POST",
           headers: {
             "Content-Type": "application/json",

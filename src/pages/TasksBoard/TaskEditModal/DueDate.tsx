@@ -30,7 +30,7 @@ const DueDate: React.FC<{ task: Task }> = ({ task }) => {
       minutes: 0,
       seconds: 0,
     };
-  
+
     if (difference > 0) {
       timeLeft = {
         days: Math.floor(difference / (1000 * 60 * 60 * 24)),
@@ -39,24 +39,26 @@ const DueDate: React.FC<{ task: Task }> = ({ task }) => {
         seconds: Math.floor((difference / 1000) % 60),
       };
     }
-  
+
     return timeLeft;
   }
- 
+
   useEffect(() => {
     const timer = setTimeout(() => {
       return setTimeLeft(calculateTimeLeft(task));
     }, 1000);
-  
+
     return () => clearTimeout(timer);
   });
-  
 
   const handleDueDateUpdate = async () => {
     try {
-      await axios.patch(`http://localhost:5000/dueDate/${task._id}`, {
-        dueDate: dueDate,
-      });
+      await axios.patch(
+        `https://task-project-server-smoky.vercel.app/dueDate/${task._id}`,
+        {
+          dueDate: dueDate,
+        }
+      );
       toast.success("Due date updated successfully");
     } catch (error) {
       console.error("Error updating due date:", error);
@@ -67,7 +69,14 @@ const DueDate: React.FC<{ task: Task }> = ({ task }) => {
   return (
     <div className="flex flex-col mb-4 w-1/2">
       <label htmlFor="dueDate" className="font-bold mb-1">
-       <p> <span className="text-slate-500 ">Due Date: </span>{timeLeft.days} <span className=" text-gray-500">days</span> {timeLeft.hours} <span className=" text-gray-500">hours</span> {timeLeft.minutes} <span className=" text-gray-500">minutes</span> {timeLeft.seconds} <span className=" text-gray-500">seconds</span> </p>
+        <p>
+          {" "}
+          <span className="text-slate-500 ">Due Date: </span>
+          {timeLeft.days} <span className=" text-gray-500">days</span>{" "}
+          {timeLeft.hours} <span className=" text-gray-500">hours</span>{" "}
+          {timeLeft.minutes} <span className=" text-gray-500">minutes</span>{" "}
+          {timeLeft.seconds} <span className=" text-gray-500">seconds</span>{" "}
+        </p>
       </label>
       <div className="flex items-center">
         <input
@@ -90,5 +99,6 @@ const DueDate: React.FC<{ task: Task }> = ({ task }) => {
 
 export default DueDate;
 
-
-{/*  */}
+{
+  /*  */
+}

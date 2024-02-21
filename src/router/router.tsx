@@ -39,7 +39,7 @@ const router = createBrowserRouter([
         path: "/board",
         element: (
           <PrivateRoute>
-            <Board id ="string"></Board>
+            <Board id="string"></Board>
           </PrivateRoute>
         ),
       },
@@ -60,7 +60,7 @@ const router = createBrowserRouter([
         ),
         // loader: ({ params }: LoaderFunctionArgs<{ id: string }>) =>
         //   fetch(
-        //     `http://localhost:5000/singleboard/${params.id}`
+        //     `https://task-project-server-smoky.vercel.app/singleboard/${params.id}`
         //   ),
       },
       {
@@ -68,13 +68,8 @@ const router = createBrowserRouter([
         element: (
           // <HandleInvitation></HandleInvitation> for user email onno thakle mailer invitation emaile login korte hobe
           <HandleInvitation>
-            
-              <MailAcceptINvitation></MailAcceptINvitation>
-         
+            <MailAcceptINvitation></MailAcceptINvitation>
           </HandleInvitation>
-
-
-
         ),
       },
       {
@@ -86,7 +81,7 @@ const router = createBrowserRouter([
         ),
         // loader: ({ params }: { params: { id: string } }) =>
         //   fetch(
-        //     `http://localhost:5000/updatetask/${params.id}`
+        //     `https://task-project-server-smoky.vercel.app/updatetask/${params.id}`
         //   ),
       },
       {

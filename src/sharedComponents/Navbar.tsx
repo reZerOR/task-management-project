@@ -56,14 +56,10 @@ const Navbar = () => {
           {/* visable in large devices */}
           <div className="lg:flex gap-6 items-center hidden">
             <ul className="flex text-lg font-medium text-primeColor gap-6">
-              <NavLink to={"/createboard"}>
-                <li>New Board</li>
-              </NavLink>
-
               {user && (
                 <>
-                  <NavLink to={"/tasksboard"}>
-                    <li>TaskBoard</li>
+                  <NavLink to={"/createboard"}>
+                    <li>New Board</li>
                   </NavLink>
                   {/* <NavLink to={"/myProfile"}>
                     <li>My Profile</li>
@@ -165,7 +161,7 @@ const Navbar = () => {
               {user ? (
                 <>
                   <motion.li variants={itemVarients}>
-                    <Link to={"/tasksboard"}>TaskBoard</Link>
+                    <Link to={"/createboard"}>New Board</Link>
                   </motion.li>
                   <motion.li variants={itemVarients}>
                     <Link to={"/myProfile"}>My Profile</Link>
