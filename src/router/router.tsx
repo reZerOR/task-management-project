@@ -31,7 +31,7 @@ const router = createBrowserRouter([
         path: "/tasksboard",
         element: (
           <PrivateRoute>
-            <TasksBoard />
+            <TasksBoard id={{ id: "string" }} />
           </PrivateRoute>
         ),
       },

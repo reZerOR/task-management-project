@@ -6,14 +6,21 @@ import { ToastContainer, toast } from "react-toastify";
 import { AuthContext } from "../../Providers/AuthProvider";
 import List from "./List";
 import Container from "../../sharedComponents/Container";
+import useAxiosPrivate from "../../Hooks/AxiosPrivate/useAxiosPrivate";
 
-const TasksBoard = () => {
+interface TasksBoardProps {
+  id: { id: string };
+}
+
+const  TasksBoard: React.FC<TasksBoardProps> = ({ id })=> {
   const [openModal, setOpenModal] = useState(false);
   const userContext = useContext(AuthContext);
   const email = userContext.user?.email;
   console.log(email);
 
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+const axiosSecure=useAxiosPrivate()
+
+  const handleSubmit = async(e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
     const formData = new FormData(e.currentTarget);
@@ -31,27 +38,20 @@ const TasksBoard = () => {
       status: "todo",
     };
 
-    fetch("http://localhost:5000/addtask", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(taskData),
-    })
-      .then((response) => response.json())
-      .then((data) => {
-        console.log("Task added successfully:", data);
-      })
-      .catch((error) => {
-        console.error("Error adding task:", error);
-      });
+    const res = await axiosSecure.patch(`/addTaskToBoard/${id}`,taskData );
+  // e.currentTarget.reset()
+  console.log(res.data);
+  if (res.data.modifiedCount > 0) {
+   
+    toast.success("Congratulations,Task Added");
+  }
+  console.log("Alltasks from taskboard",res.data);
+  
 
+  const Task = await axiosSecure.post(`/addtask`,taskData);
+  console.log(Task.data);
     e.currentTarget.reset();
 
-    toast.success("Congratulations,Task Added");
-    setTimeout(() => {
-      window.location.reload();
-    }, 2000);
   };
 
   return (
@@ -213,7 +213,7 @@ const TasksBoard = () => {
 
           {/* todo, doing and done Boards */}
           <div className="flex items-center justify-center col-span-12 md:col-span-9 mx-auto md:mx-0  gap-6">
-            <List />
+            <List boardId={id} />
           </div>
           <ToastContainer />
         </div>
