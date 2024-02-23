@@ -20,7 +20,7 @@ const List: React.FC<TasksBoardProps> = ({ boardId }) => {
   // const user=userContext.user
   const axiosPrivate=useAxiosPrivate()
   // console.log("boardId from list",boardId)
-  const { data: taskFromBoard=[] } = useQuery({
+  const { data: taskFromBoard=[],refetch } = useQuery({
     queryKey: ["taskFromBoard", boardId],
     queryFn: async () => {
       const res = await axiosPrivate.get(`/boards/${boardId}/tasks`);
@@ -29,7 +29,7 @@ const List: React.FC<TasksBoardProps> = ({ boardId }) => {
       return res.data.tasks;
     },
   });
-  
+  refetch()
   // console.log("hello from list",taskFromBoard)
   useEffect(() => {
     const fTodo = tasks

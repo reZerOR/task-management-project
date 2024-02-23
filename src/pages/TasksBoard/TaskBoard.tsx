@@ -41,7 +41,7 @@ const axiosSecure=useAxiosPrivate()
     const res = await axiosSecure.patch(`/addTaskToBoard/${id}`,taskData );
   // e.currentTarget.reset()
   console.log(res.data);
-  e.currentTarget.reset();
+  // e.currentTarget.reset();
   if (res.data.modifiedCount > 0) {
    
     toast.success("Congratulations,Task Added");
