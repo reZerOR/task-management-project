@@ -1,25 +1,36 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { useContext, useEffect, useState } from "react";
+import {  useEffect, useState } from "react";
 
-import { AuthContext } from "../../Providers/AuthProvider";
 import Section from "./Section";
-const List = () => {
+import useAxiosPrivate from "../../Hooks/AxiosPrivate/useAxiosPrivate";
+import { useQuery } from "@tanstack/react-query";
+
+
+interface TasksBoardProps {
+  boardId:  string | undefined ;
+}
+
+
+const List: React.FC<TasksBoardProps> = ({ boardId }) => {
   const [tasks, setTasks] = useState([]);
   const [todo, setTodo] = useState([]);
   const [progress, setprogress] = useState([]);
   const [complete, setComplete] = useState([]);
-  const userContext = useContext(AuthContext);
   // const user=userContext.user
-  useEffect(() => {
-    fetch(
-      `http://localhost:5000/userAddedtask?email=${userContext.user.email}`
-    )
-      .then((res) => res.json())
-      .then((data) => {
-        console.log("from user added task", data);
-        setTasks(data);
-      });
-  }, [userContext.user.email]);
+  const axiosPrivate=useAxiosPrivate()
+  // console.log("boardId from list",boardId)
+  const { data: taskFromBoard=[],refetch } = useQuery({
+    queryKey: ["taskFromBoard", boardId],
+    queryFn: async () => {
+      const res = await axiosPrivate.get(`/boards/${boardId}/tasks`);
+      // console.log(res.data.tasks);
+      setTasks(res.data.tasks);
+      return res.data.tasks;
+    },
+  });
+  refetch()
+  // console.log("hello from list",taskFromBoard)
   useEffect(() => {
     const fTodo = tasks
       ? tasks.filter((task: any) => task.status === "todo")
