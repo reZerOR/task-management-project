@@ -29,6 +29,16 @@ const CreateBoard = () => {
   });
   console.log(board);
 
+  const { data: packageRemains } = useQuery({
+    queryKey: ["packageRemains"],
+    queryFn: async () => {
+      const res = await axiosPrivate.get(`/getPackageLimit/${user?.email}`);
+      // console.log("API response:", res.data); // Log the response
+      // setUserEmail(res.data); // Assuming res.data is an array of User objects
+      return res.data.currentPackageLimit;
+    },
+  });
+
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
@@ -47,6 +57,10 @@ const CreateBoard = () => {
     console.log("Board Created successfully:", response.data);
     toast.success("Board Created successfully");
     refetch();
+
+    const res= await axiosPrivate.patch(`/decreaseLimit/${user?.email}`);
+    
+
     e.currentTarget.reset();
 
     setOpenModal(false);
@@ -56,7 +70,7 @@ const CreateBoard = () => {
     <Container>
       <div>
         <div>
-          <p>Limit Left: </p>
+          <p>Limit Left: {packageRemains}</p>
           <Link to="/increaseLimit"><button className="bg-green-600 p-2 rounded-md text-white">Increase Limit</button></Link>
         </div>
         <div className="w-72 my-10 mx-auto flex items-center justify-center  col-span-3 md:col-span-12">

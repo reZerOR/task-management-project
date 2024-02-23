@@ -47,8 +47,8 @@ const Board = ({ id }: BoardProps) => {
       return res.data.isAdmin;
     },
   });
+  
 
-  console.log(isAdmin)
 
 
 

@@ -3,6 +3,7 @@ import useAxiosPrivate from "../../../Hooks/AxiosPrivate/useAxiosPrivate";
 import { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../../../Providers/AuthProvider";
 import {Spinner} from "@nextui-org/react";
+import { ToastContainer, toast } from "react-toastify";
 
 const CheckOut = () => {
     const stripe = useStripe();
@@ -14,8 +15,9 @@ const CheckOut = () => {
     const [clientSecret, setClientSecret] = useState("");
     const [transactionId, setTransactionId] = useState('');
     const [loading, setLoading] = useState(false);
-    const {packagePrice}= useContext(AuthContext);
+    const {packagePrice, packageInfo}= useContext(AuthContext);
     console.log(packagePrice);
+    console.log(packageInfo);
     // const price = packageInfo?.package?.split(" ")[3].split("$")[1];
     // const [loading, setLoading] = useState(false);
 
@@ -57,8 +59,8 @@ const CheckOut = () => {
         });
 
         if (error) {
-            // console.log('failed. error', error);
-            // setErr(error.message);
+            console.log('failed. error', error);
+            setErr(error.message || "");
         }
         else {
             console.log('payment successful', paymentMethod);
@@ -86,23 +88,24 @@ const CheckOut = () => {
 
             if (paymentIntent.status == "succeeded") {
                 setTransactionId(paymentIntent.id);
+                console.log(packageInfo);
 
-                // const result = await axiosSecure.patch(`/addPackage/${user?.email}`, packageInfo)
+                const result = await axiosSecure.patch(`/addPackage/${user?.email}`, {packageInfo});
 
-                // if (result.data.modifiedCount > 0) {
-                //     refetch();
+                if (result.data.modifiedCount > 0) {
+                    toast("Payment Successfull");
 
-                //     setLoading(false);
+                    setLoading(false);
 
 
 
-                //     Swal.fire({
-                //         icon: "success",
-                //         title: "Successful",
-                //         text: "Successfully Bought Package",
+                    // Swal.fire({
+                    //     icon: "success",
+                    //     title: "Successful",
+                    //     text: "Successfully Bought Package",
 
-                //     });
-                // }
+                    // });
+                }
 
             }
         }
@@ -163,6 +166,7 @@ const CheckOut = () => {
 
                 </form>
             </div>
+            <ToastContainer></ToastContainer>
         </div>
     );
 };

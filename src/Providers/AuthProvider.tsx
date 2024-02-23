@@ -26,6 +26,8 @@ export type UserContextType = {
   fTime: boolean;
   setPackagePrice: any;
   packagePrice: any;
+  packageInfo: any;
+  setPackageInfo: any;
   
 };
 
@@ -57,6 +59,8 @@ type AuthContextType = {
   setFTime: any;
   packagePrice: any;
   setPackagePrice: any;
+  packageInfo: any;
+  setPackageInfo: any;
 };
 export const AuthContext = createContext({} as UserContextType);
 
@@ -66,6 +70,7 @@ const AuthProvider = ({ children }: UserContextProviderType) => {
   const [loading, setLoading] = useState(true);
   const [fTime, setFTime]= useState(true);
   const [packagePrice,setPackagePrice]=useState(null);
+  const [packageInfo, setPackageInfo]=useState("");
 
   const logOut = () => {
     setLoading(true);
@@ -164,7 +169,9 @@ console.log(auth.currentUser);
     fTime,
     setFTime,
     packagePrice,
-    setPackagePrice
+    setPackagePrice,
+    packageInfo,
+    setPackageInfo
     
   };
 

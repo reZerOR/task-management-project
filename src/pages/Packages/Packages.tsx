@@ -7,24 +7,27 @@ interface Package {
     packageType: string;
     price: number;
     board: number;
+    package: string;
     // Define other properties if present in your JSON data
 }
 
 const Packages = () => {
-    const axiosSecure = useAxiosPrivate();
-    const [packagesInfo, setPackageInfo] = useState<Package[]>([]);
-    const {setPackagePrice}= useContext(AuthContext);
+    
+    const [packages, setPackages] = useState<Package[]>([]);
+    const {setPackagePrice, setPackageInfo}= useContext(AuthContext);
 
     useEffect(()=>{
         fetch("packages.json")
         .then(res=>res.json())
-        .then(data=>setPackageInfo(data))
+        .then(data=>setPackages(data))
     },[])
-    console.log(packagesInfo);
+    console.log(packages);
     
 
-    const handlePackagePrice=(price: number)=>{
+    const handlePackagePrice=(price: number, perPackage: string)=>{
         setPackagePrice(price);
+        setPackageInfo(perPackage);
+        
     }
     return (
         <div>
@@ -39,7 +42,7 @@ const Packages = () => {
                         <div className="space-y-8 lg:grid lg:grid-cols-3 sm:gap-6 xl:gap-10 lg:space-y-0">
 
                             {
-                                packagesInfo?.map(perPackage=>(
+                                packages?.map(perPackage=>(
                                     <div className="flex flex-col p-6 mx-auto max-w-lg text-center text-gray-900 bg-white rounded-lg border border-gray-100 shadow dark:border-gray-600 xl:p-8 dark:bg-gray-800 dark:text-white">
                                     <h3 className="mb-4 text-2xl font-semibold">{perPackage.packageType}</h3>
                                     <p className="font-light text-gray-500 sm:text-lg dark:text-gray-400">Best option for personal use & for your next project.</p>
@@ -56,7 +59,7 @@ const Packages = () => {
                                         </li>
     
                                     </ul>
-                                    <Link to="/payment" className="text-white bg-primary-600 hover:bg-primary-700 focus:ring-4 focus:ring-primary-200 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:text-white  dark:focus:ring-primary-900"><button onClick={()=>handlePackagePrice(perPackage.price)}>Buy Now</button></Link>
+                                    <Link to="/payment" className="text-white bg-primary-600 hover:bg-primary-700 focus:ring-4 focus:ring-primary-200 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:text-white  dark:focus:ring-primary-900"><button onClick={()=>handlePackagePrice(perPackage.price,perPackage.package)}>Buy Now</button></Link>
                                 </div>
                                 ))
                             }
