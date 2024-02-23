@@ -79,7 +79,13 @@ const CreateBoard = () => {
         <div className="w-72 my-10 mx-auto flex items-center justify-center  col-span-3 md:col-span-12">
         
           <button
-            onClick={() => setOpenModal(true)}
+            onClick={() => {
+              if (packageRemains < 1) {
+                toast("Insufficient package limit");
+              } else {
+                setOpenModal(true);
+              }
+            }}
             className="bg-primeColor text-white p-2 rounded-lg"
           >
             Create new Board
