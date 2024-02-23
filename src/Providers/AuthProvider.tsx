@@ -24,6 +24,8 @@ export type UserContextType = {
   logOut: any;
   loading: any;
   fTime: boolean;
+  setPackagePrice: any;
+  packagePrice: any;
   
 };
 
@@ -53,6 +55,8 @@ type AuthContextType = {
   logOut: () => Promise<void>;
   fTime: boolean;
   setFTime: any;
+  packagePrice: any;
+  setPackagePrice: any;
 };
 export const AuthContext = createContext({} as UserContextType);
 
@@ -61,11 +65,14 @@ const AuthProvider = ({ children }: UserContextProviderType) => {
   
   const [loading, setLoading] = useState(true);
   const [fTime, setFTime]= useState(true);
+  const [packagePrice,setPackagePrice]=useState(null);
 
   const logOut = () => {
     setLoading(true);
     return signOut(auth);
   };
+
+  console.log(packagePrice);
 
   const googleProvider = new GoogleAuthProvider();
   const githubProvider = new GithubAuthProvider();
@@ -155,7 +162,10 @@ console.log(auth.currentUser);
     loading,
     logOut,
     fTime,
-    setFTime
+    setFTime,
+    packagePrice,
+    setPackagePrice
+    
   };
 
   return (
