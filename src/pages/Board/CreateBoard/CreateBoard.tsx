@@ -29,13 +29,13 @@ const CreateBoard = () => {
   });
   console.log(board);
 
-  const { data: packageRemains } = useQuery({
+  const { data: packageRemains, refetch: packageLimitRefetch } = useQuery({
     queryKey: ["packageRemains"],
     queryFn: async () => {
       const res = await axiosPrivate.get(`/getPackageLimit/${user?.email}`);
       // console.log("API response:", res.data); // Log the response
       // setUserEmail(res.data); // Assuming res.data is an array of User objects
-      return res.data.currentPackageLimit;
+      return res.data.currentPackageLimit || 0;
     },
   });
 
@@ -59,7 +59,10 @@ const CreateBoard = () => {
     refetch();
 
     const res= await axiosPrivate.patch(`/decreaseLimit/${user?.email}`);
-    
+    if(res?.data.modifiedCount>0){
+      packageLimitRefetch();
+    }
+
 
     e.currentTarget.reset();
 
