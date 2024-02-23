@@ -9,7 +9,7 @@ import Container from "../../sharedComponents/Container";
 import useAxiosPrivate from "../../Hooks/AxiosPrivate/useAxiosPrivate";
 
 interface TasksBoardProps {
-  id: { id: string };
+  id:   string  | undefined;
 }
 
 const  TasksBoard: React.FC<TasksBoardProps> = ({ id })=> {
@@ -41,6 +41,7 @@ const axiosSecure=useAxiosPrivate()
     const res = await axiosSecure.patch(`/addTaskToBoard/${id}`,taskData );
   // e.currentTarget.reset()
   console.log(res.data);
+  e.currentTarget.reset();
   if (res.data.modifiedCount > 0) {
    
     toast.success("Congratulations,Task Added");
@@ -50,7 +51,7 @@ const axiosSecure=useAxiosPrivate()
 
   const Task = await axiosSecure.post(`/addtask`,taskData);
   console.log(Task.data);
-    e.currentTarget.reset();
+    
 
   };
 

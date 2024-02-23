@@ -55,9 +55,9 @@ const Task = ({ task, setTasks }: parameter) => {
     }).then(async (result: any) => {
       if (result.isConfirmed) {
         const res = await axiosPrivate.delete(`/deletetaskFromBoard/${id}`)
-        console.log("from task delete",res.status)
+        console.log("from task delete",res.data)
         
-        if (res.status === 200 || res.status === 204) {
+        if (res.data.modifiedCount > 0 ) {
           setTasks((prevTasks: any) =>
             prevTasks.filter((t: any) => t._id !== id)
           );

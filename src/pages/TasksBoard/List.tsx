@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import {  useEffect, useState } from "react";
 
@@ -7,7 +8,7 @@ import { useQuery } from "@tanstack/react-query";
 
 
 interface TasksBoardProps {
-  boardId: { id: string };
+  boardId:  string | undefined ;
 }
 
 
@@ -18,18 +19,18 @@ const List: React.FC<TasksBoardProps> = ({ boardId }) => {
   const [complete, setComplete] = useState([]);
   // const user=userContext.user
   const axiosPrivate=useAxiosPrivate()
-  console.log("boardId from list",boardId)
-  const { data: taskFromBoard=[], refetch } = useQuery({
+  // console.log("boardId from list",boardId)
+  const { data: taskFromBoard=[] } = useQuery({
     queryKey: ["taskFromBoard", boardId],
     queryFn: async () => {
       const res = await axiosPrivate.get(`/boards/${boardId}/tasks`);
       // console.log(res.data.tasks);
-      setTasks(res.data.tasks);  
+      setTasks(res.data.tasks);
       return res.data.tasks;
     },
   });
-  refetch()
-  console.log("hello from list",taskFromBoard)
+  
+  // console.log("hello from list",taskFromBoard)
   useEffect(() => {
     const fTodo = tasks
       ? tasks.filter((task: any) => task.status === "todo")

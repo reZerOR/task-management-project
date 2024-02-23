@@ -53,7 +53,7 @@ const CreateBoard = () => {
 
   return (
     // <Container>
-      <div className="bg-gradient-to-r from-secondary-50 to-primary-300 p-10">
+      <div className="bg-gradient-to-r from-secondary-50 to-primary-200 p-10">
         <Container>
         <div>
         <div className="w-72 my-10 mx-auto flex items-center justify-center  col-span-3 md:col-span-12">

@@ -38,7 +38,7 @@ const Singleboard = () => {
         <p className="text-xl text-default-500 font-medium"> Type: {type}</p>
         {type === "Team" && <Board id={_id}/>}
       </div>
-      <TasksBoard id={{ id: "string" }}></TasksBoard>
+      <TasksBoard id={ id }></TasksBoard>
     </div>
    </Container>
    </div>

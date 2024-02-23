@@ -7,9 +7,9 @@ import {Card, CardHeader, CardBody, CardFooter, Divider, Link, Image} from "@nex
 
 const BoardCard = (card:any) => {
     const{name,details,type,_id}=card.card
-    // console.log
+    // console.log("from board card id",_id)
 
-    const cardColor = type === "Team" ? "#3498db" : "#2ecc71";
+    const cardColor = type === "Team" ? "#c9e0f0" : "#a2f5c5";
     return (
         <Card className="max-w-[400px]" style={{ backgroundColor: cardColor }}>
       <CardHeader className="flex gap-3">
