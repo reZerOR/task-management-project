@@ -1,6 +1,7 @@
 import { useRef, FormEvent, useState, useEffect } from 'react';
 import emailjs from '@emailjs/browser';
 import { toast } from 'react-toastify';
+import Logo from '../../sharedComponents/Logo';
 
 export const Support: React.FC = () => {
   const [formData, setFormData] = useState({
@@ -52,6 +53,9 @@ export const Support: React.FC = () => {
   return (
     <div className="flex justify-center items-center h-screen bg-gray-100">
       <form ref={formRef} onSubmit={sendEmail} className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4 w-96">
+     <div className="mb-6 flex justify-center ">
+     <Logo />
+     </div>
         <h2 className="text-2xl font-bold mb-6 text-center">Contact Support</h2>
         <div className="mb-4">
           <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="user_name">Name</label>
