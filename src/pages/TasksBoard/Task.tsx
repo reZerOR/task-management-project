@@ -111,7 +111,7 @@ const Task = ({ task, setTasks }: parameter) => {
 
       <>
         <Modal isOpen={isOpen} onOpenChange={onOpenChange} size="5xl">
-          {" "}
+         
           {/* Use onClose instead of onOpenChange */}
           <ModalContent>
             {() => (
