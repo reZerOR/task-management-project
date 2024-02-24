@@ -2,6 +2,9 @@ import { useRef, FormEvent, useState, useEffect } from 'react';
 import emailjs from '@emailjs/browser';
 import { toast } from 'react-toastify';
 import Logo from '../../sharedComponents/Logo';
+import { motion } from 'framer-motion';
+import Animation from '../../assets/support/Animation.json'
+import Lottie from 'lottie-react';
 
 export const Support: React.FC = () => {
   const [formData, setFormData] = useState({
@@ -51,7 +54,22 @@ export const Support: React.FC = () => {
   };
 
   return (
-    <div className="flex justify-center items-center h-screen bg-gray-100">
+    <div className="flex justify-center items-center h-screen bg-gray-100 gap-24">
+         <motion.div
+        initial={{ opacity: 0, scale: 2 }} // Initial animation properties
+        animate={{ opacity: 1, scale: 1 }}    // Animation properties when component is mounted
+        exit={{ opacity: 1, scale: 0.5 }}      // Animation properties when component is unmounted
+        transition={{ duration: 0.5 }}
+      >
+        <Lottie animationData={Animation} loop={true} />
+      </motion.div>
+
+      <motion.div
+      initial={{ opacity: 0, scale: 2 }} // Initial animation properties
+      animate={{ opacity: 1, scale: 1 }}    // Animation properties when component is mounted
+      exit={{ opacity: 1, scale: 0.5 }}      // Animation properties when component is unmounted
+      transition={{ duration: 0.5 }}
+      >
       <form ref={formRef} onSubmit={sendEmail} className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4 w-96">
      <div className="mb-6 flex justify-center ">
      <Logo />
@@ -92,12 +110,13 @@ export const Support: React.FC = () => {
         <div className="flex items-center justify-center">
           <button
             type="submit"
-            className="bg-primeColor hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+            className="bg-primeColor w-full hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
           >
             Send
           </button>
         </div>
       </form>
+      </motion.div>
     </div>
   );
 };
