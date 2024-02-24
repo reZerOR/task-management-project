@@ -54,29 +54,40 @@ export const Support: React.FC = () => {
   };
 
   return (
-    <div className="flex justify-center items-center h-screen bg-gray-100 gap-24">
-         <motion.div
-        initial={{ opacity: 0, scale: 2 }} // Initial animation properties
-        animate={{ opacity: 1, scale: 1 }}    // Animation properties when component is mounted
-        exit={{ opacity: 1, scale: 0.5 }}      // Animation properties when component is unmounted
-        transition={{ duration: 0.5 }}
-      >
-        <Lottie animationData={Animation} loop={true} />
-      </motion.div>
-
-      <motion.div
+    <div className="flex flex-col md:flex-row justify-center items-center min-h-screen bg-gray-100 gap-8 px-4 md:px-0">
+    <motion.div
       initial={{ opacity: 0, scale: 2 }} // Initial animation properties
-      animate={{ opacity: 1, scale: 1 }}    // Animation properties when component is mounted
-      exit={{ opacity: 1, scale: 0.5 }}      // Animation properties when component is unmounted
+      animate={{ opacity: 1, scale: 1 }} // Animation properties when component is mounted
+      exit={{ opacity: 1, scale: 0.5 }} // Animation properties when component is unmounted
       transition={{ duration: 0.5 }}
+      className="mb-8 md:mb-0 md:w-1/3 flex justify-center  "
+    >
+      <Lottie animationData={Animation} loop={true} />
+    </motion.div>
+  
+    <motion.div
+      initial={{ opacity: 0, scale: 2 }} // Initial animation properties
+      animate={{ opacity: 1, scale: 1 }} // Animation properties when component is mounted
+      exit={{ opacity: 1, scale: 0.5 }} // Animation properties when component is unmounted
+      transition={{ duration: 0.5 }}
+      className="md:w-1/2 flex justify-center"
+    >
+      <form
+        ref={formRef}
+        onSubmit={sendEmail}
+        className="bg-white shadow-md rounded px-8 pt-6 pb-8 w-full max-w-md"
       >
-      <form ref={formRef} onSubmit={sendEmail} className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4 w-96">
-     <div className="mb-6 flex justify-center ">
-     <Logo />
-     </div>
+        <div className="mb-6 flex justify-center ">
+          <Logo />
+        </div>
         <h2 className="text-2xl font-bold mb-6 text-center">Contact Support</h2>
         <div className="mb-4">
-          <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="user_name">Name</label>
+          <label
+            className="block text-gray-700 text-sm font-bold mb-2"
+            htmlFor="user_name"
+          >
+            Name
+          </label>
           <input
             type="text"
             name="user_name"
@@ -87,7 +98,12 @@ export const Support: React.FC = () => {
           />
         </div>
         <div className="mb-4">
-          <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="user_email">Email</label>
+          <label
+            className="block text-gray-700 text-sm font-bold mb-2"
+            htmlFor="user_email"
+          >
+            Email
+          </label>
           <input
             type="email"
             name="user_email"
@@ -98,7 +114,12 @@ export const Support: React.FC = () => {
           />
         </div>
         <div className="mb-6">
-          <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="message">Message</label>
+          <label
+            className="block text-gray-700 text-sm font-bold mb-2"
+            htmlFor="message"
+          >
+            Message
+          </label>
           <textarea
             name="message"
             value={formData.message}
@@ -116,7 +137,8 @@ export const Support: React.FC = () => {
           </button>
         </div>
       </form>
-      </motion.div>
-    </div>
+    </motion.div>
+  </div>
+  
   );
 };
