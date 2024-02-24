@@ -59,6 +59,9 @@ const Navbar = () => {
               <NavLink to={"/createboard"}>
                 <li>New Board</li>
               </NavLink>
+              <NavLink to={"/support"}>
+                <li>Support</li>
+              </NavLink>
 
               {user && (
                 <>

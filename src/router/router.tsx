@@ -13,6 +13,7 @@ import CreateBoard from "../pages/Board/CreateBoard/CreateBoard";
 // import SingleTask from "../pages/TasksBoard/SingleTask";
 import Singleboard from "../pages/Board/Singleboard/Singleboard";
 import HandleInvitation from "../Hooks/HandleInvitation/HandleInvitation";
+import { Support } from "../pages/Support/Support";
 
 // interface LoaderFunctionArgs<T> {
 //   params: T;
@@ -97,6 +98,12 @@ const router = createBrowserRouter([
           </PrivateRoute>
         ),
       },
+      {
+        path: "/support",
+        element: (
+            <Support></Support>
+        ),
+      }
     ],
   },
   {
