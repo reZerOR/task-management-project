@@ -1,5 +1,4 @@
 import { useContext, useEffect, useState } from "react";
-import useAxiosPrivate from "../../Hooks/AxiosPrivate/useAxiosPrivate";
 import { AuthContext } from "../../Providers/AuthProvider";
 import { Link } from "react-router-dom";
 
