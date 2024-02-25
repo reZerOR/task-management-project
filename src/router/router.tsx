@@ -34,7 +34,7 @@ const router = createBrowserRouter([
         path: "/tasksboard",
         element: (
           <PrivateRoute>
-            <TasksBoard id={{ id: "string" }} />
+            <TasksBoard id={""}/>
           </PrivateRoute>
         ),
       },
@@ -81,7 +81,7 @@ const router = createBrowserRouter([
         ),
       },
       {
-        path: "updatetask/:id",
+        path: "updatetaskInTheBoard/:id",
         element: (
           <PrivateRoute>
             <UpdateTask></UpdateTask>

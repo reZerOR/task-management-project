@@ -14,6 +14,7 @@ interface TasksBoardProps {
 
 const  TasksBoard: React.FC<TasksBoardProps> = ({ id })=> {
   const [openModal, setOpenModal] = useState(false);
+  // const [fetechAll, setFetechAll] = useState<VoidFunction>(()=>{})
   const userContext = useContext(AuthContext);
   const email = userContext.user?.email;
   console.log(email);
@@ -40,7 +41,7 @@ const axiosSecure=useAxiosPrivate()
 
     const res = await axiosSecure.patch(`/addTaskToBoard/${id}`,taskData );
   // e.currentTarget.reset()
-  console.log(res.data);
+  // console.log(res.data);
   // e.currentTarget.reset();
   if (res.data.modifiedCount > 0) {
    
@@ -49,8 +50,8 @@ const axiosSecure=useAxiosPrivate()
   console.log("Alltasks from taskboard",res.data);
   
 
-  const Task = await axiosSecure.post(`/addtask`,taskData);
-  console.log(Task.data);
+  // const Task = await axiosSecure.post(`/addtask`,taskData);
+  // console.log(Task.data);
     
 
   };
@@ -214,7 +215,7 @@ const axiosSecure=useAxiosPrivate()
 
           {/* todo, doing and done Boards */}
           <div className="flex items-center justify-center col-span-12 md:col-span-9 mx-auto md:mx-0  gap-6">
-            <List boardId={id} />
+            <List boardId={id}  />
           </div>
           <ToastContainer />
         </div>
