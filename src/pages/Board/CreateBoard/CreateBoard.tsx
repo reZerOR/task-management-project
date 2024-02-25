@@ -72,8 +72,8 @@ const CreateBoard = () => {
   return (
     <Container>
       <div>
-        <div>
-          <p>Limit Left: {packageRemains}</p>
+        <div className="space-y-2">
+          <p className="text-xl font-medium">Limit Left: {packageRemains}</p>
           <Link to="/increaseLimit"><button className="bg-green-600 p-2 rounded-md text-white">Increase Limit</button></Link>
         </div>
         <div className="w-72 my-10 mx-auto flex items-center justify-center  col-span-3 md:col-span-12">
