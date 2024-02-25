@@ -14,6 +14,7 @@ import CreateBoard from "../pages/Board/CreateBoard/CreateBoard";
 import Singleboard from "../pages/Board/Singleboard/Singleboard";
 import HandleInvitation from "../Hooks/HandleInvitation/HandleInvitation";
 import { Support } from "../pages/Support/Support";
+import Error from "../pages/Error404/Error";
 
 // interface LoaderFunctionArgs<T> {
 //   params: T;
@@ -23,6 +24,7 @@ const router = createBrowserRouter([
   {
     path: "/",
     element: <Main></Main>,
+    errorElement:<Error /> ,
     children: [
       {
         path: "/",
