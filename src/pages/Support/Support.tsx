@@ -54,13 +54,13 @@ export const Support: React.FC = () => {
   };
 
   return (
-    <div className="flex flex-col md:flex-row justify-center items-center min-h-screen bg-gray-100 gap-8 px-4 md:px-0">
+    <div className="flex flex-col md:flex-row items-center justify-center min-h-screen bg-gray-100 gap-8 px-4 md:px-0">
     <motion.div
       initial={{ opacity: 0, scale: 2 }} // Initial animation properties
       animate={{ opacity: 1, scale: 1 }} // Animation properties when component is mounted
       exit={{ opacity: 1, scale: 0.5 }} // Animation properties when component is unmounted
       transition={{ duration: 0.5 }}
-      className="mb-8 md:mb-0 md:w-1/3 flex justify-center  "
+      className="mb-8 md:mb-0 md:w-1/2 flex justify-center  "
     >
       <Lottie animationData={Animation} loop={true} />
     </motion.div>
