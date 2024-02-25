@@ -7,9 +7,11 @@ import {Card, CardHeader, CardBody, CardFooter, Divider, Link, Image} from "@nex
 
 const BoardCard = (card:any) => {
     const{name,details,type,_id}=card.card
-    // console.log
+    // console.log("from board card id",_id)
+
+    const cardColor = type === "Team" ? "#c9e0f0" : "#a2f5c5";
     return (
-        <Card className="max-w-[400px]">
+        <Card className="max-w-[400px]" style={{ backgroundColor: cardColor }}>
       <CardHeader className="flex gap-3">
         <Image
           alt="nextui logo"
@@ -19,8 +21,8 @@ const BoardCard = (card:any) => {
           width={40}
         />
         <div className="flex flex-col">
-          <p className="text-md">{name}</p>
-          <p className="text-small text-default-500">{type}</p>
+          <p className="text-md font-semibold">{name}</p>
+          <p className="text-small text-default-700 font-bold">{type}</p>
         </div>
       </CardHeader>
       <Divider/>
@@ -29,7 +31,7 @@ const BoardCard = (card:any) => {
       </CardBody>
       <Divider/>
       <CardFooter>
-        <Link  href={`/singleboard/${_id}`} > <button className="btn-secondary underline">View Details.</button></Link>
+        <Link  href={`/singleboard/${_id}`} > <button className="btn-secondary underline font-semibold">View Details.</button></Link>
       </CardFooter>
     </Card>
     );

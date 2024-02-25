@@ -19,6 +19,7 @@ import {
 import CommentBox from "./TaskEditModal/CommentBox";
 import DueDate from "./TaskEditModal/DueDate";
 import FileUploader from "./TaskEditModal/FileUploader";
+import useAxiosPrivate from "../../Hooks/AxiosPrivate/useAxiosPrivate";
 
 type parameter = {
   task: any;
@@ -30,7 +31,7 @@ type parameter = {
 const Task = ({ task, setTasks }: parameter) => {
   // for modal
   const { isOpen, onOpen, onOpenChange } = useDisclosure();
- 
+  const axiosPrivate=useAxiosPrivate()
 
   // console.log("task",task)
   // console.log("tasksss",tasks)
@@ -53,13 +54,10 @@ const Task = ({ task, setTasks }: parameter) => {
       confirmButtonText: "Yes, delete it!",
     }).then(async (result: any) => {
       if (result.isConfirmed) {
-        const res = await fetch(
-          `http://localhost:5000/deletetask/${id}`,
-          {
-            method: "DELETE",
-          }
-        );
-        if (res.ok) {
+        const res = await axiosPrivate.delete(`/deletetaskFromBoard/${id}`)
+        console.log("from task delete",res.data)
+        
+        if (res.data.modifiedCount > 0 ) {
           setTasks((prevTasks: any) =>
             prevTasks.filter((t: any) => t._id !== id)
           );
@@ -71,6 +69,7 @@ const Task = ({ task, setTasks }: parameter) => {
           text: "Your task has been deleted.",
           icon: "success",
         });
+       
       }
     });
   };
@@ -99,7 +98,7 @@ const Task = ({ task, setTasks }: parameter) => {
           </button>
         </div>
         <div>
-          <Link to={`/updatetask/${task._id}`}>
+          <Link to={`/updatetaskInTheBoard/${task._id}`}>
             <button className="absolute top-8 right-1 text-slate-400 hover:text-black text-2xl">
               <BiSolidEdit></BiSolidEdit>
             </button>
@@ -111,7 +110,7 @@ const Task = ({ task, setTasks }: parameter) => {
 
       <>
         <Modal isOpen={isOpen} onOpenChange={onOpenChange} size="5xl">
-          {" "}
+         
           {/* Use onClose instead of onOpenChange */}
           <ModalContent>
             {() => (

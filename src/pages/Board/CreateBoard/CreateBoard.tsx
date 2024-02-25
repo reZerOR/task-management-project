@@ -70,7 +70,11 @@ const CreateBoard = () => {
   };
 
   return (
-    <Container>
+    // <Container>
+      <div className="bg-gradient-to-r from-secondary-50 to-primary-200 p-10">
+        <Container>
+        
+    
       <div>
         <div className="space-y-2">
           <p className="text-xl font-medium">Limit Left: {packageRemains}</p>
@@ -185,8 +189,10 @@ const CreateBoard = () => {
             ))}
         </div>
         <ToastContainer />
+        </div>
+        </Container>
       </div>
-    </Container>
+    // </Container>
   );
 };
 

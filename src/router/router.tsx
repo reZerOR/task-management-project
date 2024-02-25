@@ -13,6 +13,8 @@ import CreateBoard from "../pages/Board/CreateBoard/CreateBoard";
 // import SingleTask from "../pages/TasksBoard/SingleTask";
 import Singleboard from "../pages/Board/Singleboard/Singleboard";
 import HandleInvitation from "../Hooks/HandleInvitation/HandleInvitation";
+import { Support } from "../pages/Support/Support";
+import Error from "../pages/Error404/Error";
 import Packages from "../pages/Packages/Packages";
 import Payment from "../pages/Payment/Payment";
 
@@ -24,6 +26,7 @@ const router = createBrowserRouter([
   {
     path: "/",
     element: <Main></Main>,
+    errorElement:<Error /> ,
     children: [
       {
         path: "/",
@@ -33,7 +36,7 @@ const router = createBrowserRouter([
         path: "/tasksboard",
         element: (
           <PrivateRoute>
-            <TasksBoard />
+            <TasksBoard id={ "" } />
           </PrivateRoute>
         ),
       },
@@ -97,6 +100,12 @@ const router = createBrowserRouter([
           <PrivateRoute>
             <MyProfile></MyProfile>
           </PrivateRoute>
+        ),
+      },
+      {
+        path: "/support",
+        element: (
+            <Support></Support>
         ),
       },
       {

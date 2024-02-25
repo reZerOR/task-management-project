@@ -6,6 +6,7 @@ import TasksBoard from "../../TasksBoard/TaskBoard";
 import Board from "../Board";
 import { useQuery } from "@tanstack/react-query";
 import useAxiosPublic from "../../../Hooks/AxiosPublic/useAxiosPublic";
+import Container from "../../../sharedComponents/Container";
 
 const Singleboard = () => {
   // const board = useLoaderData();
@@ -29,14 +30,18 @@ const Singleboard = () => {
   const { _id, name, type } = board as { _id: string, name: string; type: string };
 
   return (
-    <div>
+   <div className="bg-gradient-to-l from-secondary-100 to-primary-100 p-10">
+    <Container>
+     <div >
       <div className="flex flex-col justify-center items-center my-10">
         <p className="text-2xl font-bold"> Name: {name}</p>
         <p className="text-xl text-default-500 font-medium"> Type: {type}</p>
         {type === "Team" && <Board id={_id}/>}
       </div>
-      <TasksBoard></TasksBoard>
+      <TasksBoard id={ id }></TasksBoard>
     </div>
+   </Container>
+   </div>
   );
 };
 
