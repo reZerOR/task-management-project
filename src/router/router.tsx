@@ -15,6 +15,8 @@ import Singleboard from "../pages/Board/Singleboard/Singleboard";
 import HandleInvitation from "../Hooks/HandleInvitation/HandleInvitation";
 import { Support } from "../pages/Support/Support";
 import Error from "../pages/Error404/Error";
+import Packages from "../pages/Packages/Packages";
+import Payment from "../pages/Payment/Payment";
 
 // interface LoaderFunctionArgs<T> {
 //   params: T;
@@ -34,7 +36,7 @@ const router = createBrowserRouter([
         path: "/tasksboard",
         element: (
           <PrivateRoute>
-            <TasksBoard id={{ id: "string" }} />
+            <TasksBoard id={ "" } />
           </PrivateRoute>
         ),
       },
@@ -105,7 +107,23 @@ const router = createBrowserRouter([
         element: (
             <Support></Support>
         ),
-      }
+      },
+      {
+        path: "/increaseLimit",
+        element: (
+          <PrivateRoute>
+            <Packages></Packages>
+          </PrivateRoute>
+        ),
+      },
+      {
+        path: "/payment",
+        element: (
+          <PrivateRoute>
+            <Payment></Payment>
+          </PrivateRoute>
+        ),
+      },
     ],
   },
   {

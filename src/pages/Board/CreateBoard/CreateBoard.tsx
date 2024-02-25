@@ -9,6 +9,7 @@ import { useQuery } from "@tanstack/react-query";
 import BoardCard from "./BoardCard/BoardCard";
 import Container from "../../../sharedComponents/Container";
 import useAxiosPublic from "../../../Hooks/AxiosPublic/useAxiosPublic";
+import { Link } from "react-router-dom";
 
 const CreateBoard = () => {
   const [openModal, setOpenModal] = useState(false);
@@ -28,6 +29,16 @@ const CreateBoard = () => {
   });
   console.log(board);
 
+  const { data: packageRemains, refetch: packageLimitRefetch } = useQuery({
+    queryKey: ["packageRemains"],
+    queryFn: async () => {
+      const res = await axiosPrivate.get(`/getPackageLimit/${user?.email}`);
+      // console.log("API response:", res.data); // Log the response
+      // setUserEmail(res.data); // Assuming res.data is an array of User objects
+      return res.data.currentPackageLimit || 0;
+    },
+  });
+
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
@@ -46,6 +57,13 @@ const CreateBoard = () => {
     console.log("Board Created successfully:", response.data);
     toast.success("Board Created successfully");
     refetch();
+
+    const res= await axiosPrivate.patch(`/decreaseLimit/${user?.email}`);
+    if(res?.data.modifiedCount>0){
+      packageLimitRefetch();
+    }
+
+
     e.currentTarget.reset();
 
     setOpenModal(false);
@@ -55,10 +73,23 @@ const CreateBoard = () => {
     // <Container>
       <div className="bg-gradient-to-r from-secondary-50 to-primary-200 p-10">
         <Container>
-        <div>
+        
+    
+      <div>
+        <div className="space-y-2">
+          <p className="text-xl font-medium">Limit Left: {packageRemains}</p>
+          <Link to="/increaseLimit"><button className="bg-green-600 p-2 rounded-md text-white">Increase Limit</button></Link>
+        </div>
         <div className="w-72 my-10 mx-auto flex items-center justify-center  col-span-3 md:col-span-12">
+        
           <button
-            onClick={() => setOpenModal(true)}
+            onClick={() => {
+              if (packageRemains < 1) {
+                toast("Insufficient package limit");
+              } else {
+                setOpenModal(true);
+              }
+            }}
             className="bg-primeColor text-white p-2 rounded-lg"
           >
             Create new Board
