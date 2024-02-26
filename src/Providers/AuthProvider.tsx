@@ -69,7 +69,7 @@ const AuthProvider = ({ children }: UserContextProviderType) => {
   
   const [loading, setLoading] = useState(true);
   const [fTime, setFTime]= useState(true);
-  const [packagePrice,setPackagePrice]=useState(null);
+  const [packagePrice,setPackagePrice]=useState(0);
   const [packageInfo, setPackageInfo]=useState("");
 
   const logOut = () => {
