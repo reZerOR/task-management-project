@@ -48,6 +48,7 @@ const Register = () => {
       const photoURL = photoURLInput;
       const email = emailInput.value;
       const password = passwordInput.value;
+      const currentPackageLimit=5;
       console.log(displayName, photoURL, email, password);
 
       // password validation
@@ -70,7 +71,7 @@ const Register = () => {
             headers: {
               "Content-Type": "application/json",
             },
-            body: JSON.stringify({ displayName, photoURL, email }),
+            body: JSON.stringify({ displayName, photoURL, email,currentPackageLimit }),
           });
           if (response.ok) {
             console.log("User information posted to MongoDB");
@@ -98,6 +99,7 @@ const Register = () => {
           displayName: result.user?.displayName,
           photoURL: result.user?.photoURL,
           email: result.user?.email,
+          currentPackageLimit: 5,
         };
 
         // Assuming you want to send user information to the server
@@ -137,6 +139,7 @@ const Register = () => {
           displayName: result.user?.displayName,
           photoURL: result.user?.photoURL,
           email: result.user?.email,
+          currentPackageLimit: 5,
         };
 
         // Assuming you want to send user information to the server

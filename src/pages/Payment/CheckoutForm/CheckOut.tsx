@@ -4,6 +4,7 @@ import { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../../../Providers/AuthProvider";
 import {Spinner} from "@nextui-org/react";
 import { ToastContainer, toast } from "react-toastify";
+import { useNavigate } from "react-router-dom";
 
 const CheckOut = () => {
     const stripe = useStripe();
@@ -22,6 +23,18 @@ const CheckOut = () => {
     // const [loading, setLoading] = useState(false);
 
     // const [packageExists, refetch] = usePackageExists();
+    const navigate=useNavigate();
+
+    useEffect(() => {
+        if ( !packagePrice) {
+
+                navigate("/increaseLimit");
+        
+            
+        }
+
+
+    }, [packagePrice])
 
     useEffect(() => {
         if (packagePrice > 0) {
