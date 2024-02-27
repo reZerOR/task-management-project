@@ -16,7 +16,7 @@ const CommentBox = ({taskId}:{taskId: string}) => {
     const comment = form.comment.value;
 
     axios
-      .post("http://localhost:5000/comment", {
+      .post("https://task-project-server-smoky.vercel.app/comment", {
         comment: comment, taskId
       })
       .then((response) => {
@@ -33,7 +33,7 @@ const CommentBox = ({taskId}:{taskId: string}) => {
     queryKey: ["comments"],
     queryFn: () =>
       axios
-        .get(`http://localhost:5000/comment/${taskId}`)
+        .get(`https://task-project-server-smoky.vercel.app/comment/${taskId}`)
         .then((res) => res.data),
   });
 

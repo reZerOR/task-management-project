@@ -56,21 +56,21 @@ const Navbar = () => {
           {/* visable in large devices */}
           <div className="lg:flex gap-6 items-center hidden">
             <ul className="flex text-lg font-medium text-primeColor gap-6">
-              <NavLink to={"/createboard"}>
-                <li>New Board</li>
-              </NavLink>
-              <NavLink to={"/support"}>
-                <li>Support</li>
-              </NavLink>
 
               {user && (
                 <>
-                  <NavLink to={"/tasksboard"}>
+                  {/* <NavLink to={"/tasksboard"}>
                     <li>TaskBoard</li>
-                  </NavLink>
+                  </NavLink> */}
                   {/* <NavLink to={"/myProfile"}>
                     <li>My Profile</li>
                   </NavLink> */}
+                  <NavLink to={"/createboard"}>
+                    <li>New Board</li>
+                  </NavLink>
+                  <NavLink to={"/support"}>
+                    <li>Support</li>
+                  </NavLink>
                 </>
               )}
             </ul>

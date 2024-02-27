@@ -4,36 +4,49 @@ import {  useEffect, useState } from "react";
 
 import Section from "./Section";
 import useAxiosPrivate from "../../Hooks/AxiosPrivate/useAxiosPrivate";
-import { useQuery } from "@tanstack/react-query";
+// import { useQuery } from "@tanstack/react-query";
 
 
 interface TasksBoardProps {
   boardId:  string | undefined ;
+  changed: number
 }
 
 
-const List: React.FC<TasksBoardProps> = ({ boardId }) => {
+const List: React.FC<TasksBoardProps> = ({ boardId, changed }) => {
   const [tasks, setTasks] = useState([]);
   const [todo, setTodo] = useState([]);
   const [progress, setprogress] = useState([]);
   const [complete, setComplete] = useState([]);
   // const user=userContext.user
   const axiosPrivate=useAxiosPrivate()
+  useEffect(()=>{
+    async function fetchData() {
+      // You can await here
+      const response = await axiosPrivate.get(`/boards/${boardId}/tasks`);
+      console.log(response);
+      
+      // ...
+      setTasks(response.data.tasks)
+    }
+    fetchData();
+  }, [changed, axiosPrivate, boardId])
   // console.log("boardId from list",boardId)
-  const { data: taskFromBoard=[], refetch } = useQuery({
-    queryKey: ["taskFromBoard", boardId],
-    queryFn: async () => {
-      const res = await axiosPrivate.get(`/boards/${boardId}/tasks`);
-      // console.log(res.data.tasks);
-      setTasks(res.data.tasks);
-      return res.data.tasks;
-    },
-  });
-// handleRefetch(refetch)
-  // const handleRefetch = ()=> {
-  //   refetch()
-  // }
-  refetch()
+  // const { data: taskFromBoard=[], refetch } = useQuery({
+  //   queryKey: ["taskFromBoard", boardId],
+  //   queryFn: async () => {
+  //     const res = await axiosPrivate.get(`/boards/${boardId}/tasks`);
+  //     // console.log(res.data.tasks);
+  //     setTasks(res.data.tasks);
+  //     return res.data.tasks;
+  //   },
+  // });
+//   console.log(taskFromBoard)
+// // handleRefetch(refetch)
+//   // const handleRefetch = ()=> {
+//   //   refetch()
+//   // }
+//   refetch()
   
   // console.log("hello from list",taskFromBoard)
   useEffect(() => {

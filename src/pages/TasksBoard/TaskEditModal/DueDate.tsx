@@ -54,7 +54,7 @@ const DueDate: React.FC<{ task: Task }> = ({ task }) => {
 
   const handleDueDateUpdate = async () => {
     try {
-      await axios.patch(`http://localhost:5000/dueDate/${task._id}`, {
+      await axios.patch(`https://task-project-server-smoky.vercel.app/dueDate/${task._id}`, {
         dueDate: dueDate,
       });
       toast.success("Due date updated successfully");

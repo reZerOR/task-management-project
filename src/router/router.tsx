@@ -65,7 +65,7 @@ const router = createBrowserRouter([
         ),
         // loader: ({ params }: LoaderFunctionArgs<{ id: string }>) =>
         //   fetch(
-        //     `http://localhost:5000/singleboard/${params.id}`
+        //     `https://task-project-server-smoky.vercel.app/singleboard/${params.id}`
         //   ),
       },
       {
@@ -91,7 +91,7 @@ const router = createBrowserRouter([
         ),
         // loader: ({ params }: { params: { id: string } }) =>
         //   fetch(
-        //     `http://localhost:5000/updatetask/${params.id}`
+        //     `https://task-project-server-smoky.vercel.app/updatetask/${params.id}`
         //   ),
       },
       {
@@ -105,7 +105,10 @@ const router = createBrowserRouter([
       {
         path: "/support",
         element: (
-            <Support></Support>
+          <PrivateRoute>
+        
+          <Support></Support>
+        </PrivateRoute>
         ),
       },
       {
