@@ -6,6 +6,7 @@ import BannerAnimation from "../../../assets/Home/banner.json";
 import Lottie from "lottie-react";
 import { Link } from "react-router-dom";
 import useUser from "../../../Hooks/IsUser/useUser";
+import { FcAdvance  } from "react-icons/fc";
 
 const Banner = () => {
   const user = useUser();
@@ -21,10 +22,28 @@ const Banner = () => {
           <div className="flex-1">
             {/* reviews */}
 
-            <h1 className=" text-6xl xl:text-8xl font-stylish text-gray-800  leading-snug">
+            {/* <h1 className=" text-6xl xl:text-8xl font-stylish text-gray-800  leading-snug">
               Unlock the power of teamwork with{" "}
               <span className=" text-primeColor font-stylish">TaskFlow</span>
-            </h1>
+            </h1> */}
+            <motion.h1
+            style={{
+              backgroundClip: "text",
+              WebkitBackgroundClip: "text",
+              color: "transparent",
+            }}
+              className="text-6xl xl:text-8xl font-stylish text-gray-800 leading-snug text-gradient bg-gradient-to-r from-purple-500 via-pink-500 to-red-500"
+              initial={{ opacity: 0, y: -20 }} // Initial animation state
+              animate={{ opacity: 1, y: 0 }} // Animation when component mounts
+              transition={{ duration: 0.5 }} // Animation duration
+            >
+              Unlock the power of teamwork with{" "}
+              <span className="text-primeColor font-stylish">
+                <span className=" font-extrabold">
+                  TaskFlow
+                </span>
+              </span>
+            </motion.h1>
 
             <div className="mt-6">
               <p>
@@ -46,10 +65,10 @@ const Banner = () => {
 
             <Link
               to={`${user ? "/tasksboard" : "/login"}`}
-              className="mt-6 block"
+              className="mt-6 block  items-center"
             >
-              <button className="text-lg font-medium rounded-lg px-8 h-16 before:block before:absolute hover:before:bg-primeColor before:w-0 before:h-0 hover:before:h-20 hover:before:w-full before:-bottom-2 before:right-0 before:duration-300 before:rounded-lg before:-z-10 relative inline-block transform hover:text-white text-primeColor bg-transparent border-2 overflow-hidden border-primeColor duration-300">
-                Get Started
+              <button className=" flex items-center gap-2 text-lg font-medium rounded-lg px-8 h-16 before:block before:absolute hover:before:bg-primeColor before:w-0 before:h-0 hover:before:h-20 hover:before:w-full before:-bottom-2 before:right-0 before:duration-300 before:rounded-lg before:-z-10 relative  transform hover:text-white text-primeColor bg-transparent border-2 overflow-hidden border-primeColor duration-300">
+               <FcAdvance className="text-4xl"/> Get Started
               </button>
             </Link>
           </div>
