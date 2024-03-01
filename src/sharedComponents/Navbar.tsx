@@ -5,6 +5,7 @@ import { Sling as Hamburger } from "hamburger-react";
 import { Link, NavLink, useNavigate } from "react-router-dom";
 import { AuthContext } from "../Providers/AuthProvider";
 import useUser from "../Hooks/IsUser/useUser";
+import {FcSms, FcPlus } from "react-icons/fc";
 import {
   Avatar,
   Dropdown,
@@ -65,11 +66,11 @@ const Navbar = () => {
                   {/* <NavLink to={"/myProfile"}>
                     <li>My Profile</li>
                   </NavLink> */}
-                  <NavLink to={"/createboard"}>
-                    <li>New Board</li>
+                  <NavLink to={"/createboard"} className="flex items-center gap-2 btn ">
+                   <FcPlus className="text-2xl" /> <li>New Board</li>
                   </NavLink>
-                  <NavLink to={"/support"}>
-                    <li>Support</li>
+                  <NavLink to={"/support"} className="flex items-center gap-2 btn ">
+                    <FcSms className="text-2xl"/> <li>Support</li>
                   </NavLink>
                 </>
               )}

@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const axiosSecure = axios.create({
-  baseURL: "https://task-project-server-smoky.vercel.app",
+  baseURL: "http://localhost:5000",
   // baseURL: "https://task-project-server-smoky.vercel.app",
 });
 const useAxiosPrivate = () => {
@@ -9,3 +9,8 @@ const useAxiosPrivate = () => {
 };
 
 export default useAxiosPrivate;
+
+
+
+
+
