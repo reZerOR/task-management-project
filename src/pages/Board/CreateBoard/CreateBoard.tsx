@@ -10,6 +10,7 @@ import BoardCard from "./BoardCard/BoardCard";
 import Container from "../../../sharedComponents/Container";
 import useAxiosPublic from "../../../Hooks/AxiosPublic/useAxiosPublic";
 import { Link } from "react-router-dom";
+import { FcAddColumn, FcDataRecovery } from "react-icons/fc";
 
 const CreateBoard = () => {
   const [openModal, setOpenModal] = useState(false);
@@ -70,7 +71,7 @@ const CreateBoard = () => {
 
   return (
     // <Container>
-    <div className="bg-gradient-to-r from-secondary-50 to-primary-200 p-10 rounded-xl ">
+    <div className="bg-gradient-to-r from-secondary-50 to-primary-200 p-10  ">
       <Container>
         <div className="grid grid-cols-12 w-full gap-2 md:gap-0 min-h-screen rounded-xl ">
           {/* Left Side  */}
@@ -107,8 +108,8 @@ const CreateBoard = () => {
               {/* Limit button */}
               <div className="mb-2">
                 <Link to="/increaseLimit">
-                  <button className="bg-green-600 btn btn-sm border-0 p-2 rounded-md text-white">
-                    Increase Limit
+                  <button className="bg-green-600 btn btn-sm border-0 p-2 rounded-md text-white flex gap-2 items-center">
+                   <FcAddColumn className="text-xl "/> Increase Limit
                   </button>
                 </Link>
               </div>
@@ -124,9 +125,9 @@ const CreateBoard = () => {
                     setOpenModal(true);
                   }
                 }}
-                className="bg-primeColor text-white p-2 rounded-lg"
+                className="bg-primeColor text-white p-2 rounded-lg flex items-center gap-2"
               >
-                Create new Board
+               <FcDataRecovery className="text-xl"/> Create new Board
               </button>
               <div
                 onClick={() => setOpenModal(false)}
