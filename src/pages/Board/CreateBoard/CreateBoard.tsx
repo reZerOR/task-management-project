@@ -9,7 +9,7 @@ import { useQuery } from "@tanstack/react-query";
 import BoardCard from "./BoardCard/BoardCard";
 import Container from "../../../sharedComponents/Container";
 import useAxiosPublic from "../../../Hooks/AxiosPublic/useAxiosPublic";
-import { Link, NavLink } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { FcAddColumn, FcDataRecovery } from "react-icons/fc";
 
 const CreateBoard = () => {
