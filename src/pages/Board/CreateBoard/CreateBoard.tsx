@@ -9,7 +9,7 @@ import { useQuery } from "@tanstack/react-query";
 import BoardCard from "./BoardCard/BoardCard";
 import Container from "../../../sharedComponents/Container";
 import useAxiosPublic from "../../../Hooks/AxiosPublic/useAxiosPublic";
-import { Link } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 import { FcAddColumn, FcDataRecovery } from "react-icons/fc";
 
 const CreateBoard = () => {
@@ -92,15 +92,19 @@ const CreateBoard = () => {
             >
               <div className="p-2 flex flex-col justify-center items-center text-center">
                 <div className="avatar cursor-pointer">
+                  
                   <div className="w-16 rounded-full ring ring-primary ring-offset-base-100 ring-offset-2">
+                    <Link to="/myProfile" >
                     <img src={user?.photoURL} alt="User Avatar" />
+                    </Link>
                   </div>
+               
                 </div>
                 <h3 className="text-md font-bold mt-2">{user?.displayName}</h3>
                 <strong className="m2-5 text-sm">{user?.email}</strong>
                 <p className="text-md font-medium">
                   Board Limit Left:{" "}
-                  <span className="font-bold text-red-500 text-xl">
+                  <span className="font-bold text-red-800 text-xl">
                     {packageRemains}
                   </span>
                 </p>
@@ -228,7 +232,7 @@ const CreateBoard = () => {
 
           {/* Right side  */}
           <div className="col-span-12 md:col-span-9 ml-5 ">
-            <h3 className="text-xl mb-5 ">Your Bords: <span className="text-green-500 font-bold"> {board?.length}</span></h3>
+            <h3 className="text-xl mb-5 ">Your Bords: <span className="text-green-700 text-2xl font-bold"> {board?.length}</span></h3>
 
           <div className=" grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
             {board &&
