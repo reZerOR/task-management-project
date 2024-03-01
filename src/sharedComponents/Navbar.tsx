@@ -17,7 +17,8 @@ import useUserInfo from "../Hooks/UserInfo/useUserInfo";
 
 const Navbar = () => {
   const userContext = useContext(AuthContext);
-  const user = useUser();
+  const {user} = useContext(AuthContext)
+  const SingleUser = useUser();
   const [userInfo] = useUserInfo();
 
   const [visable, setVisable] = useState(false);
@@ -43,6 +44,7 @@ const Navbar = () => {
   const handleToMyProfile = () => {
     navigate("/myProfile");
   };
+ 
   return (
     <div className="bg-secondColor  bg-opacity-60 ">
       <Container>
@@ -58,7 +60,7 @@ const Navbar = () => {
           <div className="lg:flex gap-6 items-center hidden">
             <ul className="flex text-lg font-medium text-primeColor gap-6">
 
-              {user && (
+              {SingleUser && (
                 <>
                   {/* <NavLink to={"/tasksboard"}>
                     <li>TaskBoard</li>
@@ -66,7 +68,7 @@ const Navbar = () => {
                   {/* <NavLink to={"/myProfile"}>
                     <li>My Profile</li>
                   </NavLink> */}
-                  <NavLink to={"/createboard"} className="flex items-center gap-2 btn ">
+                  <NavLink to={"/createboard"} className="flex items-center gap-2 btn  ">
                    <FcPlus className="text-2xl" /> <li>New Board</li>
                   </NavLink>
                   <NavLink to={"/support"} className="flex items-center gap-2 btn ">
@@ -77,7 +79,7 @@ const Navbar = () => {
             </ul>
 
             <div className="text-lg font-medium space-x-6 py-5">
-              {user ? (
+              {SingleUser ? (
                 <>
                   {/* <button
                     onClick={handleLogout}
@@ -97,15 +99,33 @@ const Navbar = () => {
                       </DropdownTrigger>
                       <DropdownMenu aria-label="Profile Actions" variant="flat">
                         <DropdownItem key="profile" className="h-14 gap-2">
-                          <p className="font-semibold">Signed in as</p>
+                          {/* <p className="font-semibold">Signed in as</p>
                           <p className="font-semibold">
                             {userContext?.user?.email}
-                          </p>
+                          </p> */}
+
+<div
+              style={{
+                borderImage:
+                  "linear-gradient(to right, #5a67d8, #9f7aea, #ed64a6) 1",
+                borderImageSlice: "1",
+              }}
+              className="flex flex-col items-center border-b-2 "
+            >
+              <div className="p-2 flex flex-col justify-center items-center text-center">
+                <div className="avatar cursor-pointer">
+                </div>
+                <h3 className="text-md font-bold mt-2">{user?.displayName}</h3>
+                <strong className="m2-5 text-sm">{user?.email}</strong>
+              </div>
+             
+            </div>
                         </DropdownItem>
 
                         <DropdownItem
                           onClick={handleToMyProfile}
                           key="myProfile"
+                          className="btn btn-sm mt-5 border-0 bg-primeColor text-white font-bold"
                         >
                           My Profile
                         </DropdownItem>
@@ -113,6 +133,7 @@ const Navbar = () => {
                           onClick={handleLogout}
                           key="logout"
                           color="danger"
+                          className="btn btn-sm mt-2 border-0 bg-red-500 text-white font-bold"
                         >
                           Log Out
                         </DropdownItem>
@@ -166,7 +187,7 @@ const Navbar = () => {
               }}
               className="mt-10 absolute z-50 bg-primeColor text-white w-60  right-0 p-4 space-y-4 rounded-lg"
             >
-              {user ? (
+              {SingleUser ? (
                 <>
                   <motion.li variants={itemVarients}>
                     <Link to={"/tasksboard"}>TaskBoard</Link>

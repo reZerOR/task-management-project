@@ -10,6 +10,7 @@ import BoardCard from "./BoardCard/BoardCard";
 import Container from "../../../sharedComponents/Container";
 import useAxiosPublic from "../../../Hooks/AxiosPublic/useAxiosPublic";
 import { Link } from "react-router-dom";
+import { FcAddColumn, FcDataRecovery } from "react-icons/fc";
 
 const CreateBoard = () => {
   const [openModal, setOpenModal] = useState(false);
@@ -70,7 +71,7 @@ const CreateBoard = () => {
 
   return (
     // <Container>
-    <div className="bg-gradient-to-r from-secondary-50 to-primary-200 p-10 rounded-xl ">
+    <div className="bg-gradient-to-r from-secondary-50 to-primary-200 p-10  ">
       <Container>
         <div className="grid grid-cols-12 w-full gap-2 md:gap-0 min-h-screen rounded-xl ">
           {/* Left Side  */}
@@ -91,15 +92,19 @@ const CreateBoard = () => {
             >
               <div className="p-2 flex flex-col justify-center items-center text-center">
                 <div className="avatar cursor-pointer">
+                  
                   <div className="w-16 rounded-full ring ring-primary ring-offset-base-100 ring-offset-2">
+                    <Link to="/myProfile" >
                     <img src={user?.photoURL} alt="User Avatar" />
+                    </Link>
                   </div>
+               
                 </div>
                 <h3 className="text-md font-bold mt-2">{user?.displayName}</h3>
                 <strong className="m2-5 text-sm">{user?.email}</strong>
                 <p className="text-md font-medium">
                   Board Limit Left:{" "}
-                  <span className="font-bold text-red-500 text-xl">
+                  <span className="font-bold text-red-800 text-xl">
                     {packageRemains}
                   </span>
                 </p>
@@ -107,8 +112,8 @@ const CreateBoard = () => {
               {/* Limit button */}
               <div className="mb-2">
                 <Link to="/increaseLimit">
-                  <button className="bg-green-600 btn btn-sm border-0 p-2 rounded-md text-white">
-                    Increase Limit
+                  <button className="bg-green-600 btn btn-sm border-0 p-2 rounded-md text-white flex gap-2 items-center">
+                   <FcAddColumn className="text-xl "/> Increase Limit
                   </button>
                 </Link>
               </div>
@@ -124,9 +129,9 @@ const CreateBoard = () => {
                     setOpenModal(true);
                   }
                 }}
-                className="bg-primeColor text-white p-2 rounded-lg"
+                className="bg-primeColor text-white p-2 rounded-lg flex items-center gap-2"
               >
-                Create new Board
+               <FcDataRecovery className="text-xl"/> Create new Board
               </button>
               <div
                 onClick={() => setOpenModal(false)}
@@ -227,7 +232,7 @@ const CreateBoard = () => {
 
           {/* Right side  */}
           <div className="col-span-12 md:col-span-9 ml-5 ">
-            <h3 className="text-xl mb-5 ">Your Bords: <span className="text-green-500 font-bold"> {board?.length}</span></h3>
+            <h3 className="text-xl mb-5 ">Your Bords: <span className="text-green-700 text-2xl font-bold"> {board?.length}</span></h3>
 
           <div className=" grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
             {board &&

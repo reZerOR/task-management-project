@@ -54,7 +54,7 @@ export const Support: React.FC = () => {
   };
 
   return (
-    <div className="flex flex-col md:flex-row items-center justify-center min-h-screen bg-gray-100 gap-8 px-4 md:px-0">
+    <div className="flex flex-col md:flex-row items-center justify-center min-h-screen gap-8 px-4 md:px-0 bg-gradient-to-r from-secondary-50 to-primary-200 p-10">
     <motion.div
       initial={{ opacity: 0, scale: 2 }} // Initial animation properties
       animate={{ opacity: 1, scale: 1 }} // Animation properties when component is mounted
