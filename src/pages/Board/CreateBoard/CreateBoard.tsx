@@ -105,7 +105,7 @@ const CreateBoard = () => {
                 <p className="text-md font-medium">
                   Board Limit Left:{" "}
                   <span className="font-bold text-red-800 text-xl">
-                    {packageRemains}
+                    {packageRemains || 0}
                   </span>
                 </p>
               </div>
@@ -232,7 +232,7 @@ const CreateBoard = () => {
 
           {/* Right side  */}
           <div className="col-span-12 md:col-span-9 ml-5 ">
-            <h3 className="text-xl mb-5 ">Your Bords: <span className="text-green-700 text-2xl font-bold"> {board?.length}</span></h3>
+            <h3 className="text-xl mb-5 ">Your Bords: <span className="text-green-700 text-2xl font-bold"> {board?.length || 0 }</span></h3>
 
           <div className=" grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
             {board &&

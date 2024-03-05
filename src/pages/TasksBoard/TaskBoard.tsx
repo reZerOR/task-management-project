@@ -61,9 +61,9 @@ const axiosSecure=useAxiosPrivate()
   return (
     <>
       <Container>
-        <div className="grid grid-cols-4 w-full mx-auto min-h-[calc(100vh-384px)] gap-10 mt-5">
+        <div className="grid grid-cols-4 justify-center  min-h-[calc(100vh-384px)] gap-10 mt-5 ">
           {/* Create Project Modal */}
-          <div className="w-72 mx-auto flex items-center justify-center  col-span-3 md:col-span-12">
+          <div className="w-72 mx-auto flex items-center justify-center  col-span-12">
             <button
               onClick={() => setOpenModal(true)}
               className="bg-primeColor text-white p-2 rounded-lg"
