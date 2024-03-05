@@ -46,7 +46,7 @@ const Navbar = () => {
   };
  
   return (
-    <div className="bg-secondColor  bg-opacity-60 ">
+    <div className="bg-secondColor bg-opacity-60 ">
       <Container>
         <nav className="flex items-center justify-between">
           {/* logo text */}
@@ -68,8 +68,10 @@ const Navbar = () => {
                   {/* <NavLink to={"/myProfile"}>
                     <li>My Profile</li>
                   </NavLink> */}
+
                   <NavLink to={"/createboard"} className="flex items-center gap-2 btn  ">
                    <FcPlus className="text-2xl" /> <li>New Board</li>
+
                   </NavLink>
                   <NavLink to={"/support"} className="flex items-center gap-2 btn ">
                     <FcSms className="text-2xl"/> <li>Support</li>
@@ -161,7 +163,7 @@ const Navbar = () => {
           <motion.div
             initial={false}
             animate={visable ? "open" : "closed"}
-            className="relative lg:hidden"
+            className="relative lg:hidden py-6"
           >
             <Hamburger toggled={visable} toggle={setVisable} />
             <motion.ul
@@ -190,10 +192,13 @@ const Navbar = () => {
               {SingleUser ? (
                 <>
                   <motion.li variants={itemVarients}>
-                    <Link to={"/tasksboard"}>TaskBoard</Link>
+                    <Link to={"/createboard"}>Boards</Link>
                   </motion.li>
                   <motion.li variants={itemVarients}>
                     <Link to={"/myProfile"}>My Profile</Link>
+                  </motion.li>
+                  <motion.li variants={itemVarients}>
+                    <Link to={"/support"}>Support</Link>
                   </motion.li>
                   <motion.button
                     onClick={handleLogout}

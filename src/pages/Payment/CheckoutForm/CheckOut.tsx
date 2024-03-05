@@ -34,7 +34,7 @@ const CheckOut = () => {
         }
 
 
-    }, [packagePrice])
+    }, [packagePrice, navigate])
 
     useEffect(() => {
         if (packagePrice > 0) {
