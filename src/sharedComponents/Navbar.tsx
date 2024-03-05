@@ -70,7 +70,7 @@ const Navbar = () => {
                   </NavLink> */}
 
                   <NavLink to={"/createboard"} className="flex items-center gap-2 btn  ">
-                   <FcPlus className="text-2xl" /> <li>New Board</li>
+                   <FcPlus className="text-2xl text-primeColor" /> <li>New Board</li>
 
                   </NavLink>
                   <NavLink to={"/support"} className="flex items-center gap-2 btn ">

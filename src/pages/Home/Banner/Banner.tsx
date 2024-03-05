@@ -30,16 +30,16 @@ const Banner = () => {
             style={{
               backgroundClip: "text",
               WebkitBackgroundClip: "text",
-              color: "transparent",
+              color: "black",
             }}
-              className="text-6xl xl:text-8xl font-stylish text-gray-800 leading-snug text-gradient bg-gradient-to-r from-purple-500 via-pink-500 to-red-500"
-              initial={{ opacity: 0, y: -20 }} // Initial animation state
-              animate={{ opacity: 1, y: 0 }} // Animation when component mounts
-              transition={{ duration: 0.5 }} // Animation duration
+              className="text-6xl xl:text-8xl font-stylish"
+              initial={{ opacity: 0, x: -500}} // Initial animation state
+              animate={{ opacity: 1, x: 0}} // Animation when component mounts
+              transition={{ duration: 1 }} // Animation duration
             >
               Unlock the power of teamwork with{" "}
               <span className="text-primeColor font-stylish">
-                <span className=" font-extrabold">
+                <span className=" font-stylish">
                   TaskFlow
                 </span>
               </span>
