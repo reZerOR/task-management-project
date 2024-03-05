@@ -11,7 +11,7 @@ const BoardCard = (card:any) => {
 
     const cardColor = type === "Team" ? "#c9e0f0" : "#a2f5c5";
     return (
-        <Card className="max-w-[400px]" style={{ backgroundColor: cardColor }}>
+        <Card className="max-w-[400px]  h-60" style={{ backgroundColor: cardColor }}>
       <CardHeader className="flex gap-3">
         <Image
           alt="nextui logo"
